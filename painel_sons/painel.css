@@ -1,0 +1,43 @@
+/* style.css */
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #222;
+    color: white;
+    margin-top: 50px;
+}
+
+#mixer-panel {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background-color: #333;
+    padding: 30px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.channel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.play-btn {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* This turns the standard slider into a vertical DJ Fader */
+.volume-fader {
+    -webkit-appearance: slider-vertical; /* For Chrome/Safari/Edge */
+    width: 20px;
+    height: 200px; /* How tall you want the fader to be */
+    cursor: pointer;
+}
