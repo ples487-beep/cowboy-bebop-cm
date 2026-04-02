@@ -9,18 +9,17 @@ let planetas = [
 ];
 
 let tempoCutscene = 0;
-let estrelas = [];
+let imgMarte, imgNave, imgPortal;
+
+function preload() {
+  imgMarte = loadImage('assets/marte.png');
+  imgNave = loadImage('assets/nave.png');
+  imgPortal = loadImage('assets/portal.png');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 200; i++) {
-    estrelas.push({
-      x: random(width),
-      y: random(height),
-      tamanho: random(1, 3),
-      velocidade: random(2, 8),
-    });
-  }
+  
 }
 
 function draw() {
@@ -53,29 +52,42 @@ function desenharCutscene() {
   tempoCutscene++;
 
   let progresso = tempoCutscene / 180;
-  let deslocamento = width * 0.25 * progresso;
+  let deslocamento = width * 0.08 * progresso;
+
+  // aplicar tint com a cor do planeta
+  tint(planetaAtual.cor);
 
   // planeta
-  fill(50, 35, 10);
-  noStroke();
-  circle(width * 0.85 - deslocamento, height * -0.1, height * 1.2);
+  image(imgMarte, width * 0.35 - deslocamento*0.5, height * -0.2, height * 1.1, height * 1.1);
+
+  // portal
+  image(imgPortal, width * 0.1 - deslocamento*0.75, height * 0.25, 160, 160);
 
   // nave
-  fill(200, 150, 50);
-  noStroke();
-  circle(width * 0.35 - deslocamento, height * 0.72, 18);
+  image(imgNave, width * 0.2 - deslocamento*1.2, height * 0.5, 400, 240);
+
+  noTint();
 
   // texto
   fill(237, 224, 196, map(tempoCutscene, 0, 60, 0, 255));
+  noStroke();
   textAlign(LEFT, CENTER);
   textSize(11);
   text('A aproximar de ' + planetaAtual.nome + '...', 40, height - 40);
 
   if (tempoCutscene > 180) {
-    tempoCutscene = 0;
-    estado = 'planeta';
+    let nomeArquivo = planetaAtual.nome.toLowerCase() + '.html';
+    window.location.href = '../planetas/' + nomeArquivo;
   }
 }
+
+function desenharPlaneta() {
+  fill(237, 224, 196);
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  text(planetaAtual.nome, width / 2, height / 2);
+}
+
 function mousePressed() {
   let cx = width / 2;
   let cy = height / 2;
@@ -89,4 +101,8 @@ function mousePressed() {
       estado = 'cutscene';
     }
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
