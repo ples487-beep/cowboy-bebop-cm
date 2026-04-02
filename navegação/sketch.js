@@ -3,7 +3,7 @@ let planetaAtual = null;
 
 let planetas = [
   new Planeta('VÉNUS',    100, 10, 0,   0.008, '#4a7fc8'),
-  new Planeta('CALISTO',    160, 11, 1,   0.006, '#4a7fc8'),
+  new Planeta('TIJUANA',    160, 11, 1,   0.006, '#4a7fc8'),
   new Planeta('MARTE',    230, 10, 2,   0.004, '#c8a44a'),
   new Planeta('GANYMEDE', 310, 13, 3.5, 0.002, '#7a9cbf'),
 ];
