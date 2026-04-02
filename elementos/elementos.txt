@@ -1,0 +1,1 @@
+Esta pasta serverá apenas para colocar todos os elementos visuais e auditivos presentes no projeto
