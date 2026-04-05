@@ -2,17 +2,24 @@ let estado = 'mapa';
 let planetaAtual = null;
 
 let planetas = [
-  new Planeta('VENUS',    100, 10, 0,   0.008, '#FEE7A0'),
-  new Planeta('TIJUANA',    160, 11, 1,   0.006, '#FFCD48'),
-  new Planeta('MARTE',    230, 10, 2,   0.004, '#fa7f5d'),
-  new Planeta('GANYMEDE', 310, 13, 3.5, 0.002, '#7a9cbf'),
+  new Planeta('VENUS',    130, 10, 0,   0.004, '#ffdb70'),
+  new Planeta('MARTE',    300, 10, 2,   0.002, '#fa7f5d'),
+  new Planeta('TIJUANA',    210, 11, 1,   0.003, '#FFCD48'),
+  new Planeta('GANYMEDE', 400, 13, 3.5, 0.001, '#7a9cbf'),
 ];
 
 let tempoCutscene = 0;
-let imgMarte, imgNave, imgPortal, imgBg, imgEstrelas;
+let imgNave, imgPortal, imgBg, imgEstrelas;
+let imgPlanetas = {};
+let font  ;
 
 function preload() {
-  imgMarte = loadImage('assets/marte.png');
+  font = loadFont('fontes/bookman1.ttf');
+  font2 = loadFont('fontes/IBMPlexMono-Regular.ttf');
+  imgPlanetas['VENUS'] = loadImage('assets/venus.png');
+  imgPlanetas['TIJUANA'] = loadImage('assets/tijuana.png');
+  imgPlanetas['MARTE'] = loadImage('assets/marte.png');
+  imgPlanetas['GANYMEDE'] = loadImage('assets/ganymede.png');
   imgNave = loadImage('assets/nave.png');
   imgPortal = loadImage('assets/portal.png');
   imgBg = loadImage('assets/bg.png');
@@ -39,12 +46,24 @@ function desenharMapa() {
   let cy = height / 2;
 
   fill(237, 224, 196);
+  tint(100);
+  image(imgEstrelas,0,0, width, height,);
+  noTint();
   noStroke();
   circle(cx, cy, 20);
 
   for (let p of planetas) {
     p.atualizar();
     p.desenhar(cx, cy);
+    
+    // Nome do planeta em pequeno
+    let pos = p.posicao(cx, cy);
+    fill(237, 224, 196);
+    textAlign(CENTER, TOP);
+    textSize(10);
+    noStroke();
+    textFont(font2);
+    text(p.nome, pos.x, pos.y + p.tamanho + 5);
   }
 }
 
@@ -55,20 +74,24 @@ function desenharCutscene() {
   let scroll = width * 0.01 * progresso;
   let offset = width * 0.08 * progresso;
   
-  image(imgBg, -width * 0.15 - scroll, -height * 0.15, width * 1.3, height * 1.3);
-  image(imgEstrelas, -width * 0.15 - scroll, -height * 0.15, width * 1.3, height * 1.3);
+  //image(imgBg, -width * 0.05 - scroll, -height * 0.05, width * 1.1, height * 1.1);
+  image(imgEstrelas, -width * 0.05 - scroll, -height * 0.05, width * 1.1, height * 1.1);
   
+  //desenha o respetivo planeta 
+  image(imgPlanetas[planetaAtual.nome], width * 0.35 + offset * 0.5, height * -0.2, height * 1.1, height * 1.1);
   tint(planetaAtual.cor);
-  image(imgMarte, width * 0.35 + offset * 0.5, height * -0.2, height * 1.1, height * 1.1);
-  image(imgPortal, width * 0.1 + offset * 0.75, height * 0.25, 160, 160);
-  image(imgNave, width * 0.2 + offset * 1.2, height * 0.5, 400, 240);
+  image(imgPortal, width * 0.1 + offset * 0.2, height * 0.45 - 20, 100, 100);
+  image(imgPortal, width * 0.1 + offset * 0.45, height * 0.45 - 10, 130, 130);
+  image(imgPortal, width * 0.1 + offset * 0.75, height * 0.45, 160, 160);
+  image(imgNave, width * 0.2 + offset * 1.2, height * 0.5, 500, 400);
   noTint();
 
   fill(237, 224, 196, map(tempoCutscene, 0, 40, 0, 255));
   noStroke();
   textAlign(LEFT, CENTER);
-  textSize(11);
-  text('A aproximar de ' + planetaAtual.nome + '...', 40, height - 40);
+  textFont(font);
+  textSize(18);
+  text('A APROXIMAR DE ' + planetaAtual.nome + '...', 40, height - 40);
 
   if (tempoCutscene > 100) {
     window.location.href = '../planetas/' + planetaAtual.nome.toLowerCase() + '.html';
