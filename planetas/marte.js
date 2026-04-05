@@ -20,13 +20,14 @@ function draw() {
   stroke(42, 31, 20);
   strokeWeight(1);
   line(width * 0.3, 0, width * 0.3, height);
-  for (let b of botoes) b.desenhar();
+  
 
   desenharMixer();
   desenharVisuais();
 }
 
 function desenharMixer() {
+    for (let b of botoes) b.desenhar();
   // painel esquerdo
 }
 

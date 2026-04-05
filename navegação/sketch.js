@@ -2,19 +2,21 @@ let estado = 'mapa';
 let planetaAtual = null;
 
 let planetas = [
-  new Planeta('VENUS',    100, 10, 0,   0.008, '#4a7fc8'),
-  new Planeta('TIJUANA',    160, 11, 1,   0.006, '#4a7fc8'),
-  new Planeta('MARTE',    230, 10, 2,   0.004, '#c8a44a'),
+  new Planeta('VENUS',    100, 10, 0,   0.008, '#FEE7A0'),
+  new Planeta('TIJUANA',    160, 11, 1,   0.006, '#FFCD48'),
+  new Planeta('MARTE',    230, 10, 2,   0.004, '#fa7f5d'),
   new Planeta('GANYMEDE', 310, 13, 3.5, 0.002, '#7a9cbf'),
 ];
 
 let tempoCutscene = 0;
-let imgMarte, imgNave, imgPortal;
+let imgMarte, imgNave, imgPortal, imgBg, imgEstrelas;
 
 function preload() {
   imgMarte = loadImage('assets/marte.png');
   imgNave = loadImage('assets/nave.png');
   imgPortal = loadImage('assets/portal.png');
+  imgBg = loadImage('assets/bg.png');
+  imgEstrelas = loadImage('assets/estrelas.png');
 }
 
 function setup() {
@@ -45,28 +47,23 @@ function desenharMapa() {
     p.desenhar(cx, cy);
   }
 }
-//mockup vai ser substituido por imagens
+
 function desenharCutscene() {
   tempoCutscene++;
 
   let progresso = tempoCutscene / 360;
-  let deslocamento = width * 0.08 * progresso;
-
-  // aplicar tint com a cor do planeta
+  let scroll = width * 0.01 * progresso;
+  let offset = width * 0.08 * progresso;
+  
+  image(imgBg, -width * 0.15 - scroll, -height * 0.15, width * 1.3, height * 1.3);
+  image(imgEstrelas, -width * 0.15 - scroll, -height * 0.15, width * 1.3, height * 1.3);
+  
   tint(planetaAtual.cor);
-
-  // planeta
-  image(imgMarte, width * 0.35 + deslocamento*0.5, height * -0.2, height * 1.1, height * 1.1);
-
-  // portal
-  image(imgPortal, width * 0.1 + deslocamento*0.75, height * 0.25, 160, 160);
-
-  // nave
-  image(imgNave, width * 0.2 + deslocamento*1.2, height * 0.5, 400, 240);
-
+  image(imgMarte, width * 0.35 + offset * 0.5, height * -0.2, height * 1.1, height * 1.1);
+  image(imgPortal, width * 0.1 + offset * 0.75, height * 0.25, 160, 160);
+  image(imgNave, width * 0.2 + offset * 1.2, height * 0.5, 400, 240);
   noTint();
 
-  // texto
   fill(237, 224, 196, map(tempoCutscene, 0, 40, 0, 255));
   noStroke();
   textAlign(LEFT, CENTER);
@@ -74,8 +71,7 @@ function desenharCutscene() {
   text('A aproximar de ' + planetaAtual.nome + '...', 40, height - 40);
 
   if (tempoCutscene > 100) {
-    let nomeArquivo = planetaAtual.nome.toLowerCase() + '.html';
-    window.location.href = '../planetas/' + nomeArquivo;
+    window.location.href = '../planetas/' + planetaAtual.nome.toLowerCase() + '.html';
   }
 }
 function mousePressed() {
