@@ -15,10 +15,10 @@ function setup() {
   let bh = 50;
   let gap = 20;
 
-  botoes.push(new Botao(px, height * 0.25, bw, bh, '1', corMarte, fontIBM));
-  botoes.push(new Botao(px, height * 0.25 + (bh + gap), bw, bh, '2', corMarte, fontIBM));
-  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 2, bw, bh, '3', corMarte, fontIBM));
-  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 3, bw, bh, '4', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25, bw, bh, 'TR', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25 + (bh + gap), bw, bh, 'BA', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 2, bw, bh, 'BX', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 3, bw, bh, 'DR', corMarte, fontIBM));
 }
 
 function draw() {
@@ -36,6 +36,9 @@ function draw() {
 
 function desenharMixer() {
     for (let b of botoes) b.desenhar();
+    fill(100, 80, 70);
+    textSize(16);
+    text('voltar', width * 0.05, height * 0.06);
   // painel esquerdo
 }
 
@@ -43,7 +46,12 @@ function desenharVisuais() {
   // área direita
   image(imgMarte, width * 0.3, 0, width * 0.7, height);
 }
-
+//da commit
 function mousePressed() {
   for (let b of botoes) b.clicado();
+
+  if (mouseX > width * 0.05 && mouseX < width * 0.15 && 
+    mouseY > height * 0.04 && mouseY < height * 0.08) {
+  window.location.href = '../navegação/index.html';
+  }
 }
