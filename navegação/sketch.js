@@ -16,6 +16,7 @@ let font  ;
 function preload() {
   font = loadFont('fontes/bookman1.ttf');
   font2 = loadFont('fontes/IBMPlexMono-Regular.ttf');
+
   imgPlanetas['VENUS'] = loadImage('assets/venus.png');
   imgPlanetas['TIJUANA'] = loadImage('assets/tijuana.png');
   imgPlanetas['MARTE'] = loadImage('assets/marte.png');
@@ -70,15 +71,20 @@ function desenharMapa() {
 function desenharCutscene() {
   tempoCutscene++;
 
-  let progresso = tempoCutscene / 360;
-  let scroll = width * 0.01 * progresso;
+  let progresso = tempoCutscene / 180;
+  let scroll = width * 0.03 * progresso;
   let offset = width * 0.08 * progresso;
   
   //image(imgBg, -width * 0.05 - scroll, -height * 0.05, width * 1.1, height * 1.1);
-  image(imgEstrelas, -width * 0.05 - scroll, -height * 0.05, width * 1.1, height * 1.1);
+  
   
   //desenha o respetivo planeta 
+  tint(planetaAtual.cor);
+  image(imgEstrelas, -width * 0.05 - scroll, -height * 0.05, width * 1.1, height * 1.1);
+  noTint();
+
   image(imgPlanetas[planetaAtual.nome], width * 0.35 + offset * 0.5, height * -0.2, height * 1.1, height * 1.1);
+  
   tint(planetaAtual.cor);
   image(imgPortal, width * 0.1 + offset * 0.2, height * 0.45 - 20, 100, 100);
   image(imgPortal, width * 0.1 + offset * 0.45, height * 0.45 - 10, 130, 130);

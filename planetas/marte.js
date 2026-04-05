@@ -1,4 +1,12 @@
 let botoes = [];
+let corMarte = '#fa7f5d';
+let imgMarte;
+let fontIBM;
+
+function preload() {
+  fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
+  imgMarte = loadImage('../navegação/assets/marte1.png');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -7,10 +15,10 @@ function setup() {
   let bh = 50;
   let gap = 20;
 
-  botoes.push(new Botao(px, height * 0.25, bw, bh, '1'));
-  botoes.push(new Botao(px, height * 0.25 + (bh + gap), bw, bh, '2'));
-  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 2, bw, bh, '3'));
-  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 3, bw, bh, '4'));
+  botoes.push(new Botao(px, height * 0.25, bw, bh, '1', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25 + (bh + gap), bw, bh, '2', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 2, bw, bh, '3', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 3, bw, bh, '4', corMarte, fontIBM));
 }
 
 function draw() {
@@ -33,6 +41,7 @@ function desenharMixer() {
 
 function desenharVisuais() {
   // área direita
+  image(imgMarte, width * 0.3, 0, width * 0.7, height);
 }
 
 function mousePressed() {
