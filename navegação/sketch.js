@@ -11,7 +11,7 @@ let planetas = [
 let tempoCutscene = 0;
 let imgNave, imgPortal, imgBg, imgEstrelas;
 let imgPlanetas = {};
-let font  ;
+let font ;
 
 function preload() {
   font = loadFont('fontes/bookman1.ttf');
