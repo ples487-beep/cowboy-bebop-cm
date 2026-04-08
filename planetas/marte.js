@@ -8,13 +8,13 @@ let somAtivo = false;
 
 function preload() {
   fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
-  imgBg = loadImage('../../elementos/marte/bg.png');
-  imgStars = loadImage('../../elementos/marte/marte estrelas.png');
-  imgNave = loadImage('../../elementos/marte/marte nave.png');
-  imgPlaneta = loadImage('../../elementos/marte/marte planeta.png');
-  somBass = loadSound('../../elementos/sounds/double_bass.wav');
-  somBateria = loadSound('../../elementos/sounds/jazz-drumming_170bpm.wav');
-  somSax = loadSound('../../elementos/sounds/sax-phrase-honey-moon-pt-8_90bpm_D_minor.wav');
+  imgBg = loadImage('../elementos/marte/bg.png');
+  imgStars = loadImage('../elementos/marte/marte estrelas.png');
+  imgNave = loadImage('../elementos/marte/marte nave.png');
+  imgPlaneta = loadImage('../elementos/marte/marte planeta.png');
+  somBass = loadSound('../elementos/sounds/double_bass.wav');
+  somBateria = loadSound('../elementos/sounds/jazz-drumming_170bpm.wav');
+  somSax = loadSound('../elementos/sounds/sax-phrase-honey-moon-pt-8_90bpm_D_minor.wav');
 }
 
 function setup() {
