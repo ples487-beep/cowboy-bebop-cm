@@ -2,10 +2,10 @@ let estado = 'mapa';
 let planetaAtual = null;
 
 let planetas = [
-  new Planeta('VENUS',    130, 10, 0,   0.004, '#ffdb70'),
-  new Planeta('MARTE',    300, 10, 2,   0.002, '#fa7f5d'),
-  new Planeta('TIJUANA',    210, 11, 1,   0.003, '#FFCD48'),
-  new Planeta('GANYMEDE', 400, 13, 3.5, 0.001, '#7a9cbf'),
+  new Planeta('VENUS',    120, 8,  0,   0.005,  '#ffae00'),
+  new Planeta('MARTE',    200, 8, 2,   0.003,  '#ffd500'),
+  new Planeta('TIJUANA',  290, 6,  1,   0.0003, '#ffb700'),
+  new Planeta('GANYMEDE', 380, 6, 3.5, 0.001,  '#ff9a0c'),
 ];
 
 let tempoCutscene = 0;
@@ -15,6 +15,15 @@ let Titulo="Universe of Cowboy Bebop";
 let font ;
 
 
+let imgPlanetasMap = {};
+let font ;
+
+let zoomAtual = 1;
+let zoomAlvo = 1;
+let offsetX = 0;
+let offsetY = 0;
+let aDragging = false;
+let dragStartX, dragStartY;
 
 function preload() {
   font = loadFont('fontes/bookman1.ttf');
@@ -24,6 +33,12 @@ function preload() {
   imgPlanetas['TIJUANA'] = loadImage('assets/tijuana.png');
   imgPlanetas['MARTE'] = loadImage('assets/marte.png');
   imgPlanetas['GANYMEDE'] = loadImage('assets/ganymede.png');
+
+  imgPlanetasMap['VENUS']    = loadImage('assets/venus_map.png');
+  imgPlanetasMap['MARTE']    = loadImage('assets/marte_map.png');
+  imgPlanetasMap['TIJUANA']  = loadImage('assets/tijuana_map.png');
+  imgPlanetasMap['GANYMEDE'] = loadImage('assets/ganymede_map.png');
+
   imgNave = loadImage('assets/nave.png');
   imgPortal = loadImage('assets/portal.png');
   imgBg = loadImage('assets/bg.png');
@@ -46,9 +61,10 @@ function draw() {
 }
 
 function desenharMapa() {
+  
   let cx = width / 2;
   let cy = height / 2;
-
+  desenharCinturao(cx, cy);
   fill(237, 224, 196);
   tint(100);
   image(imgEstrelas,0,0, width, height,);
@@ -77,6 +93,18 @@ function desenharMapa() {
   textSize(32);            
   text(Titulo, width / 2, 30); 
 
+}
+function desenharCinturao(cx, cy) {
+  randomSeed(42);
+  noStroke();
+  for (let i = 0; i < 60; i++) {
+    let a = random(TWO_PI);
+    let r = 290 + random(-20, 20);
+    let x = cx + cos(a) * r;
+    let y = cy + sin(a) * r * 0.3;
+    fill(200, 170, 80, random(60, 150));
+    circle(x, y, random(1, 2.5));
+  }
 }
 
 function desenharCutscene() {

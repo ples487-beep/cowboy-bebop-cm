@@ -20,15 +20,19 @@ class Planeta {
   }
 
   desenhar(cx, cy) {
-    let { x, y } = this.posicao(cx, cy);
+  let { x, y } = this.posicao(cx, cy);
 
-    noFill();
-    stroke(60, 100, 180);
-    strokeWeight(0.8);
-    ellipse(cx, cy, this.raioOrbita * 2, this.raioOrbita * 0.6);
+  // órbita
+  noFill();
+  stroke(237, 224, 196, 40);
+  strokeWeight(0.5);
+  ellipse(cx, cy, this.raioOrbita * 2, this.raioOrbita * 0.6);
 
-    fill(this.cor);
-    noStroke();
-    circle(x, y, this.tamanho);
-  }
+  // planeta com textura
+  tint(this.cor);
+  imageMode(CENTER);
+  image(imgPlanetasMap[this.nome], x, y, this.tamanho * 2, this.tamanho * 2);
+  noTint();
+  imageMode(CORNER);
+}
 }
