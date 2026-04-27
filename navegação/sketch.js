@@ -11,12 +11,11 @@ let planetas = [
 let tempoCutscene = 0;
 let imgNave, imgPortal, imgBg, imgEstrelas;
 let imgPlanetas = {};
-let Titulo="Universe of Cowboy Bebop";
+let titulo=('UNIVERSE OF COWBOY BEBOP');
 let font ;
 
 
 let imgPlanetasMap = {};
-let font ;
 
 let zoomAtual = 1;
 let zoomAlvo = 1;
@@ -91,7 +90,7 @@ function desenharMapa() {
   textAlign(CENTER, TOP);  
   textFont(font2);         
   textSize(32);            
-  text(Titulo, width / 2, 30); 
+  text(titulo, width / 2, 30); 
 
 }
 function desenharCinturao(cx, cy) {
@@ -143,19 +142,43 @@ function desenharCutscene() {
   }
 }
 function mousePressed() {
-  let cx = width / 2;
-  let cy = height / 2;
-  
+  // para o planeta
+  let cx = width / 2; 
+  let cy = height / 2; 
 
-  for (let p of planetas) {
-    let pos = p.posicao(cx, cy);
+
+  //textFont(font); // Make sure the computer measures using your exact font
+  //textSize(32);   // Make sure it uses the exact size
+  //para o titulo
+  let tituloX= width/2; 
+  let tituloY= 30; 
+  let tituloLargura= textWidth(titulo); 
+  let tituloAltura= 32; 
+
+  
+  
+  //para o planeta
+  for (let p of planetas) { 
+    let pos = p.posicao(cx, cy); 
     let d = dist(mouseX, mouseY, pos.x, pos.y);
 
     if (d < p.tamanho * 2) {
-      planetaAtual = p;
-      estado = 'cutscene';
-      tempoCutscene = 0;
+      planetaAtual = p; 
+      estado = 'cutscene'; 
+      tempoCutscene = 0; 
     }
+  }
+
+  //para o titulo
+  if(
+    mouseX<(tituloX+tituloLargura/2) &&
+    mouseX>(tituloX-tituloLargura/2) &&
+    mouseY>(tituloY) &&
+    mouseY<(tituloY+tituloAltura)
+  )
+  {
+    fill('#7b68ee');
+    console.log("CLICASTE NO TÍTULO!");
   }
 }
 
