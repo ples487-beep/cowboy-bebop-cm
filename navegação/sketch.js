@@ -11,7 +11,10 @@ let planetas = [
 let tempoCutscene = 0;
 let imgNave, imgPortal, imgBg, imgEstrelas;
 let imgPlanetas = {};
+let Titulo="Universe of Cowboy Bebop";
 let font ;
+
+
 
 function preload() {
   font = loadFont('fontes/bookman1.ttf');
@@ -66,6 +69,14 @@ function desenharMapa() {
     textFont(font2);
     text(p.nome, pos.x, pos.y + p.tamanho + 5);
   }
+
+  // Titulo do jogo
+  fill('#ede0c4');         
+  textAlign(CENTER, TOP);  
+  textFont(font2);         
+  textSize(32);            
+  text(Titulo, width / 2, 30); 
+
 }
 
 function desenharCutscene() {
