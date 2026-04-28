@@ -1,4 +1,5 @@
 let botoes = [];
+let botoesNavegacao = [];
 let corMarte = '#fa7f5d';
 let imgBg, imgStars, imgNave, imgPlaneta;
 let fontIBM;
@@ -34,7 +35,7 @@ function setup() {
   somBass.setVolume(0);
   somBateria.setVolume(0);
   somSax.setVolume(0);
-   let px = width * 0.05;
+  let px = width * 0.05;
   let bw = 50;
   let bh = 50;
   let gap = 20;
@@ -43,7 +44,7 @@ function setup() {
   botoes.push(new Botao(px, height * 0.25 + (bh + gap), bw, bh, 'BA', corMarte, fontIBM));
   botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 2, bw, bh, 'SX', corMarte, fontIBM));
   botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 3, bw, bh, 'DR', corMarte, fontIBM));
-  botoes.push(new Botao(px, height * 0.06, bw, bh, 'voltar',255, fontIBM));
+  botoesNavegacao.push(new Botao(px, height * 0.06, bw, bh, 'voltar',255, fontIBM));
 }
 
 function draw() {
@@ -62,9 +63,7 @@ function draw() {
 // painel esquerdo
 function desenharMixer() {
     for (let b of botoes) b.desenhar();
-    //fill(100, 80, 70); //cor texto
-    //textSize(16); //tamanho texto
-    //text('voltar', width * 0.05, height * 0.06); //texto de voltar ----> pensar em meter no array de botões
+    for (let bN of botoesNavegacao) bN.desenhar();
 }
 
 function desenharVisuais() {
