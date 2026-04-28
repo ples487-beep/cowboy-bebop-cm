@@ -96,27 +96,27 @@ function desenharMapa() {
   //text(titulo, width / 2, 30); 
   textAlign(LEFT, TOP);
 
-  // 1. Calcular onde a primeira letra começa para a frase ficar centrada
-  let larguraTotal = textWidth(titulo); // Garante que a variável se chama mesmo 'titulo'
+  //onde a primeira letra começa para a frase ficar centrada
+  let larguraTotal = textWidth(titulo);
   let xAtual = (width / 2) - (larguraTotal / 2);
 
+  // split('', Titulo) parte a palavra num array: ['U', 'n', 'i', 'v', ...]
+  let letrasBaralhadas = split(titulo, '');
+
+  //if (animarTitulo) {
+      //letrasBaralhadas = shuffle(letrasBaralhadas);
+    //}
+
   for (let i = 0; i < titulo.length; i++) {
-    let letra = titulo.charAt(i); // Pega na letra atual
+    let letraOriginal = titulo.charAt(i);       // A letra que deveria estar aqui
+    let letraParaDesenhar = letrasBaralhadas[i]; // A letra que calhou nesta posição após baralhar
+
+    // Desenha a letra misturada
+    text(letraParaDesenhar, xAtual, 30);
     
-    let offsetX = 0;
-    let offsetY = 0;
-
-    // Se a animação estiver ativa, adiciona o tremor (opcional)
-    if (animarTitulo) {
-      offsetX = random(-4, 4);
-      offsetY = random(-4, 4);
-    }
-
-    // 2. A LINHA MÁGICA QUE FALTA: Desenhar a letra de facto!
-    text(letra, xAtual + offsetX, 30 + offsetY);
-
-    // 3. OUTRA LINHA CRUCIAL: Empurrar o 'X' para a direita para a próxima letra
-    xAtual += textWidth(letra);
+    // Avança o 'X' usando a largura da letra ORIGINAL. 
+    // (Isto impede que a palavra inteira fique a encolher e esticar loucamente)
+    xAtual += textWidth(letraOriginal);
   }
 
 
