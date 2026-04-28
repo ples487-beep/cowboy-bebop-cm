@@ -43,6 +43,7 @@ function setup() {
   botoes.push(new Botao(px, height * 0.25 + (bh + gap), bw, bh, 'BA', corMarte, fontIBM));
   botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 2, bw, bh, 'SX', corMarte, fontIBM));
   botoes.push(new Botao(px, height * 0.25 + (bh + gap) * 3, bw, bh, 'DR', corMarte, fontIBM));
+  botoes.push(new Botao(px, height * 0.06, bw, bh, 'voltar',255, fontIBM));
 }
 
 function draw() {
@@ -58,12 +59,12 @@ function draw() {
   desenharVisuais();
 }
 
+// painel esquerdo
 function desenharMixer() {
     for (let b of botoes) b.desenhar();
-    fill(100, 80, 70);
-    textSize(16);
-    text('voltar', width * 0.05, height * 0.06);
-  // painel esquerdo
+    //fill(100, 80, 70); //cor texto
+    //textSize(16); //tamanho texto
+    //text('voltar', width * 0.05, height * 0.06); //texto de voltar ----> pensar em meter no array de botões
 }
 
 function desenharVisuais() {
@@ -104,8 +105,8 @@ function mousePressed() {
     }
   }
 
-  if (mouseX > width * 0.05 && mouseX < width * 0.15 && 
-    mouseY > height * 0.04 && mouseY < height * 0.08) {
-    window.location.href = '../navegação/index.html';
-  }
+  //if (mouseX > width * 0.05 - (width * 0.05)/2 && mouseX < (width * 0.05)*2 && 
+    //mouseY > height * 0.04 && mouseY < height * 0.08) {
+    //window.location.href = '../navegação/index.html';
+  //}
 }
