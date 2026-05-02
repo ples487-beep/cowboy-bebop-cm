@@ -1,0 +1,15 @@
+.btn_action {
+    display: flex; /*para os botões ficarem posicionados na vertical*/
+    /*justify-content: center;*/
+    /*text-align: center;*/
+    background-color: #fa7f5d; 
+    /*stroke: 0px;*/
+    /*gap: 20px;*/
+    margin-bottom:10px;/*espaçamento dos botões para baixo*/
+    border: 0px; /*retira a linha do botão*/
+}
+
+.btn_navigation {
+    background-color: transparent;
+    border: 0px; /*retira a linha do botão*/
+}
