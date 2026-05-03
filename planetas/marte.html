@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marte</title>
     <link rel="stylesheet" href="../buttons/botoes.css"> <!--Estilo dos Botões-->
-    <link rel="stylesheet" href="../buttons/botoes.js"> <!--Interação dos Botões-->
 
 </head>
 <body>
@@ -13,19 +12,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
 
     <div class="painel_lateral">
+        
+        <div class="painel_lateral_header">
+            <!--Botões de navegação-->
+            <button class="btn_navigation" id="btn_vl">voltar</button>
+        </div>
 
-    <!--Botões de navegação-->
-    <button class="btn_navigation" id="btn vl">voltar</button>
+        <div class="painel_lateral_body">
+            <!--Botões de ação!-->
+            <button class="btn_action" id="btn_bx">BX</button>
+            <button class="btn_action" id="btn_ba">BA</button>
+            <button class="btn_action" id="btn_sx">SX</button>
+            <button class="btn_action" id="btn_dr">DR</button>
+        </div>
 
-    <!--Botões de ação!-->
-    <button class="btn_action" id="btn bx">BX</button>
-    <button class="btn_action" id="btn ba">BA</button>
-    <button class="btn_action" id="btn sx">SX</button>
-    <button class="btn_action" id="btn dr">DR</button>
-
-    </div>
+        </div>
     
     <script src="marte.js"></script>
+
+    <script src="../buttons/botoes.js"></script> <!--Interação dos Botões-->
     
 
 </body>

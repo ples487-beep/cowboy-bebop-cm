@@ -16,23 +16,34 @@ canvas {
 .painel_lateral {
     background-color:black;
     width:20vw;
-    height:100vh;
-    display:flex;
-    flex-direction:column;  
+    height:100vh;  
+    border: 2px solid orange;
 }
 
+.painel_lateral_header{
+  height: 5vh;
+  border:2px solid white;
+}
+
+.painel_lateral_body{
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-self: center;
+  border:2px solid white;
+}
 
 .btn_action {
-    width:30%;
-    /*justify-self: center;*/
+    width:100%;
     align-self: center;
     /*text-align: center;*/
-    background-color: #fa7f5d; 
-    color:white;
+    /*background-color: #fa7f5d;*/ 
+    /*text-decoration-color:white;*/
     /*stroke: 0px;*/
     /*gap: 20px;*/
     margin-bottom:10px;/*espaçamento dos botões para baixo*/
-    border: 0px;
+    /*border: 2px solid white;*/
 }
 
 .btn_navigation {
@@ -40,5 +51,5 @@ canvas {
     align-self: flex-start;/*flex start substitui o left*/
     background-color: transparent;
     color: white;
-    border: 0px;/*retira a linha do botão*/
+    border: 2px solid white;/*retira a linha do botão*/
 }
