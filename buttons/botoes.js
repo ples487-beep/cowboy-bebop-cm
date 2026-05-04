@@ -1,22 +1,42 @@
 // Seleciona todos os botões que têm a classe 'btn_action'
-const botoesAcao = document.querySelectorAll('.btn_action');
+let botoesAcao = document.querySelectorAll('.btn_action');
 
 // Define as cores
-const corOriginal = '#fa7f5d'; 
-const corNova = '#d95a38'; // Um tom mais escuro de laranja (podes alterar)
+let corOriginal = '#fa7f5d'; 
+//let corNova = '#d95a38'; // Um tom mais escuro de laranja (podes alterar)
 
 
 // Passa por cada botão e adiciona os eventos
 botoesAcao.forEach(botao => {
+
+    let botaoClicado = false;
     
     // Quando o rato passa por cima (Mouse Over)
     botao.addEventListener('mouseover', () => {
-        botao.style.backgroundColor = corNova;
+        corOriginal = '#d95a38';
+        botao.style.backgroundColor = corOriginal;
         botao.style.cursor = 'pointer'; // Muda a setinha para a mão de clicar
     });
 
     // Quando o rato sai de cima (Mouse Out)
     botao.addEventListener('mouseout', () => {
-        botao.style.backgroundColor = corOriginal;
+        //corOriginal = '#fa7f5d';
+        //botao.style.backgroundColor = corOriginal;
+        if(botaoClicado === false){
+            corOriginal = '#fa7f5d';
+            botao.style.backgroundColor = corOriginal;
+        }
+
+        else if(botaoClicado === true){
+            corOriginal = '#FF3131';
+            botao.style.backgroundColor = corOriginal;
+        }
+    });
+
+    //Quando o rato clica no botão
+    botao.addEventListener('click', () => {
+        botaoClicado = !botaoClicado;
+        //corOriginal = '#fa7f5d';
+        //botao.style.backgroundColor = corOriginal;
     });
 });
