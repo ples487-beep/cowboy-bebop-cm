@@ -5,6 +5,7 @@ const botoesAcao = document.querySelectorAll('.btn_action');
 const corOriginal = '#fa7f5d'; 
 const corNova = '#d95a38'; // Um tom mais escuro de laranja (podes alterar)
 
+
 // Passa por cada botão e adiciona os eventos
 botoesAcao.forEach(botao => {
     
