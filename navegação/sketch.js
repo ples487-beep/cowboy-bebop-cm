@@ -3,9 +3,9 @@ let planetaAtual = null;
 
 let planetas = [
   new Planeta('VENUS',    120, 8,  0,   0.005,  '#ffae00'),
-  new Planeta('MARTE',    200, 8, 2,   0.003,  '#ffd500'),
-  new Planeta('TIJUANA',  290, 6,  1,   0.0003, '#ffb700'),
-  new Planeta('GANYMEDE', 380, 6, 3.5, 0.001,  '#ff9a0c'),
+  new Planeta('MARTE',    200, 8, 2,   0.003,  'rgb(252, 68, 62)'),
+  new Planeta('TIJUANA',  290, 6,  1,   0.0003, '#6bebc2'),
+  new Planeta('GANYMEDE', 380, 6, 3.5, 0.001,  '#4117ff'),
 ];
 
 let tempoCutscene = 0;
