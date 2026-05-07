@@ -2,10 +2,10 @@ let estado = 'mapa';
 let planetaAtual = null;
 
 let planetas = [
-  new Planeta('VENUS',    120, 8,  0,   0.005,  '#ffae00'),
-  new Planeta('MARTE',    200, 8, 2,   0.003,  'rgb(252, 68, 62)'),
-  new Planeta('TIJUANA',  290, 6,  1,   0.0003, '#6bebc2'),
-  new Planeta('GANYMEDE', 380, 6, 3.5, 0.001,  '#4117ff'),
+  new Planeta('VENUS',    180, 16, 0,   0.001,  '#ffae00'),
+  new Planeta('MARTE',    280, 16, 2,   0.0009,  'rgb(252, 68, 62)'),
+  new Planeta('TIJUANA',  400, 14,  1,   0.0003, '#6bebc2'),
+  new Planeta('GANYMEDE', 520, 14, 3.5,  0.0001,  '#4117ff'),
 ];
 
 let tempoCutscene = 0;
@@ -57,41 +57,79 @@ function draw() {
 }
 
 function desenharMapa() {
-  
   let cx = width / 2;
-  let cy = height / 2;
-  desenharCinturao(cx, cy);
-  fill(237, 224, 196);
-  tint(100);
-  image(imgEstrelas,0,0, width, height,);
-  noTint();
-  noStroke();
-  circle(cx, cy, 20);
+let cy = height / 2;
 
-  for (let p of planetas) {
+// fundo
+tint(65, 23, 255,100);
+image(imgBg, 0, 0, width, height);
+
+// estrelas 
+let estrelasX = map(mouseX, 0, width, -10, 10);
+let estrelasY = map(mouseY, 0, height, -5, 5);
+image(imgEstrelas,estrelasX * 0.5,estrelasY * 0.5,width,height);
+tint(65, 23, 255, 80);
+image(imgEstrelas,100+estrelasX,50+estrelasY,width,height);
+noTint();
+// centro
+fill(237, 224, 196);
+noStroke();
+circle(cx, cy, 20);
+
+//cinturão
+desenharCinturao(cx, cy);
+
+//desenhar planetas loop
+
+ for (let p of planetas) {
     p.atualizar();
     p.desenhar(cx, cy);
     
-    // Nome do planeta em pequeno
     let pos = p.posicao(cx, cy);
+    
+    // nome pequeno por cima do planeta
     fill(237, 224, 196);
     textAlign(CENTER, TOP);
     textSize(10);
     noStroke();
     textFont(font2);
     text(p.nome, pos.x, pos.y + p.tamanho + 5);
+
+    // hover em baixo
+    let d = dist(mouseX, mouseY, pos.x, pos.y);
+    if (d < p.tamanho * 3) {
+      fill(p.cor);
+      textFont(font);
+      textSize(48);
+      textAlign(LEFT, BOTTOM);
+      noStroke();
+      text(p.nome, 40, height - 60);
+      
+      fill(237, 224, 196, 150);
+      textFont(font2);
+      textSize(11);
+      text('// clica para visitar', 40, height - 35);
+    }
   }
+
+  //hud
+  fill(237, 224, 196, 60);
+  textFont(font2);
+  textSize(10);
+  textAlign(LEFT, TOP);
+  noStroke();
+  text('THE UNIVERSE OF COWBOY BEBOP', 30, 30);
 }
 function desenharCinturao(cx, cy) {
   randomSeed(42);
   noStroke();
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 80; i++) {
     let a = random(TWO_PI);
-    let r = 290 + random(-20, 20);
+    let r = 450 + random(-25, 25);
     let x = cx + cos(a) * r;
     let y = cy + sin(a) * r * 0.3;
-    fill(200, 170, 80, random(60, 150));
-    circle(x, y, random(1, 2.5));
+    fill(255, 174, 0, random(60, 150));
+    circle(x, y, random(1, 3));
   }
 }
 
