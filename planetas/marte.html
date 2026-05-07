@@ -4,14 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marte</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../buttons/botoes.css"> <!--Estilo dos Botões-->
 
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
-    <script src="classbotao.js"></script>
-    <script src="marte.js"></script>
+    <!-- Biblioteca principal p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <!-- Biblioteca de som p5.sound.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+
+    <div class="page_container">
+
+        <div id="canvas-container"></div>
+
+        <div class="mixer">
+        
+            <div class="mixer_header">
+                <!--Botões de navegação-->
+                <button class="btn_navigation" id="btn_vl">voltar</button>
+            </div>
+
+            <div id="painel_gravacoes" class="painel_gravacoes">
+            <h3 style="color: white; font-family: sans-serif; font-size: 14px;">As Minhas Faixas</h3>
+            </div>
+
+            <div class="mixer_body">
+                <!--Botões de ação!-->
+                <button class="btn_action" id="btn_bx">BX</button>
+                <button class="btn_action" id="btn_ba">BA</button>
+                <button class="btn_action" id="btn_sx">SX</button>
+                <button class="btn_action" id="btn_rec">REC</button>
+                <button class="btn_action" id="btn_dr"></button>
+            </div>
+
+        </div>
+    
+        <script src="marte.js"></script>
+        <script src="../buttons/botoes.js"></script> <!--Interação dos Botões-->
+
+    </div>
     
 
 </body>

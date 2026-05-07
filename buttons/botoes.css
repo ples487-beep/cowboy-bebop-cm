@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    margin: 0; /* Remove margens padrão */
+}
+
+/* Organiza as coisas de cima para baixo */
+.page_container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: black; /* Se for uma frincha, agora fica preta e invisível! */
+    gap: 0;              /* Força a zero de espaço entre o canvas e o mixer */
+}
+
+/*canvas {*/
+  /*display: block;*/
+/*}*/
+
+/* O espaço do p5.js */
+#canvas-container {
+    flex-grow: 1; /* Isto faz com que o canvas ocupe todo o espaço que o mixer não está a usar */
+    display: flex;
+    justify-content: center; /* Opcional: Centra o canvas na horizontal */
+    align-items: center;     /* Opcional: Centra o canvas na vertical */
+}
+
+.mixer {
+    background-image: url('../elementos/painel/painel.png'); 
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    width: 100vw;
+    height: 30vh;
+    
+    /* O TRUQUE MÁGICO: Puxa o painel 2 pixels para cima */
+    margin-top: -30px; 
+    
+    /* Garante que o mixer fica por cima do canvas se houver sobreposição */
+    position: relative; 
+    z-index: 10; 
+}
+
+.mixer_header{
+  height: 5vh;
+  /*border:2px solid white;*/
+}
+
+.mixer_body{
+  height: 25vh; /* Os restantes 25vh para completar os 30vh do mixer */
+  display: flex;
+  flex-direction: row; /* Para os botões ficarem lado a lado, se preferires! */
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_action {
+    width:60px;
+    height: 60px;
+    align-self: center;
+    /*text-align: center;*/
+    background-color: #fa7f5d; 
+    color:white;
+    /*stroke: 0px;*/
+    margin: 20px;
+    /*margin-bottom:10px;*/
+    border: 0px;
+
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn_navigation {
+    margin: 20px;
+    align-self: flex-start;/*flex start substitui o left*/
+    background-color: transparent;
+    color: white;
+    border: 0px;/*retira a linha do botão*/
+    padding: 10px;
+}
+
+#btn_dr {
+    background-image: url('../elementos/painel/botao_2.png'); 
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent; 
+    
+    /* ADICIONA ESTAS 2 LINHAS */
+    border-radius: 50%; /* Garante que a área de clique é perfeitamente redonda */
+    user-select: none;  /* Impede que arrastar o rato selecione elementos no ecrã */
+}
+
+
+/* O Painel Flutuante para as Gravações */
+.painel_gravacoes {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Fica no canto superior direito */
+    background-color: rgba(20, 20, 20, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #fa7f5d;
+    z-index: 50; /* Fica por cima de tudo */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre as faixas de áudio */
+}
+
+/* Opcional: Efeito a piscar para o botão REC */
+.gravando {
+    background-color: red !important;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
