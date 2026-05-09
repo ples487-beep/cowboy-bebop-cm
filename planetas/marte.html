@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marte</title>
-    <link rel="stylesheet" href="../buttons/botoes.css"> <!--Estilo dos Botões-->
+
+    <!--carregar fonte-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="global.css"> 
 
 </head>
+
 <body>
     <!-- Biblioteca principal p5.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
@@ -15,32 +22,32 @@
 
     <div class="page_container">
 
-        <div id="canvas-container"></div>
+        <div class="canvas_container"></div>
 
-        <div class="mixer">
+        <div class="mixer_container">
         
             <div class="mixer_header">
                 <!--Botões de navegação-->
                 <button class="btn_navigation" id="btn_vl">voltar</button>
             </div>
 
-            <div id="painel_gravacoes" class="painel_gravacoes">
+            <!--div id="painel_gravacoes" class="painel_gravacoes">
             <h3 style="color: white; font-family: sans-serif; font-size: 14px;">As Minhas Faixas</h3>
-            </div>
+            </div-->
 
             <div class="mixer_body">
                 <!--Botões de ação!-->
                 <button class="btn_action" id="btn_bx">BX</button>
                 <button class="btn_action" id="btn_ba">BA</button>
                 <button class="btn_action" id="btn_sx">SX</button>
-                <button class="btn_action" id="btn_rec">REC</button>
+                <button class="btn_action" id="btn_rec">BT</button>
                 <button class="btn_action" id="btn_dr"></button>
             </div>
 
         </div>
     
         <script src="marte.js"></script>
-        <script src="../buttons/botoes.js"></script> <!--Interação dos Botões-->
+        <script src="global.js"></script> 
 
     </div>
     
