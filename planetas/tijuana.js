@@ -1,112 +1,262 @@
-let corTijuana = '#f5a54a';
-let cenaAtiva = 1; // 1, 2 ou 3
-
-// Cena 1
-let cena1Bg, cena1Bg2, cena1Layer1, cena1Layer2, cena1Layer3;
-
-// Cena 2
-let cena2Bg, cena2Bg2, cena2Layer1, cena2Layer2;
-
-// Cena 3
-let cena3Bg1, cena3Bg2, cena3Layer1, cena3Layer2, cena3Layer3;
-
 let fontIBM;
 
+let somNoise, somOboe, somSax, somSynth;
+
+let gravador, ficheiroGravacao;
+
+let cenaAtiva = 1;
+
+// Cena 1
+let cena1bg, cena1bg2, cena1layer1, cena1layer2, cena1layer3;
+// Cena 2
+let cena2bg, cena2bg2, cena2layer1, cena2layer2;
+// Cena 3
+let cena3bg, cena3bg2, cena3layer1, cena3layer2, cena3layer3;
+
 function preload() {
-  fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
-  
-  // Cena 1
-  cena1Bg = loadImage('../elementos/tijuana/cena1/bg.png');
-  cena1Bg2 = loadImage('../elementos/tijuana/cena1/bg2.png');
-  cena1Layer1 = loadImage('../elementos/tijuana/cena1/layer1.png');
-  cena1Layer2 = loadImage('../elementos/tijuana/cena1/layer2.png');
-  cena1Layer3 = loadImage('../elementos/tijuana/cena1/layer3.png');
-  
-  // Cena 2
-  cena2Bg = loadImage('../elementos/tijuana/cena2/bg.png');
-  cena2Bg2 = loadImage('../elementos/tijuana/cena2/bg2.png');
-  cena2Layer1 = loadImage('../elementos/tijuana/cena2/layer1.gif');
-  cena2Layer2 = loadImage('../elementos/tijuana/cena2/layer2.gif');
-  
-  // Cena 3
-  cena3Bg1 = loadImage('../elementos/tijuana/cena3/bg1.png');
-  cena3Bg2 = loadImage('../elementos/tijuana/cena3/bg2.png');
-  cena3Layer1 = loadImage('../elementos/tijuana/cena3/layer1.png');
-  cena3Layer2 = loadImage('../elementos/tijuana/cena3/layer2.png');
-  cena3Layer3 = loadImage('../elementos/tijuana/cena3/layer3.png');
+    fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
+
+    cena1bg     = loadImage('../elementos/tijuana/cena1/bg.png');
+    cena1bg2    = loadImage('../elementos/tijuana/cena1/bg2.png');
+    cena1layer1 = loadImage('../elementos/tijuana/cena1/layer1.png');
+    cena1layer2 = loadImage('../elementos/tijuana/cena1/layer2.png');
+    cena1layer3 = loadImage('../elementos/tijuana/cena1/layer3.png');
+
+    cena2bg     = loadImage('../elementos/tijuana/cena2/bg.png');
+    cena2bg2    = loadImage('../elementos/tijuana/cena2/bg2.png');
+    cena2layer1 = loadImage('../elementos/tijuana/cena2/layer1.gif');
+    cena2layer2 = loadImage('../elementos/tijuana/cena2/layer2.gif');
+
+    cena3bg     = loadImage('../elementos/tijuana/cena3/bg1.png');
+    cena3bg2    = loadImage('../elementos/tijuana/cena3/bg2.png');
+    cena3layer1 = loadImage('../elementos/tijuana/cena3/layer1.png');
+    cena3layer2 = loadImage('../elementos/tijuana/cena3/layer2.png');
+    cena3layer3 = loadImage('../elementos/tijuana/cena3/layer3.png');
+
+    somNoise = loadSound('../elementos/sounds/tijuana_noise.mp3');
+    somOboe  = loadSound('../elementos/sounds/tijuana_oboe.mp3');
+    somSax   = loadSound('../elementos/sounds/tijuana_sax.mp3');
+    somSynth = loadSound('../elementos/sounds/tijuana_synth.mp3');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+    let container = document.querySelector('.canvas_container');
+    let myCanvas = createCanvas(container.clientWidth, container.clientHeight);
+    myCanvas.parent('canvas_container');
+
+    somNoise.setVolume(0.5);
+    gravador = new p5.SoundRecorder();
 }
 
 function draw() {
-  background(10, 8, 6);
-  
- 
-  if (cenaAtiva === 1) desenharCena1();
-  else if (cenaAtiva === 2) desenharCena2();
-  else if (cenaAtiva === 3) desenharCena3();
-  
-  
-  fill(30, 25, 20);
-  rect(0, height * 0.85, width, height * 0.15);
+    background(0);
+    desenharCena1();
+    if (cenaAtiva === 1) desenharCena1();
+    else if (cenaAtiva === 2) desenharCena2();
+    else if (cenaAtiva === 3) desenharCena3();
+
+    
 }
 
 function desenharCena1() {
+    let h = height * 0.9;
+    let w = h * (4 / 3);
+    let x = (width - w) / 2;
+    let y = (height - h) / 2;
 
-  let maxW = width * 0.7;
-  let maxH = height * 0.75;
-  let h = min(maxH, maxW * 3 / 4);
-  let w = h * 4 / 3;
-  let x = (width - w) / 2;
-  let y = height * 0.1 + (maxH - h) / 2;
-  
-  image(cena1Bg, x, y, w, h);
-  image(cena1Bg2, x, y, w, h);
-  image(cena1Layer1, x, y, w, h);
-  image(cena1Layer2, x, y, w, h);
-  image(cena1Layer3, x, y, w, h);
+    image(cena1bg, x, y, w, h);
+    tint(255, 180);
+    image(cena1bg2, x, y, w, h);
+    tint(255, 220);
+    image(cena1layer1, x, y, w, h);
+    tint(255, 150);
+    image(cena1layer2, x, y, w, h);
+    tint(255, 120);
+    image(cena1layer3, x, y, w, h);
+    noTint();
 }
 
 function desenharCena2() {
-  
-  let maxW = width * 0.7;
-  let maxH = height * 0.75;
-  let h = min(maxH, maxW * 3 / 4);
-  let w = h * 4 / 3;
-  let x = (width - w) / 2;
-  let y = height * 0.1 + (maxH - h) / 2;
-  
-  image(cena2Bg, x, y, w, h);
-  image(cena2Bg2, x, y, w, h);
-  image(cena2Layer1, x, y, w, h);
-  image(cena2Layer2, x, y, w, h);
+    let h = height * 0.9;
+    let w = h * (4 / 3);
+    let x = (width - w) / 2;
+    let y = (height - h) / 2;
+
+    image(cena2bg, x, y, w, h);
+    tint(255, 180);
+    image(cena2bg2, x, y, w, h);
+    tint(255, 220);
+    image(cena2layer1, x, y, w, h);
+    tint(255, 150);
+    image(cena2layer2, x, y, w, h);
+    noTint();
 }
 
 function desenharCena3() {
-  let maxW = width * 0.7;
-  let maxH = height * 0.75;
-  let h = min(maxH, maxW * 3 / 4);
-  let w = h * 4 / 3;
-  let x = (width - w) / 2;
-  let y = height * 0.1 + (maxH - h) / 2;
-  
-  image(cena3Bg1, x, y, w, h);
-  image(cena3Bg2, x, y, w, h);
-  image(cena3Layer1, x, y, w, h);
-  image(cena3Layer2, x, y, w, h);
-  image(cena3Layer3, x, y, w, h);
+    let h = height * 0.9;
+    let w = h * (4 / 3);
+    let x = (width - w) / 2;
+    let y = (height - h) / 2;
+
+    image(cena3bg, x, y, w, h);
+    tint(255, 160);
+    image(cena3bg2, x, y, w, h);
+    tint(255, 230);
+    image(cena3layer1, x, y, w, h);
+    tint(255, 150);
+    image(cena3layer2, x, y, w, h);
+    tint(255, 120);
+    image(cena3layer3, x, y, w, h);
+    noTint();
+}
+
+function windowResized() {
+    let container = document.getElementById('canvas_container');
+    resizeCanvas(container.clientWidth, container.clientHeight);
 }
 
 function mousePressed() {
-  // Alternar cenas com clique na área de preview
-  if (mouseY < height * 0.85) {
     cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
-  }
-  
-  if (mouseX > width * 0.05 && mouseX < width * 0.15 && 
-    mouseY > height * 0.04 && mouseY < height * 0.08) {
-    window.location.href = '../navegação/index.html';
-  }
 }
+
+// ==========================================
+// BOTÕES DE SOM
+// ==========================================
+let botoesAcao = document.querySelectorAll('.btn_action');
+
+botoesAcao.forEach(botao => {
+    let botaoClicado = false;
+    if (botao.id === 'btn_rec') return;
+
+    botao.addEventListener('mouseover', () => {
+        botao.style.cursor = 'pointer';
+        botao.style.filter = 'sepia(100%) saturate(250%) hue-rotate(320deg) brightness(230%)';
+    });
+
+    botao.addEventListener('mouseout', () => {
+        if (botaoClicado === false) {
+            botao.style.filter = 'sepia(100%) saturate(250%) hue-rotate(320deg) brightness(130%)';
+        } else {
+            botao.style.filter = 'sepia(100%) saturate(250%) hue-rotate(320deg) brightness(300%)';
+        }
+    });
+
+    botao.addEventListener('click', () => {
+        botaoClicado = !botaoClicado;
+
+        if (botao.id === 'btn_bx') {
+            if (somNoise && somNoise.isLoaded()) { botaoClicado ? somNoise.loop() : somNoise.pause(); }
+        }
+        if (botao.id === 'btn_bs') {
+            if (somOboe && somOboe.isLoaded()) { botaoClicado ? somOboe.loop() : somOboe.pause(); }
+        }
+        if (botao.id === 'btn_bt') {
+            if (somSax && somSax.isLoaded()) { botaoClicado ? somSax.loop() : somSax.pause(); }
+        }
+        if (botao.id === 'btn_ba') {
+            if (somSynth && somSynth.isLoaded()) { botaoClicado ? somSynth.loop() : somSynth.pause(); }
+        }
+    });
+});
+
+
+// ==========================================
+// BOTÃO VOLTAR
+// ==========================================
+let btnVoltar = document.getElementById('btn_vl');
+
+if (btnVoltar) {
+    btnVoltar.addEventListener('mouseover', () => {
+        btnVoltar.style.fontSize = '20px';
+        btnVoltar.style.cursor = 'pointer';
+    });
+    btnVoltar.addEventListener('mouseout', () => {
+        btnVoltar.style.fontSize = '16px';
+    });
+    btnVoltar.addEventListener('click', () => {
+        window.location.href = '../navegação/index.html';
+    });
+}
+
+
+// ==========================================
+// BOTÃO REC
+// ==========================================
+let aGravar = false;
+const corNormal = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))";
+const corHover  = "linear-gradient(rgba(255, 50, 50, 0.4), rgba(255, 50, 50, 0.4))";
+const corGravar = "linear-gradient(rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.8))";
+
+let btnRec = document.getElementById('btn_rec');
+
+if (btnRec) {
+    btnRec.style.filter = "none";
+
+    btnRec.addEventListener('mouseover', () => {
+        if (!aGravar) btnRec.style.setProperty('--pelicula', corHover);
+    });
+    btnRec.addEventListener('mouseout', () => {
+        if (!aGravar) btnRec.style.setProperty('--pelicula', corNormal);
+    });
+
+    btnRec.addEventListener('click', () => {
+        if (typeof p5 !== 'undefined' && !gravador) gravador = new p5.SoundRecorder();
+        if (!gravador) return;
+
+        if (!aGravar) {
+            ficheiroGravacao = new p5.SoundFile();
+            gravador.record(ficheiroGravacao);
+            aGravar = true;
+            btnRec.innerText = "STOP";
+            btnRec.style.setProperty('--pelicula', corGravar);
+            btnRec.classList.add('gravando');
+        } else {
+            gravador.stop();
+            aGravar = false;
+            btnRec.innerText = "REC";
+            btnRec.style.setProperty('--pelicula', corNormal);
+            btnRec.classList.remove('gravando');
+
+            setTimeout(() => {
+                let blobAudio = ficheiroGravacao.getBlob();
+                let reader = new FileReader();
+                reader.readAsDataURL(blobAudio);
+                reader.onloadend = () => {
+                    let gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
+                    gravacoes.push({
+                        planeta: 'TIJUANA',
+                        data: new Date().toLocaleDateString(),
+                        audio: reader.result
+                    });
+                    localStorage.setItem('gravacoes', JSON.stringify(gravacoes));
+                    btnRec.innerText = "SAVED";
+                    setTimeout(() => btnRec.innerText = "REC", 1500);
+                };
+            }, 100);
+        }
+    });
+}
+
+
+// ==========================================
+// SLIDERS DE VOLUME
+// ==========================================
+let sliderBx = document.getElementById('vol_bx');
+if (sliderBx) sliderBx.addEventListener('input', () => {
+    if (somNoise && somNoise.isLoaded()) somNoise.setVolume(parseFloat(sliderBx.value));
+});
+
+let sliderBs = document.getElementById('vol_bs');
+if (sliderBs) sliderBs.addEventListener('input', () => {
+    if (somOboe && somOboe.isLoaded()) somOboe.setVolume(parseFloat(sliderBs.value));
+});
+
+let sliderBt = document.getElementById('vol_bt');
+if (sliderBt) sliderBt.addEventListener('input', () => {
+    if (somSax && somSax.isLoaded()) somSax.setVolume(parseFloat(sliderBt.value));
+});
+
+let sliderBa = document.getElementById('vol_ba');
+if (sliderBa) sliderBa.addEventListener('input', () => {
+    if (somSynth && somSynth.isLoaded()) somSynth.setVolume(parseFloat(sliderBa.value));
+});

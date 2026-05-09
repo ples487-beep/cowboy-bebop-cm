@@ -3,15 +3,32 @@ let fontIBM;
 
 let somBass, somBateria, somSax, somSax2;
 
+let cenaAtiva = 1;
+
 
 let gravador, ficheiroGravacao;
 
 function preload() {
     fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
-    imgBg = loadImage('../elementos/marte/bg.png');
-    imgStars = loadImage('../elementos/marte/marte estrelas.png');
-    imgNave = loadImage('../elementos/marte/marte nave.png');
-    imgPlaneta = loadImage('../elementos/marte/marte planeta.png');
+
+    //cena1 Marte 
+    cena1bg = loadImage('../elementos/marte/cena1/bg.png');
+    cena1bg2 = loadImage('../elementos/marte/cena1/bg2.png');
+    cena1layer = loadImage('../elementos/marte/cena1/layer1.png');
+    cena1layer2 = loadImage('../elementos/marte/cena1/layer2.png');
+
+    //cena2 Marte
+    cena2bg = loadImage('../elementos/marte/cena2/bg.png');
+    cena2bg2 = loadImage('../elementos/marte/cena2/bg2.png');
+    cena2layer1 = loadImage('../elementos/marte/cena2/layer1.png');
+    cena2layer2 = loadImage('../elementos/marte/cena2/layer2.png');
+    cena2layer3 = loadImage('../elementos/marte/cena2/layer3.png');
+    //cena3 Marte
+    cena3bg = loadImage('../elementos/marte/cena3/bg.png');
+    cena3bg2 = loadImage('../elementos/marte/cena3/bg2.png');
+    cena3layer1 = loadImage('../elementos/marte/cena3/layer1.png');
+    cena3layer2 = loadImage('../elementos/marte/cena3/layer2.png');
+
 
     somBass = loadSound('../elementos/sounds/marte_bass.mp3');
     somBateria = loadSound('../elementos/sounds/marte_drum.mp3');
@@ -21,13 +38,13 @@ function preload() {
 
 function setup() {
     // Procura a div que criámos no HTML para saber o tamanho exato disponível
-    let container = document.getElementById('canvas-container');
+    let container = document.querySelector('.canvas_container');
     
     // Cria o canvas com a largura e altura exatas dessa div
     let myCanvas = createCanvas(container.clientWidth, container.clientHeight);
 
     // Prende o canvas dentro da div correta (respeitando o layout Flexbox!)
-    myCanvas.parent('canvas-container');
+    myCanvas.parent('canvas_container');
   
     // Apagámos o position(0, 0) e o z-index, pois o Flexbox já organiza tudo!
 
@@ -42,47 +59,86 @@ function setup() {
 }
 
 function draw() {
-    background(8, 6, 4);
+    background(0);
 
     // Apaguei a linha vertical de divisão (stroke, line), pois 
     // já não há painel lateral a dividir o ecrã.
   
-    desenharVisuais();
+    if (cenaAtiva === 1) desenharCena1();
+    else if (cenaAtiva === 2) desenharCena2();
+    else if (cenaAtiva === 3) desenharCena3();
 }
 
-function desenharVisuais() {
-    // Como o Canvas agora tem o tamanho perfeito da área livre, 
-    // começamos a desenhar no canto superior esquerdo (0,0)
-    let x = 0;
-    let y = 0;
+function desenharCena1() {
+    // Mantemos a proporção 4:3
+    let h = height * 0.9;
+    let w = h * (4 / 3);
+    let x = (width - w) / 2;   // ← ERA: width - w
+    let y = (height - h) / 2;
+
+    image(cena1bg, x, y, w, h);
     
-    // E ocupamos 100% da largura (width) e 100% da altura (height)
-    let w = width;
-    let h = height;
-  
-    image(imgBg, x, y, w, h);
-  
-    // Transparência das estrelas mapeia para saxophone
-    //let alphaStar = map(saxAmp.getLevel(), 0, 0.3, 50, 255);
-    //tint(255, alphaStar);
-    image(imgStars, x, y, w, h);
-  
-    // Transparência do planeta mapeia para bateria
-    //let alphaPlaneta = map(bateriaAmp.getLevel(), 0, 0.3, 50, 255);
-    //tint(255, alphaPlaneta);
-    image(imgPlaneta, x, y, w, h);
-  
-    // Pulso na nave baseado no baixo
-    //let alphaNave = map(bassAmp.getLevel(), 0, 0.3, 100, 255);
-    //tint(255, alphaNave);
-    image(imgNave, x, y, w, h);
+    tint(255, 180);
+    image(cena1bg2, x, y, w, h);
+    image(cena1layer, x, y, w, h);
+    
+    image(cena1layer2, x, y, w, h);
+
+    noTint();
+}
+
+function desenharCena2() {
+    let h = height * 0.9;
+    let w = h * (4 / 3);
+    let x = (width - w) / 2;   // ← ERA: width - w
+    let y = (height - h) / 2;
+
+    image(cena2bg, x, y, w, h);
+
+    tint(255, 180);
+    image(cena2bg2, x, y, w, h);
+
+    tint(255, 220);
+    image(cena2layer1, x, y, w, h);
+
+    tint(255, 150);
+    image(cena2layer2, x, y, w, h);
+
+    tint(255, 100);
+    image(cena2layer3, x, y, w, h);
+
+    noTint();
+}
+
+function desenharCena3() {
+    let h = height * 0.9;
+    let w = h * (4 / 3);
+    let x = (width - w) / 2;   // ← ERA: width - w
+    let y = (height - h) / 2;
+
+    image(cena3bg, x, y, w, h);
+
+    tint(255, 160);
+    image(cena3bg2, x, y, w, h);
+
+    tint(255, 230);
+    image(cena3layer1, x, y, w, h);
+
+    tint(255, 120);
+    image(cena3layer2, x, y, w, h);
+
+    noTint();
 }
 
 // NOVA FUNÇÃO: Garante que se redimensionares a janela do browser,
 // o canvas adapta-se ao novo espaço perfeitamente.
 function windowResized() {
-    let container = document.getElementById('canvas-container');
+    let container = document.getElementById('canvas_container');
     resizeCanvas(container.clientWidth, container.clientHeight);
+}
+
+function mousePressed() {
+    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
 }
 
 
@@ -240,27 +296,48 @@ if (btnRec) {
     });
 
     btnRec.addEventListener('click', () => {
-        // Se o gravador não existir (erro do p5), tentamos criar um
-        if (typeof p5 !== 'undefined' && !gravador) {
-            gravador = new p5.SoundRecorder();
-        }
-        if (!gravador) return;
+    if (typeof p5 !== 'undefined' && !gravador) {
+        gravador = new p5.SoundRecorder();
+    }
+    if (!gravador) return;
 
-        if (!aGravar) {
-            ficheiroGravacao = new p5.SoundFile();
-            gravador.record(ficheiroGravacao);
-            aGravar = true;
-            btnRec.innerText = "STOP";
-            btnRec.style.setProperty('--pelicula', corGravar);
-            btnRec.classList.add('gravando');
-        } else {
-            gravador.stop();
-            aGravar = false;
-            btnRec.innerText = "REC";
-            btnRec.style.setProperty('--pelicula', corHover);
-            btnRec.classList.remove('gravando');
-        }
-    });
+    if (!aGravar) {
+        ficheiroGravacao = new p5.SoundFile();
+        gravador.record(ficheiroGravacao);
+        aGravar = true;
+        btnRec.innerText = "STOP";
+        btnRec.style.setProperty('--pelicula', corGravar);
+        btnRec.classList.add('gravando');
+
+    } else {
+        gravador.stop();
+        aGravar = false;
+        btnRec.innerText = "REC";
+        btnRec.style.setProperty('--pelicula', corNormal);
+        btnRec.classList.remove('gravando');
+
+        setTimeout(() => {
+            let blobAudio = ficheiroGravacao.getBlob();
+            let urlAudio = URL.createObjectURL(blobAudio);
+
+            let reader = new FileReader();
+            reader.readAsDataURL(blobAudio);
+            reader.onloadend = () => {
+                let gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
+                gravacoes.push({
+                    planeta: 'MARTE',
+                    data: new Date().toLocaleDateString(),
+                    audio: reader.result
+                });
+                localStorage.setItem('gravacoes', JSON.stringify(gravacoes));
+
+                // feedback visual
+                btnRec.innerText = "SAVED";
+                setTimeout(() => btnRec.innerText = "REC", 1500);
+            };
+        }, 100);
+    }
+  } );
 }
 
 // ==========================================

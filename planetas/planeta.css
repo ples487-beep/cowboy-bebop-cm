@@ -31,16 +31,19 @@ body {
     gap: 0;              /* Força a zero de espaço entre o canvas e o mixer */
 }
 
-canvas {
-  display: block;
-}
 
 /* O espaço do p5.js */
 .canvas_container {
-    flex-grow: 1; /* Isto faz com que o canvas ocupe todo o espaço que o mixer não está a usar */
+    flex: 1;           /* ← ADICIONA ISTO */
     display: flex;
-    justify-content: center; /* Opcional: Centra o canvas na horizontal */
-    align-items: center;     /* Opcional: Centra o canvas na vertical */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: black;
+}
+
+canvas {
+    display: block; /* Remove espaços brancos extra */
 }
 
 .mixer_container { 

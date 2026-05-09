@@ -3,16 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marte</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Venus</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="planeta.css"> 
 
 </head>
+
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
-    <script src="classbotao.js"></script>
-    <script src="venus.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+
+    <div class="page_container">
+
+        <div id="canvas_container" class="canvas_container"></div>
+
+        <div class="mixer_container">
+        
+            <div class="mixer_header">
+                <button class="btn_navigation" id="btn_vl">voltar</button>
+            </div>
+
+            <div class="mixer_body">
+                <div class="row_rec">
+                    <button class="btn_action" id="btn_rec">REC</button>
+                </div>
+
+                <div class="control_row">
+                    <div class="btn_fantasma"></div>
+                    <div class="label_vol">VOL</div>
+                </div>
+
+                <div class="control_row">
+                    <button class="btn_action" id="btn_bx">GT</button>
+                    <input type="range" class="volume_slider" id="vol_bx" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <div class="control_row">
+                    <button class="btn_action" id="btn_bs">DR</button>
+                    <input type="range" class="volume_slider" id="vol_bs" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <div class="control_row">
+                    <button class="btn_action" id="btn_bt">GL</button>
+                    <input type="range" class="volume_slider" id="vol_bt" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <!-- Quarto botão desativado — só tens 3 sons -->
+                <div class="control_row">
+                    <button class="btn_action" id="btn_ba" disabled style="opacity: 0.3;">---</button>
+                    <input type="range" class="volume_slider" id="vol_ba" min="0" max="1" step="0.01" value="0.5" disabled style="opacity: 0.3;">
+                </div>
+            </div>
+
+        </div>
+
+        <div id="mobile-warning">
+            <div class="popup-box">
+                <h2>Ecrã Incompatível</h2>
+                <p>OLÁ COWBOY!!! Esta experiência não está optimizada para o seu ecrã...</p> 
+                <p>Por favor tente aceder através de um dispositivo com um ecrã maior para poder experienciar o nosso website.</p>
+            </div>
+        </div>
+
+        <script src="venus.js"></script>
+
+    </div>
 
 </body>
 </html>
