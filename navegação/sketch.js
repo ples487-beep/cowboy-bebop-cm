@@ -21,6 +21,9 @@ let offsetY = 0;
 let aDragging = false;
 let dragStartX, dragStartY;
 
+let gravacoes = [];
+let audioElements = [];
+
 function preload() {
   font = loadFont('fontes/bookman1.ttf');
   font2 = loadFont('fontes/IBMPlexMono-Regular.ttf');
@@ -43,6 +46,15 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //GRAVAÇOES
+  gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
+
+  audioElements = gravacoes.map(g => {
+  let a = document.createElement('audio');
+  a.src = g.audio;
+  document.body.appendChild(a);
+  return a;
+});
   
 }
 
@@ -61,12 +73,13 @@ function desenharMapa() {
 let cy = height / 2;
 
 // fundo
-tint(65, 23, 255,100);
+tint(65, 23, 255,80);
 image(imgBg, 0, 0, width, height);
-
+noTint();
 // estrelas 
-let estrelasX = map(mouseX, 0, width, -10, 10);
-let estrelasY = map(mouseY, 0, height, -5, 5);
+tint(65, 23, 255,200);
+let estrelasX = map(mouseX, 0, width, -20, 20);
+let estrelasY = map(mouseY, 0, height, -10, 10);
 image(imgEstrelas,estrelasX * 0.5,estrelasY * 0.5,width,height);
 tint(65, 23, 255, 80);
 image(imgEstrelas,100+estrelasX,50+estrelasY,width,height);
@@ -90,7 +103,7 @@ desenharCinturao(cx, cy);
     // nome pequeno por cima do planeta
     fill(237, 224, 196);
     textAlign(CENTER, TOP);
-    textSize(10);
+    textSize(1);
     noStroke();
     textFont(font2);
     text(p.nome, pos.x, pos.y + p.tamanho + 5);
@@ -110,15 +123,19 @@ desenharCinturao(cx, cy);
       textSize(11);
       text('// clica para visitar', 40, height - 35);
     }
+    desenharCartoes();
   }
 
   //hud
-  fill(237, 224, 196, 60);
+  fill(255, 220);
   textFont(font2);
-  textSize(10);
+  textSize(12);
+  letterSpacing = 1;
   textAlign(LEFT, TOP);
   noStroke();
   text('THE UNIVERSE OF COWBOY BEBOP', 30, 30);
+
+  
 }
 function desenharCinturao(cx, cy) {
   randomSeed(42);
@@ -128,11 +145,41 @@ function desenharCinturao(cx, cy) {
     let r = 450 + random(-25, 25);
     let x = cx + cos(a) * r;
     let y = cy + sin(a) * r * 0.3;
-    fill(255, 174, 0, random(60, 150));
+    fill(65, 23, 255,random(60, 150));
     circle(x, y, random(1, 3));
   }
 }
+function desenharCartoes() {
+  if (gravacoes.length === 0) return;
+  
+  let cardW = 200;
+  let cardH = 60;
+  let startX = 30;
+  let startY = height - cardH - 20;
 
+  for (let i = 0; i < gravacoes.length; i++) {
+    let x = startX + i * (cardW + 10);
+    let g = gravacoes[i];
+
+    // fundo
+    fill(20, 15, 10);
+    stroke(100, 80, 50);
+    strokeWeight(1);
+    rect(x, startY, cardW, cardH);
+
+    // texto
+    fill(237, 224, 196);
+    noStroke();
+    textFont(font2);
+    textSize(10);
+    textAlign(LEFT, TOP);
+    text(g.planeta, x + 10, startY + 10);
+    text(g.data, x + 10, startY + 25);
+    
+    fill(150, 120, 60);
+    text('TOCAR', x + 10, startY + 42);
+  }
+}
 function desenharCutscene() {
   tempoCutscene++;
 
@@ -171,8 +218,8 @@ function desenharCutscene() {
 function mousePressed() {
   let cx = width / 2;
   let cy = height / 2;
-  
 
+  // clicar nos planetas
   for (let p of planetas) {
     let pos = p.posicao(cx, cy);
     let d = dist(mouseX, mouseY, pos.x, pos.y);
@@ -181,6 +228,19 @@ function mousePressed() {
       planetaAtual = p;
       estado = 'cutscene';
       tempoCutscene = 0;
+    }
+  }
+
+  // clicar nos cartões de gravação
+  let cardW = 200;
+  let cardH = 60;
+  let startY = height - cardH - 20;
+
+  for (let i = 0; i < gravacoes.length; i++) {
+    let x = 30 + i * (cardW + 10);
+    
+    if (mouseX > x && mouseX < x + cardW && mouseY > startY && mouseY < startY + cardH) {
+      audioElements[i].play();
     }
   }
 }

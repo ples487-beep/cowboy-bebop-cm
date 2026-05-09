@@ -115,6 +115,17 @@ if (btnRec) {
                 
                 // 4. Adiciona o leitor ao nosso Painel de Gravações
                 document.getElementById('painel_gravacoes').appendChild(leitorAudio);
+                let reader = new FileReader();
+                reader.readAsDataURL(blobAudio);
+                reader.onloadend = () => {
+                let gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
+                gravacoes.push({
+                planeta: 'MARTE',
+                data: new Date().toLocaleDateString(),
+                audio: reader.result
+             });
+    localStorage.setItem('gravacoes', JSON.stringify(gravacoes));
+        };
             }, 100); // 100 milissegundos de pausa por segurança
         }
     });
