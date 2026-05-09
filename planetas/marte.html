@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="global.css"> 
+    <link rel="stylesheet" href="marte.css"> 
 
 </head>
 
@@ -36,18 +36,58 @@
             </div-->
 
             <div class="mixer_body">
-                <!--Botões de ação!-->
-                <button class="btn_action" id="btn_bx">BX</button>
-                <button class="btn_action" id="btn_ba">BA</button>
-                <button class="btn_action" id="btn_sx">SX</button>
-                <button class="btn_action" id="btn_rec">BT</button>
-                <button class="btn_action" id="btn_dr"></button>
+                <!-- O botão REC fica sozinho no topo -->
+                <div class="row_rec">
+                    <button class="btn_action" id="btn_rec">REC</button>
+                </div>
+
+                <!-- Linha do Título (A forma correta) -->
+                <div class="control_row">
+                    <div class="btn_fantasma"></div> <!-- Ocupa o espaço exato de um botão -->
+                    <div class="label_vol">VOL</div> <!-- Ocupa o espaço exato da barra -->
+                </div>
+
+                <!-- Linha 1: BX + Slider -->
+                <div class="control_row">
+                    <button class="btn_action" id="btn_bx">BX</button>
+                    <input type="range" class="volume_slider" id="vol_bx" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <!-- Linha 2: BS + Slider -->
+                <div class="control_row">
+                    <button class="btn_action" id="btn_bs">BS</button>
+                    <input type="range" class="volume_slider" id="vol_bs" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <!-- Linha 3: BT + Slider -->
+                <div class="control_row">
+                    <button class="btn_action" id="btn_bt">BT</button>
+                    <input type="range" class="volume_slider" id="vol_bt" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <!-- Linha 4: BA + Slider -->
+                <div class="control_row">
+                    <button class="btn_action" id="btn_ba">BA</button>
+                    <input type="range" class="volume_slider" id="vol_ba" min="0" max="1" step="0.01" value="0.5">
+                </div>
             </div>
 
         </div>
+
+
+        <!-- O Pop-up de Aviso -->
+        <div id="mobile-warning">
+            <div class="popup-box">
+                <h2>Ecrã Incompatível</h2>
+                <p> OLÁ COWBOY!!! Esta experiência não está optimizada para o seu ecrã...</p> 
+                <p>Por favor tente aceder através de um dispositivo com um ecrã maior para poder experienciar o nosso website.</p>
+    
+            </div>
+        </div>
+
     
         <script src="marte.js"></script>
-        <script src="global.js"></script> 
+         
 
     </div>
     
