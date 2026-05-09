@@ -10,6 +10,8 @@ let cena2Bg, cena2Bg2, cena2Layer1, cena2Layer2;
 // Cena 3
 let cena3Bg1, cena3Bg2, cena3Layer1;
 
+let somDrone, somBateria, somSax;
+
 let fontIBM;
 
 let gravador, ficheiroGravacao
@@ -33,6 +35,10 @@ function preload() {
   cena3Bg1 = loadImage('../elementos/ganymede/cena3/bg1.png');
   cena3Bg2 = loadImage('../elementos/ganymede/cena3/bg2.png');
   cena3Layer1 = loadImage('../elementos/ganymede/cena3/layer1.png');
+
+  somDrone = loadSound('../elementos/sounds/ganymede_drone.mp3'); 
+  somBateria = loadSound('../elementos/sounds/ganymede_drum.mp3'); 
+  somSax = loadSound('../elementos/sounds/ganymede_sax.mp3'); 
 }
 
 function setup() {
@@ -166,11 +172,31 @@ botoesAcao.forEach(botao => {
 
         // A lógica do som para o BX continua a funcionar normalmente!
         if (botao.id === 'btn_bx'){
-            if (somBass && somBass.isLoaded()) {
+            if (somDrone && somDrone.isLoaded()) {
                 if (botaoClicado === true){
-                    somBass.play();
+                    somDrone.loop();
                 } else {
-                    somBass.pause();
+                    somDrone.pause();
+                }
+            } 
+        } 
+
+        if (botao.id === 'btn_bs'){
+            if (somBateria && somBateria.isLoaded()) {
+                if (botaoClicado === true){
+                    somBateria.loop();
+                } else {
+                    somBateria.pause();
+                }
+            } 
+        } 
+
+        if (botao.id === 'btn_bt'){
+            if (somSax && somSax.isLoaded()) {
+                if (botaoClicado === true){
+                    somSax.loop();
+                } else {
+                    somSax.pause();
                 }
             } 
         } 
@@ -264,4 +290,41 @@ if (btnRec) {
         }
     });
 }
+
+
+// ==========================================
+// 5. LÓGICA DOS SLIDERS DE VOLUME
+// ==========================================
+
+
+// --- Controlo de Volume do BX (Bass / BS) ---
+let sliderBx = document.getElementById('vol_bx');
+if (sliderBx) {
+    sliderBx.addEventListener('input', () => {
+        if (somDrone && somDrone.isLoaded()) {
+            somDrone.setVolume(parseFloat(sliderBx.value)); 
+        }
+    });
+}
+
+// --- Controlo de Volume do BS (Bateria / DR) ---
+let sliderBs = document.getElementById('vol_bs');
+if (sliderBs) {
+    sliderBs.addEventListener('input', () => {
+        if (somBateria && somBateria.isLoaded()) {
+            somBateria.setVolume(parseFloat(sliderBs.value));
+        }
+    });
+}
+
+// --- Controlo de Volume do BT (Sax 1 / SX1) ---
+let sliderBt = document.getElementById('vol_bt');
+if (sliderBt) {
+    sliderBt.addEventListener('input', () => {
+        if (somSax && somSax.isLoaded()) {
+            somSax.setVolume(parseFloat(sliderBt.value));
+        }
+    });
+}
+
 

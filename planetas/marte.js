@@ -1,7 +1,7 @@
 let imgBg, imgStars, imgNave, imgPlaneta;
 let fontIBM;
 
-let somBass, somBateria, somSax;
+let somBass, somBateria, somSax, somSax2;
 
 
 let gravador, ficheiroGravacao;
