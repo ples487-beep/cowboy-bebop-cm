@@ -266,7 +266,7 @@ if (btnVoltar) {
         // Redireciona para a página principal
         // NOTA: Se o teu index.html estiver uma pasta atrás (na pasta principal do projeto),
         // deves usar '../index.html'. Se estiver na mesma pasta, usa apenas 'index.html'.
-        window.location.href = '../navegação/index.html'; 
+        window.location.href = '../index.html'; 
     });
 }
 

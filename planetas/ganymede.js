@@ -163,7 +163,7 @@ if (btnVoltar) {
         btnVoltar.style.fontSize = '16px';
     });
     btnVoltar.addEventListener('click', () => {
-        window.location.href = '../navegação/index.html';
+        window.location.href = '../index.html';
     });
 }
 
