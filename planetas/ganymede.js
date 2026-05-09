@@ -14,6 +14,10 @@ let fontIBM;
 
 let gravador, ficheiroGravacao;
 
+somBass = loadSound('../elementos/sounds/double_bass.wav');
+somBateria = loadSound('../elementos/sounds/jazz-drumming_170bpm.wav');
+somSax = loadSound('../elementos/sounds/sax-phrase-honey-moon-pt-8_90bpm_D_minor.wav');
+
 function preload() {
   fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
   
