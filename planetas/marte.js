@@ -13,9 +13,10 @@ function preload() {
     imgNave = loadImage('../elementos/marte/marte nave.png');
     imgPlaneta = loadImage('../elementos/marte/marte planeta.png');
 
-    somBass = loadSound('../elementos/sounds/double_bass.wav');
-    somBateria = loadSound('../elementos/sounds/jazz-drumming_170bpm.wav');
-    somSax = loadSound('../elementos/sounds/sax-phrase-honey-moon-pt-8_90bpm_D_minor.wav');
+    somBass = loadSound('../elementos/sounds/marte_bass.mp3');
+    somBateria = loadSound('../elementos/sounds/marte_drum.mp3');
+    somSax = loadSound('../elementos/sounds/marte_sax1.mp3');
+    somSax2 = loadSound('../elementos/sounds/marte_sax2.mp3');
 }
 
 function setup() {
@@ -135,12 +136,42 @@ botoesAcao.forEach(botao => {
         if (botao.id === 'btn_bx'){
             if (somBass && somBass.isLoaded()) {
                 if (botaoClicado === true){
-                    somBass.play();
+                    somBass.loop();
                 } else {
                     somBass.pause();
                 }
             } 
         } 
+
+        if (botao.id === 'btn_bs'){
+            if (somBateria && somBateria.isLoaded()) {
+                if (botaoClicado === true){
+                    somBateria.loop();
+                } else {
+                    somBateria.pause();
+                }
+            } 
+        } 
+
+        if (botao.id === 'btn_bt'){
+            if (somSax && somSax.isLoaded()) {
+                if (botaoClicado === true){
+                    somSax.loop();
+                } else {
+                    somSax.pause();
+                }
+            } 
+        }
+        
+        if (botao.id === 'btn_ba'){
+            if (somSax2 && somSax2.isLoaded()) {
+                if (botaoClicado === true){
+                    somSax2.loop();
+                } else {
+                    somSax2.pause();
+                }
+            } 
+        }
 
         // Muda a cor do clique, ignorando apenas o btn_dr
        
@@ -228,6 +259,51 @@ if (btnRec) {
             btnRec.innerText = "REC";
             btnRec.style.setProperty('--pelicula', corHover);
             btnRec.classList.remove('gravando');
+        }
+    });
+}
+
+// ==========================================
+// 5. LÓGICA DOS SLIDERS DE VOLUME
+// ==========================================
+
+
+// --- Controlo de Volume do BX (Bass / BS) ---
+let sliderBx = document.getElementById('vol_bx');
+if (sliderBx) {
+    sliderBx.addEventListener('input', () => {
+        if (somBass && somBass.isLoaded()) {
+            somBass.setVolume(parseFloat(sliderBx.value)); 
+        }
+    });
+}
+
+// --- Controlo de Volume do BS (Bateria / DR) ---
+let sliderBs = document.getElementById('vol_bs');
+if (sliderBs) {
+    sliderBs.addEventListener('input', () => {
+        if (somBateria && somBateria.isLoaded()) {
+            somBateria.setVolume(parseFloat(sliderBs.value));
+        }
+    });
+}
+
+// --- Controlo de Volume do BT (Sax 1 / SX1) ---
+let sliderBt = document.getElementById('vol_bt');
+if (sliderBt) {
+    sliderBt.addEventListener('input', () => {
+        if (somSax && somSax.isLoaded()) {
+            somSax.setVolume(parseFloat(sliderBt.value));
+        }
+    });
+}
+
+// --- Controlo de Volume do BA (Sax 2 / SX2) ---
+let sliderBa = document.getElementById('vol_ba');
+if (sliderBa) {
+    sliderBa.addEventListener('input', () => {
+        if (somSax2 && somSax2.isLoaded()) {
+            somSax2.setVolume(parseFloat(sliderBa.value));
         }
     });
 }
