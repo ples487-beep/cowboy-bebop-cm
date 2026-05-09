@@ -154,16 +154,16 @@ function desenharCartoes() {
   
   let cardW = 200;
   let cardH = 60;
-  let startX = 30;
-  let startY = height - cardH - 20;
+  let startX = width - (gravacoes.length * (cardW + 10)) - 30;
+  let startY = height - cardH - 60;
 
   for (let i = 0; i < gravacoes.length; i++) {
     let x = startX + i * (cardW + 10);
     let g = gravacoes[i];
 
     // fundo
-    fill(20, 15, 10);
-    stroke(100, 80, 50);
+    fill('#06011e');
+    stroke('#4117ff');
     strokeWeight(1);
     rect(x, startY, cardW, cardH);
 
@@ -176,7 +176,7 @@ function desenharCartoes() {
     text(g.planeta, x + 10, startY + 10);
     text(g.data, x + 10, startY + 25);
     
-    fill(150, 120, 60);
+    fill('#4117ff');
     text('TOCAR', x + 10, startY + 42);
   }
 }
@@ -237,7 +237,7 @@ function mousePressed() {
   let startY = height - cardH - 20;
 
   for (let i = 0; i < gravacoes.length; i++) {
-    let x = 30 + i * (cardW + 10);
+    let x = width - (gravacoes.length * (cardW + 10)) - 30 + i * (cardW + 10);
     
     if (mouseX > x && mouseX < x + cardW && mouseY > startY && mouseY < startY + cardH) {
       audioElements[i].play();
