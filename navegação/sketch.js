@@ -213,7 +213,7 @@ function desenharCutscene() {
   text('A APROXIMAR DE ' + planetaAtual.nome + '...', 40, height - 40);
 
   if (tempoCutscene > 100) {
-    window.location.href = 'planetas/' + planetaAtual.nome.toLowerCase() + '.html';
+    window.location.href = './planetas/' + planetaAtual.nome.toLowerCase() + '.html';
   }
 }
 function mousePressed() {
