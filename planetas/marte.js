@@ -130,8 +130,7 @@ function desenharCena3() {
     noTint();
 }
 
-// NOVA FUNÇÃO: Garante que se redimensionares a janela do browser,
-// o canvas adapta-se ao novo espaço perfeitamente.
+
 function windowResized() {
     let container = document.getElementById('canvas_container');
     resizeCanvas(container.clientWidth, container.clientHeight);
@@ -151,10 +150,10 @@ function mousePressed() {
 
 
 
-// Seleciona todos os botões que têm a classe 'btn_action'
+
 let botoesAcao = document.querySelectorAll('.btn_action');
 
-// Passa por cada botão e adiciona os eventos
+
 botoesAcao.forEach(botao => {
 
     let botaoClicado = false;
@@ -170,9 +169,9 @@ botoesAcao.forEach(botao => {
         
     });
 
-    // Quando o rato sai de cima (Mouse Out)
+
     botao.addEventListener('mouseout', () => {
-        // Só muda a cor se NÃO for o btn_dr
+
         
             if(botaoClicado === false){
                 //botao.style.backgroundColor = '#fa7f5d';
@@ -184,11 +183,11 @@ botoesAcao.forEach(botao => {
         
     });
 
-    // Quando o rato clica no botão
+
     botao.addEventListener('click', () => {
         botaoClicado = !botaoClicado;
 
-        // A lógica do som para o BX continua a funcionar normalmente!
+    
         if (botao.id === 'btn_bx'){
             if (somBass && somBass.isLoaded()) {
                 if (botaoClicado === true){
@@ -229,7 +228,7 @@ botoesAcao.forEach(botao => {
             } 
         }
 
-        // Muda a cor do clique, ignorando apenas o btn_dr
+       
        
             if(botaoClicado === true){
                 //botao.style.backgroundColor = '#FF3131'; 
@@ -241,9 +240,7 @@ botoesAcao.forEach(botao => {
 });
 
 
-// ==========================================
-// 4. LÓGICA DO BOTÃO VOLTAR
-// ==========================================
+
 let btnVoltar = document.getElementById('btn_vl');
 
 if (btnVoltar) {

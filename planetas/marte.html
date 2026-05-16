@@ -14,10 +14,8 @@
 
 </head>
 
-<body>
-    <!-- Biblioteca principal p5.js -->
+<body></body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <!-- Biblioteca de som p5.sound.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
 
     <div class="page_container">
@@ -27,43 +25,36 @@
         <div class="mixer_container">
         
             <div class="mixer_header">
-                <!--Botões de navegação-->
                 <button class="btn_navigation" id="btn_vl">voltar</button>
             </div>
 
             
 
             <div class="mixer_body">
-                <!-- O botão REC fica sozinho no topo -->
                 <div class="row_rec">
                     <button class="btn_action" id="btn_rec">REC</button>
                 </div>
 
-                <!-- Linha do Título (A forma correta) -->
                 <div class="control_row">
-                    <div class="btn_fantasma"></div> <!-- Ocupa o espaço exato de um botão -->
-                    <div class="label_vol">VOL</div> <!-- Ocupa o espaço exato da barra -->
+                    <div class="btn_fantasma"></div> 
+                    <div class="label_vol">VOL</div> 
                 </div>
 
-                <!-- Linha 1: BX + Slider -->
                 <div class="control_row">
                     <button class="btn_action" id="btn_bx">BS</button>
                     <input type="range" class="volume_slider" id="vol_bx" min="0" max="1" step="0.01" value="0.5">
                 </div>
 
-                <!-- Linha 2: BS + Slider -->
                 <div class="control_row">
                     <button class="btn_action" id="btn_bs">BT</button>
                     <input type="range" class="volume_slider" id="vol_bs" min="0" max="1" step="0.01" value="0.5">
                 </div>
 
-                <!-- Linha 3: BT + Slider -->
                 <div class="control_row">
                     <button class="btn_action" id="btn_bt">SX1</button>
                     <input type="range" class="volume_slider" id="vol_bt" min="0" max="1" step="0.01" value="0.5">
                 </div>
 
-                <!-- Linha 4: BA + Slider -->
                 <div class="control_row">
                     <button class="btn_action" id="btn_ba">SX2</button>
                     <input type="range" class="volume_slider" id="vol_ba" min="0" max="1" step="0.01" value="0.5">
@@ -73,7 +64,7 @@
         </div>
 
 
-        <!-- O Pop-up de Aviso -->
+
         <div id="mobile-warning">
             <div class="popup-box">
                 <h2>Ecrã Incompatível</h2>
