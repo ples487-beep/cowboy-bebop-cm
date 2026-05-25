@@ -14,29 +14,29 @@ let cena2bg, cena2bg2, cena2layer1, cena2layer2;
 let cena3bg, cena3bg2, cena3layer1, cena3layer2, cena3layer3;
 
 function preload() {
-    fontIBM = loadFont('/navegação/fontes/IBMPlexMono-Regular.ttf');
+    fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
-    cena1bg     = loadImage('/elementos/tijuana/cena1/bg.png');
-    cena1bg2    = loadImage('/elementos/tijuana/cena1/bg2.png');
-    cena1layer1 = loadImage('/elementos/tijuana/cena1/layer1.png');
-    cena1layer2 = loadImage('/elementos/tijuana/cena1/layer2.png');
-    cena1layer3 = loadImage('/elementos/tijuana/cena1/layer3.png');
+    cena1bg     = loadImage('../elementos/tijuana/cena1/bg.png');
+    cena1bg2    = loadImage('../elementos/tijuana/cena1/bg2.png');
+    cena1layer1 = loadImage('../elementos/tijuana/cena1/layer1.png');
+    cena1layer2 = loadImage('../elementos/tijuana/cena1/layer2.png');
+    cena1layer3 = loadImage('../elementos/tijuana/cena1/layer3.png');
 
-    cena2bg     = loadImage('/elementos/tijuana/cena2/bg.png');
-    cena2bg2    = loadImage('/elementos/tijuana/cena2/bg2.png');
-    cena2layer1 = loadImage('/elementos/tijuana/cena2/layer1.gif');
-    cena2layer2 = loadImage('/elementos/tijuana/cena2/layer2.gif');
+    cena2bg     = loadImage('../elementos/tijuana/cena2/bg.png');
+    cena2bg2    = loadImage('../elementos/tijuana/cena2/bg2.png');
+    cena2layer1 = loadImage('../elementos/tijuana/cena2/layer1.gif');
+    cena2layer2 = loadImage('../elementos/tijuana/cena2/layer2.gif');
 
-    cena3bg     = loadImage('/elementos/tijuana/cena3/bg1.png');
-    cena3bg2    = loadImage('/elementos/tijuana/cena3/bg2.png');
-    cena3layer1 = loadImage('/elementos/tijuana/cena3/layer1.png');
-    cena3layer2 = loadImage('/elementos/tijuana/cena3/layer2.png');
-    cena3layer3 = loadImage('/elementos/tijuana/cena3/layer3.png');
+    cena3bg     = loadImage('../elementos/tijuana/cena3/bg1.png');
+    cena3bg2    = loadImage('../elementos/tijuana/cena3/bg2.png');
+    cena3layer1 = loadImage('../elementos/tijuana/cena3/layer1.png');
+    cena3layer2 = loadImage('../elementos/tijuana/cena3/layer2.png');
+    cena3layer3 = loadImage('../elementos/tijuana/cena3/layer3.png');
 
-    somNoise = loadSound('/elementos/sounds/tijuana_noise.mp3');
-    somOboe  = loadSound('/elementos/sounds/tijuana_oboe.mp3');
-    somSax   = loadSound('/elementos/sounds/tijuana_sax.mp3');
-    somSynth = loadSound('/elementos/sounds/tijuana_synth.mp3');
+    somNoise = loadSound('../elementos/sounds/tijuana_noise.mp3');
+    somOboe  = loadSound('../elementos/sounds/tijuana_oboe.mp3');
+    somSax   = loadSound('../elementos/sounds/tijuana_sax.mp3');
+    somSynth = loadSound('../elementos/sounds/tijuana_synth.mp3');
 }
 
 function setup() {

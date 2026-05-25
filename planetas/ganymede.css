@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'Fonte'; /* Dá o nome que quiseres aqui */
-    src: url('/navegação/fontes/IBMPlexMono-Regular.ttf') format('truetype'); /* O caminho para o ficheiro */
+    src: url('../navegacao/fontes/IBMPlexMono-Regular.ttf') format('truetype'); /* O caminho para o ficheiro */
     font-weight: normal;
     font-style: normal;
 }
@@ -73,7 +73,7 @@ canvas {
 .mixer_body{
     /*border:2px solid white;*/
 
-    background-image: url('/elementos/painel/painel_2.png');
+    background-image: url('../elementos/painel/painel_2.png');
     background-size: 100% 100%; 
     background-repeat: no-repeat;
     background-position: left center; /* Garante que a imagem encosta à esquerda */
@@ -137,7 +137,7 @@ canvas {
     /* REMOVEMOS O ALIGN-SELF E AS MARGINS ANTIGAS. Fica só: */
     margin: 0; 
     
-    background-image: url('/elementos/painel/botao1.png'); 
+    background-image: url('../elementos/painel/botao1.png'); 
     background-size: 100% 100%; 
     background-color: transparent;
     filter: sepia(100%) saturate(250%) hue-rotate(320deg) brightness(130%);
@@ -153,7 +153,7 @@ canvas {
     appearance: none;
 
     /* A MUDANÇA É AQUI */
-    background-image: url('/elementos/painel/slider.png');
+    background-image: url('../elementos/painel/slider.png');
     background-size: 100% 100%; /* Estica a imagem para preencher toda a barra */
     background-repeat: no-repeat;
     background-color: transparent;
@@ -170,7 +170,7 @@ canvas {
     width: 20px; /* Mais fino */
     height: 25px; /* Mais alto (forma retangular) */
     
-    background-image: url('/elementos/painel/slider_handle.png'); 
+    background-image: url('../elementos/painel/slider_handle.png'); 
     background-size: 100% 100%; /* Garante que a imagem cabe inteira */
     background-repeat: no-repeat;
     background-position: center;
@@ -278,7 +278,7 @@ canvas {
     --pelicula: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
     
     /* 2. Juntamos a variável com a tua imagem fixa! */
-    background-image: var(--pelicula), url('/elementos/painel/rec.png');
+    background-image: var(--pelicula), url('../elementos/painel/rec.png');
     
     /* Garante que o fundo se ajusta bem */
     background-size: 100% 100%;

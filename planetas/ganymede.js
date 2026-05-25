@@ -14,26 +14,26 @@ let cena2bg, cena2bg2, cena2layer1, cena2layer2;
 let cena3bg, cena3bg2, cena3layer1;
 
 function preload() {
-    fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
+    fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
-    cena1bg     = loadImage('/elementos/ganymede/cena1/bg.png');
-    cena1bg2    = loadImage('/elementos/ganymede/cena1/bg2.png');
-    cena1layer1 = loadImage('/elementos/ganymede/cena1/layer1.png');
-    cena1layer2 = loadImage('/elementos/ganymede/cena1/layer2.png');
+    cena1bg     = loadImage('../elementos/ganymede/cena1/bg.png');
+    cena1bg2    = loadImage('../elementos/ganymede/cena1/bg2.png');
+    cena1layer1 = loadImage('../elementos/ganymede/cena1/layer1.png');
+    cena1layer2 = loadImage('../elementos/ganymede/cena1/layer2.png');
 
-    cena2bg     = loadImage('/elementos/ganymede/cena2/bg.png');
-    cena2bg2    = loadImage('/elementos/ganymede/cena2/bg2.png');
-    cena2layer1 = loadImage('/elementos/ganymede/cena2/layer1.png');
-    cena2layer2 = loadImage('/elementos/ganymede/cena2/layer2.png');
+    cena2bg     = loadImage('../elementos/ganymede/cena2/bg.png');
+    cena2bg2    = loadImage('../elementos/ganymede/cena2/bg2.png');
+    cena2layer1 = loadImage('../elementos/ganymede/cena2/layer1.png');
+    cena2layer2 = loadImage('../elementos/ganymede/cena2/layer2.png');
 
-    cena3bg     = loadImage('/elementos/ganymede/cena3/bg1.png');
-    cena3bg2    = loadImage('/elementos/ganymede/cena3/bg2.png');
-    cena3layer1 = loadImage('/elementos/ganymede/cena3/layer1.png');
+    cena3bg     = loadImage('../elementos/ganymede/cena3/bg1.png');
+    cena3bg2    = loadImage('../elementos/ganymede/cena3/bg2.png');
+    cena3layer1 = loadImage('../elementos/ganymede/cena3/layer1.png');
 
-    somBass    = loadSound('/elementos/sounds/ganymede_bass.mp3');
-    somDrone   = loadSound('/elementos/sounds/ganymede_drone.mp3');
-    somBateria = loadSound('/elementos/sounds/ganymede_drum.mp3');
-    somSax     = loadSound('/elementos/sounds/ganymede_sax.mp3');
+    somBass    = loadSound('../elementos/sounds/ganymede_bass.mp3');
+    somDrone   = loadSound('../elementos/sounds/ganymede_drone.mp3');
+    somBateria = loadSound('../elementos/sounds/ganymede_drum.mp3');
+    somSax     = loadSound('../elementos/sounds/ganymede_sax.mp3');
 }
 
 function setup() {

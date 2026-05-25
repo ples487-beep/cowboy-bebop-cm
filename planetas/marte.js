@@ -9,31 +9,31 @@ let cenaAtiva = 1;
 let gravador, ficheiroGravacao;
 
 function preload() {
-    fontIBM = loadFont('/navegação/fontes/IBMPlexMono-Regular.ttf');
+    fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
     //cena1 Marte 
-    cena1bg = loadImage('/elementos/marte/cena1/bg.png');
-    cena1bg2 = loadImage('/elementos/marte/cena1/bg2.png');
-    cena1layer = loadImage('/elementos/marte/cena1/layer1.png');
-    cena1layer2 = loadImage('/elementos/marte/cena1/layer2.png');
+    cena1bg = loadImage('../elementos/marte/cena1/bg.png');
+    cena1bg2 = loadImage('../elementos/marte/cena1/bg2.png');
+    cena1layer = loadImage('../elementos/marte/cena1/layer1.png');
+    cena1layer2 = loadImage('../elementos/marte/cena1/layer2.png');
 
     //cena2 Marte
-    cena2bg = loadImage('/elementos/marte/cena2/bg.png');
-    cena2bg2 = loadImage('/elementos/marte/cena2/bg2.png');
-    cena2layer1 = loadImage('/elementos/marte/cena2/layer1.png');
-    cena2layer2 = loadImage('/elementos/marte/cena2/layer2.png');
-    cena2layer3 = loadImage('/elementos/marte/cena2/layer3.png');
+    cena2bg = loadImage('../elementos/marte/cena2/bg.png');
+    cena2bg2 = loadImage('../elementos/marte/cena2/bg2.png');
+    cena2layer1 = loadImage('../elementos/marte/cena2/layer1.png');
+    cena2layer2 = loadImage('../elementos/marte/cena2/layer2.png');
+    cena2layer3 = loadImage('../elementos/marte/cena2/layer3.png');
     //cena3 Marte
-    cena3bg = loadImage('/elementos/marte/cena3/bg.png');
-    cena3bg2 = loadImage('/elementos/marte/cena3/bg2.png');
-    cena3layer1 = loadImage('/elementos/marte/cena3/layer1.png');
-    cena3layer2 = loadImage('/elementos/marte/cena3/layer2.png');
+    cena3bg = loadImage('../elementos/marte/cena3/bg.png');
+    cena3bg2 = loadImage('../elementos/marte/cena3/bg2.png');
+    cena3layer1 = loadImage('../elementos/marte/cena3/layer1.png');
+    cena3layer2 = loadImage('../elementos/marte/cena3/layer2.png');
 
 
-    somBass = loadSound('/elementos/sounds/marte_bass.mp3');
-    somBateria = loadSound('/elementos/sounds/marte_drum.mp3');
-    somSax = loadSound('/elementos/sounds/marte_sax1.mp3');
-    somSax2 = loadSound('/elementos/sounds/marte_sax2.mp3');
+    somBass = loadSound('../elementos/sounds/marte_bass.mp3');
+    somBateria = loadSound('../elementos/sounds/marte_drum.mp3');
+    somSax = loadSound('../elementos/sounds/marte_sax1.mp3');
+    somSax2 = loadSound('../elementos/sounds/marte_sax2.mp3');
 }
 
 function setup() {
