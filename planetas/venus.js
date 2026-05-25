@@ -14,32 +14,32 @@ let cena2bg, cena2bg2, cena2layer1, cena2layer2;
 let cena3bg, cena3bg2, cena3layer1, cena3layer2, cena3layer3;
 
 function preload() {
-    fontIBM = loadFont('../navegação/fontes/IBMPlexMono-Regular.ttf');
+    fontIBM = loadFont('/navegação/fontes/IBMPlexMono-Regular.ttf');
 
     // Cena 1
-    cena1bg     = loadImage('../elementos/venus/cena1/bg.png');
-    cena1bg2    = loadImage('../elementos/venus/cena1/bg2.png');
-    cena1layer1 = loadImage('../elementos/venus/cena1/layer1.png');
-    cena1layer2 = loadImage('../elementos/venus/cena1/layer2.png');
-    cena1layer3 = loadImage('../elementos/venus/cena1/layer3.png');
+    cena1bg     = loadImage('/elementos/venus/cena1/bg.png');
+    cena1bg2    = loadImage('/elementos/venus/cena1/bg2.png');
+    cena1layer1 = loadImage('/elementos/venus/cena1/layer1.png');
+    cena1layer2 = loadImage('/elementos/venus/cena1/layer2.png');
+    cena1layer3 = loadImage('/elementos/venus/cena1/layer3.png');
 
     // Cena 2
-    cena2bg     = loadImage('../elementos/venus/cena2/bg1.png');
-    cena2bg2    = loadImage('../elementos/venus/cena2/bg2.png');
-    cena2layer1 = loadImage('../elementos/venus/cena2/layer1.png');
-    cena2layer2 = loadImage('../elementos/venus/cena2/layer2.png');
+    cena2bg     = loadImage('/elementos/venus/cena2/bg1.png');
+    cena2bg2    = loadImage('/elementos/venus/cena2/bg2.png');
+    cena2layer1 = loadImage('/elementos/venus/cena2/layer1.png');
+    cena2layer2 = loadImage('/elementos/venus/cena2/layer2.png');
 
     // Cena 3
-    cena3bg     = loadImage('../elementos/venus/cena3/bg1.png');
-    cena3bg2    = loadImage('../elementos/venus/cena3/bg2.png');
-    cena3layer1 = loadImage('../elementos/venus/cena3/layer1.png');
-    cena3layer2 = loadImage('../elementos/venus/cena3/layer2.png');
-    cena3layer3 = loadImage('../elementos/venus/cena3/layer3.png');
+    cena3bg     = loadImage('/elementos/venus/cena3/bg1.png');
+    cena3bg2    = loadImage('/elementos/venus/cena3/bg2.png');
+    cena3layer1 = loadImage('/elementos/venus/cena3/layer1.png');
+    cena3layer2 = loadImage('/elementos/venus/cena3/layer2.png');
+    cena3layer3 = loadImage('/elementos/venus/cena3/layer3.png');
 
-    somBateria = loadSound('../elementos/sounds/venus_drum.mp3');
-    somBass    = loadSound('../elementos/sounds/venus_guitar.mp3');
-    somSax     = loadSound('../elementos/sounds/venus_guitar_lead.mp3');
-    somSax2    = loadSound('../elementos/sounds/venus_guitar_lead.mp3'); // só tens 3 sons, repete um ou deixa vazio
+    somBateria = loadSound('/elementos/sounds/venus_drum.mp3');
+    somBass    = loadSound('/elementos/sounds/venus_guitar.mp3');
+    somSax     = loadSound('/elementos/sounds/venus_guitar_lead.mp3');
+    somSax2    = loadSound('/elementos/sounds/venus_guitar_lead.mp3'); // só tens 3 sons, repete um ou deixa vazio
 }
 
 function setup() {

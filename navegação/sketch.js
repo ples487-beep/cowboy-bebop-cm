@@ -31,7 +31,7 @@ function preload() {
   imgPlanetas['VENUS'] = loadImage('navegação/assets/venus.png');
   imgPlanetas['TIJUANA'] = loadImage('navegação/assets/tijuana.png');
   imgPlanetas['MARTE'] = loadImage('navegação/assets/marte.png');
-  // CORRIGIDO: Adicionada a pasta 'navegação/' que faltava aqui em baixo
+  
   imgPlanetas['GANYMEDE'] = loadImage('navegação/assets/ganymede.png');
 
   imgPlanetasMap['VENUS']    = loadImage('navegação/assets/venus_map.png');
@@ -213,7 +213,7 @@ function desenharCutscene() {
   text('A APROXIMAR DE ' + planetaAtual.nome + '...', 40, height - 40);
 
   if (tempoCutscene > 100) {
-    window.location.href = '../planetas/' + planetaAtual.nome.toLowerCase() + '.html';
+    window.location.href = 'planetas/' + planetaAtual.nome.toLowerCase() + '.html';
   }
 }
 function mousePressed() {
