@@ -25,8 +25,8 @@ let gravacoes = [];
 let audioElements = [];
 
 function preload() {
-  font = loadFont('navegação/fontes/bookman1.ttf');
-  font2 = loadFont('navegação/fontes/IBMPlexMono-Regular.ttf');
+  font = loadFont('navegacao/fontes/bookman1.ttf');
+  font2 = loadFont('navegacao/fontes/IBMPlexMono-Regular.ttf');
 
   imgPlanetas['VENUS'] = loadImage('navegacao/assets/venus.png');
   imgPlanetas['TIJUANA'] = loadImage('navegacao/assets/tijuana.png');
