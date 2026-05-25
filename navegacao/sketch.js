@@ -28,21 +28,21 @@ function preload() {
   font = loadFont('navegação/fontes/bookman1.ttf');
   font2 = loadFont('navegação/fontes/IBMPlexMono-Regular.ttf');
 
-  imgPlanetas['VENUS'] = loadImage('navegação/assets/venus.png');
-  imgPlanetas['TIJUANA'] = loadImage('navegação/assets/tijuana.png');
-  imgPlanetas['MARTE'] = loadImage('navegação/assets/marte.png');
+  imgPlanetas['VENUS'] = loadImage('navegacao/assets/venus.png');
+  imgPlanetas['TIJUANA'] = loadImage('navegacao/assets/tijuana.png');
+  imgPlanetas['MARTE'] = loadImage('navegacao/assets/marte.png');
   
-  imgPlanetas['GANYMEDE'] = loadImage('navegação/assets/ganymede.png');
+  imgPlanetas['GANYMEDE'] = loadImage('navegacao/assets/ganymede.png');
 
-  imgPlanetasMap['VENUS']    = loadImage('navegação/assets/venus_map.png');
-  imgPlanetasMap['MARTE']    = loadImage('navegação/assets/marte_map.png');
-  imgPlanetasMap['TIJUANA']  = loadImage('navegação/assets/tijuana_map.png');
-  imgPlanetasMap['GANYMEDE'] = loadImage('navegação/assets/ganymede_map.png');
+  imgPlanetasMap['VENUS']    = loadImage('navegacao/assets/venus_map.png');
+  imgPlanetasMap['MARTE']    = loadImage('navegacao/assets/marte_map.png');
+  imgPlanetasMap['TIJUANA']  = loadImage('navegacao/assets/tijuana_map.png');
+  imgPlanetasMap['GANYMEDE'] = loadImage('navegacao/assets/ganymede_map.png');
 
-  imgNave = loadImage('navegação/assets/nave.png');
-  imgPortal = loadImage('navegação/assets/portal.png');
-  imgBg = loadImage('navegação/assets/bg.png');
-  imgEstrelas = loadImage('navegação/assets/estrelas.png');
+  imgNave = loadImage('navegacao/assets/nave.png');
+  imgPortal = loadImage('navegacao/assets/portal.png');
+  imgBg = loadImage('navegacao/assets/bg.png');
+  imgEstrelas = loadImage('navegacao/assets/estrelas.png');
 }
 
 function setup() {
