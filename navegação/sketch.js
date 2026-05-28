@@ -23,6 +23,7 @@ let dragStartX, dragStartY;
 
 let gravacoes = [];
 let audioElements = [];
+const MAX_GRAVACOES = 5; // limite máximo de gravações guardadas
 
 function preload() {
   font = loadFont('navegação/fontes/bookman1.ttf');
@@ -124,8 +125,10 @@ desenharCinturao(cx, cy);
       textSize(11);
       text('// clica para visitar', 40, height - 35);
     }
-    desenharCartoes();
   }
+
+  //desenhar cartões de gravação (fora do loop para não sobrepor)
+  desenharCartoes();
 
   //hud
   fill(255, 220);
@@ -153,13 +156,14 @@ function desenharCinturao(cx, cy) {
 function desenharCartoes() {
   if (gravacoes.length === 0) return;
   
-  let cardW = 200;
-  let cardH = 60;
-  let startX = width - (gravacoes.length * (cardW + 10)) - 30;
-  let startY = height - cardH - 60;
+  let cardW = 180;
+  let cardH = 50;
+  let spacing = 10;
+  let startX = width - (gravacoes.length * (cardW + spacing)) - 30; // direita para esquerda
+  let startY = height - cardH - 20;
 
   for (let i = 0; i < gravacoes.length; i++) {
-    let x = startX + i * (cardW + 10);
+    let x = startX + i * (cardW + spacing);
     let g = gravacoes[i];
 
     // fundo
@@ -172,13 +176,14 @@ function desenharCartoes() {
     fill(237, 224, 196);
     noStroke();
     textFont(font2);
-    textSize(10);
+    textSize(9);
     textAlign(LEFT, TOP);
-    text(g.planeta, x + 10, startY + 10);
-    text(g.data, x + 10, startY + 25);
+    text(g.planeta, x + 10, startY + 8);
+    text(g.data, x + 10, startY + 20);
     
     fill('#4117ff');
-    text('TOCAR', x + 10, startY + 42);
+    textSize(8);
+    text('TOCAR', x + 10, startY + 33);
   }
 }
 function desenharCutscene() {
@@ -233,12 +238,14 @@ function mousePressed() {
   }
 
   // clicar nos cartões de gravação
-  let cardW = 200;
-  let cardH = 60;
+  let cardW = 180;
+  let cardH = 50;
+  let spacing = 10;
+  let startX = width - (gravacoes.length * (cardW + spacing)) - 30;
   let startY = height - cardH - 20;
 
   for (let i = 0; i < gravacoes.length; i++) {
-    let x = width - (gravacoes.length * (cardW + 10)) - 30 + i * (cardW + 10);
+    let x = startX + i * (cardW + spacing);
     
     if (mouseX > x && mouseX < x + cardW && mouseY > startY && mouseY < startY + cardH) {
       audioElements[i].play();

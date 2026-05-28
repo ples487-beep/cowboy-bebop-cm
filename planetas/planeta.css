@@ -239,51 +239,46 @@ canvas {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85); /* Fundo preto com 85% de opacidade */
-    z-index: 9999; /* Garante que fica à frente de qualquer outro elemento */
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999; 
     
-    /* Prepara para centrar a caixa lá dentro */
+    
     justify-content: center;
     align-items: center;
 }
-
-/* --- A CAIXA DO POP-UP --- */
 .popup-box {
     font-family: 'Fonte', Helvetica, sans-serif;
 
     background-color: #ffffff;
     color: #333;
     padding: 40px;
-    border-radius: 12px; /* Cantos arredondados */
+    border-radius: 12px; 
     text-align: center;
     width: 80%;
-    max-width: 450px; /* Não deixa a caixa ficar gigante em tablets */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    max-width: 450px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
 }
 
 .popup-box h2 {
 
     margin-top: 0;
     margin-bottom: 30px;
-    color: #d32f2f; /* Um tom vermelho para chamar à atenção (opcional) */
+    color: #d32f2f; 
 }
 
 /* --- A REGRA DE BLOQUEIO (Media Query) --- */
 @media (max-width: 1450px) {
     
     #mobile-warning {
-        display: flex; /* Muda de "none" para "flex", ativando e centrando o pop-up */
+        display: flex; 
     }
 }
 
 #btn_rec {
-    /* 1. Criamos uma variável com a cor escura normal */
     --pelicula: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
     
-    /* 2. Juntamos a variável com a tua imagem fixa! */
     background-image: var(--pelicula), url('../elementos/painel/rec.png');
     
-    /* Garante que o fundo se ajusta bem */
     background-size: 100% 100%;
     background-color: transparent;
 
