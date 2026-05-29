@@ -231,50 +231,7 @@ canvas {
 }
 
 
-/* --- O FUNDO DO POP-UP (Overlay) --- */
-#mobile-warning {
-    display: none; /* Escondido por defeito */
-    position: fixed; /* Fica fixo por cima de toda a página */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85); /* Fundo preto com 85% de opacidade */
-    z-index: 9999; /* Garante que fica à frente de qualquer outro elemento */
-    
-    /* Prepara para centrar a caixa lá dentro */
-    justify-content: center;
-    align-items: center;
-}
 
-/* --- A CAIXA DO POP-UP --- */
-.popup-box {
-    font-family: 'Fonte', Helvetica, sans-serif;
-
-    background-color: #ffffff;
-    color: #333;
-    padding: 40px;
-    border-radius: 12px; /* Cantos arredondados */
-    text-align: center;
-    width: 80%;
-    max-width: 450px; /* Não deixa a caixa ficar gigante em tablets */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
-}
-
-.popup-box h2 {
-
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: #d32f2f; /* Um tom vermelho para chamar à atenção (opcional) */
-}
-
-/* --- A REGRA DE BLOQUEIO (Media Query) --- */
-@media (max-width: 1450px) {
-    
-    #mobile-warning {
-        display: flex; /* Muda de "none" para "flex", ativando e centrando o pop-up */
-    }
-}
 
 #btn_rec {
     /* 1. Criamos uma variável com a cor escura normal */
