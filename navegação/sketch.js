@@ -2,10 +2,10 @@ let estado = 'mapa';
 let planetaAtual = null;
 
 let planetas = [
-  new Planeta('VENUS',    180, 16, 0,   0.001,  '#ffae00'),
-  new Planeta('MARTE',    280, 16, 2,   0.0009,  'rgb(252, 68, 62)'),
-  new Planeta('TIJUANA',  400, 14,  1,   0.0003, '#6bebc2'),
-  new Planeta('GANYMEDE', 520, 14, 3.5,  0.0001,  '#4117ff'),
+  new Planeta('VENUS',    180, 24, 0,   0.001,  '#ffae00'),
+  new Planeta('MARTE',    280, 24, 2,   0.0009,  'rgb(252, 68, 62)'),
+  new Planeta('TIJUANA',  400, 20,  1,   0.0003, '#6bebc2'),
+  new Planeta('GANYMEDE', 520, 24, 3.5,  0.0001,  '#4117ff'),
 ];
 
 let tempoCutscene = 0;
@@ -24,6 +24,8 @@ let dragStartX, dragStartY;
 let gravacoes = [];
 let audioElements = [];
 const MAX_GRAVACOES = 5; // limite máximo de gravações guardadas
+
+let popupAberto = false;
 
 function preload() {
   font = loadFont('navegação/fontes/bookman1.ttf');
@@ -89,7 +91,7 @@ noTint();
 // centro
 fill(237, 224, 196);
 noStroke();
-circle(cx, cy, 20);
+circle(cx, cy, 30);
 
 //cinturão
 desenharCinturao(cx, cy);
@@ -105,7 +107,7 @@ desenharCinturao(cx, cy);
     // nome pequeno por cima do planeta
     fill(237, 224, 196);
     textAlign(CENTER, TOP);
-    textSize(1);
+    textSize(12);
     noStroke();
     textFont(font2);
     text(p.nome, pos.x, pos.y + p.tamanho + 5);
@@ -138,6 +140,11 @@ desenharCinturao(cx, cy);
   textAlign(LEFT, TOP);
   noStroke();
   text('THE UNIVERSE OF COWBOY BEBOP', 30, 30);
+  
+  // desenhar popup se aberto
+  if (popupAberto) {
+    desenharPopup();
+  }
 
   
 }
@@ -156,11 +163,11 @@ function desenharCinturao(cx, cy) {
 function desenharCartoes() {
   if (gravacoes.length === 0) return;
   
-  let cardW = 180;
-  let cardH = 50;
-  let spacing = 10;
+  let cardW = 216;
+  let cardH = 60;
+  let spacing = 12;
   let startX = width - (gravacoes.length * (cardW + spacing)) - 30; // direita para esquerda
-  let startY = height - cardH - 20;
+  let startY = height - cardH - 45;
 
   for (let i = 0; i < gravacoes.length; i++) {
     let x = startX + i * (cardW + spacing);
@@ -176,14 +183,17 @@ function desenharCartoes() {
     fill(237, 224, 196);
     noStroke();
     textFont(font2);
-    textSize(9);
+    textSize(10);
     textAlign(LEFT, TOP);
-    text(g.planeta, x + 10, startY + 8);
-    text(g.data, x + 10, startY + 20);
+    text(g.planeta, x + 12, startY + 10);
+    text(g.data, x + 12, startY + 24);
     
     fill('#4117ff');
-    textSize(8);
-    text('TOCAR', x + 10, startY + 33);
+    textSize(9);
+    textAlign(LEFT, TOP);
+    text('TOCAR', x + 12, startY + 39);
+    textAlign(RIGHT, TOP);
+    text('DOWNLOAD', x + cardW - 12, startY + 39);
   }
 }
 function desenharCutscene() {
@@ -221,7 +231,82 @@ function desenharCutscene() {
     window.location.href = './planetas/' + planetaAtual.nome.toLowerCase() + '.html';
   }
 }
+function downloadGravacao(index) {
+  let g = gravacoes[index];
+  let link = document.createElement('a');
+  link.href = g.audio;
+  link.download = `${g.planeta}_${g.data}.wav`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function desenharPopup() {
+  let popupW = 400;
+  let popupH = 250;
+  let popupX = (width - popupW) / 2;
+  let popupY = (height - popupH) / 2;
+  let closeBoxSize = 25;
+  
+  // fundo semi-transparente
+  fill(0, 0, 0, 200);
+  noStroke();
+  rect(0, 0, width, height);
+  
+  // popup
+  fill('#06011e');
+  stroke('#4117ff');
+  strokeWeight(2);
+  rect(popupX, popupY, popupW, popupH);
+  
+  // X para fechar (canto superior direito)
+  fill('#ffffff');
+  noStroke();
+  textFont(font2);
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  text('x', popupX + popupW - closeBoxSize/2 - 10, popupY + closeBoxSize/2 + 15);
+  
+  // texto da descrição
+  fill(237, 224, 196);
+  textFont(font2);
+  textSize(11);
+  textAlign(LEFT, TOP);
+  let descricao = "THE UNIVERSE OF COWBOY BEBOP é uma experiência interativa baseada na série de animação 'Cowboy Bebop'. Explora quatro localizações da série e cria as tuas próprias composições. Grava as tuas músicas e volta a ouvi-las no sistema solar.  ";
+  let creditos = "Este projeto foi realizado no âmbito da unidade curricular de Comunicação Multimédia,LDM,FCTUC 25/26";
+  text(descricao, popupX + 20, popupY + 40, popupW - 40, popupH - 80);
+  text(creditos, popupX + 20, popupY + 180, popupW - 40, popupH - 80);
+}
 function mousePressed() {
+  // fechar popup ao clicar fora ou no X
+  if (popupAberto) {
+    let popupW = 400;
+    let popupH = 250;
+    let popupX = (width - popupW) / 2;
+    let popupY = (height - popupH) / 2;
+    let closeBoxSize = 25;
+    let closeX = popupX + popupW - closeBoxSize/2 - 5;
+    let closeY = popupY + closeBoxSize/2 - 5;
+    
+    // clicar no X
+    if (dist(mouseX, mouseY, closeX, closeY) < closeBoxSize) {
+      popupAberto = false;
+      return;
+    }
+    
+    // clicar fora do popup
+    if (mouseX < popupX || mouseX > popupX + popupW || mouseY < popupY || mouseY > popupY + popupH) {
+      popupAberto = false;
+      return;
+    }
+  }
+  
+  // clicar em "THE UNIVERSE OF COWBOY BEBOP" para abrir popup
+  if (mouseX > 30 && mouseX < 280 && mouseY > 30 && mouseY < 50) {
+    popupAberto = true;
+    return;
+  }
+
   let cx = width / 2;
   let cy = height / 2;
 
@@ -238,9 +323,9 @@ function mousePressed() {
   }
 
   // clicar nos cartões de gravação
-  let cardW = 180;
-  let cardH = 50;
-  let spacing = 10;
+  let cardW = 216;
+  let cardH = 60;
+  let spacing = 12;
   let startX = width - (gravacoes.length * (cardW + spacing)) - 30;
   let startY = height - cardH - 20;
 
@@ -248,7 +333,14 @@ function mousePressed() {
     let x = startX + i * (cardW + spacing);
     
     if (mouseX > x && mouseX < x + cardW && mouseY > startY && mouseY < startY + cardH) {
-      audioElements[i].play();
+      // tocar
+      if (mouseX < x + (cardW / 2)) {
+        audioElements[i].play();
+      }
+      // download
+      else {
+        downloadGravacao(i);
+      }
     }
   }
 }
