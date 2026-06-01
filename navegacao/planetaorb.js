@@ -36,7 +36,7 @@ class Planeta {
 
     // órbita
     noFill();
-    stroke(237, 224, 196, 40);
+    stroke(65, 23, 255,44);
     strokeWeight(0.5);
     ellipse(cx, cy, this.raioOrbita * 2, this.raioOrbita * 0.6);
 

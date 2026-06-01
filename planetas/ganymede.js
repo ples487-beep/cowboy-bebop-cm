@@ -217,6 +217,10 @@ if (btnRec) {
                         data: new Date().toLocaleDateString(),
                         audio: reader.result
                     });
+                    // limitar a 5 gravações máximas
+                    if (gravacoes.length > 5) {
+                        gravacoes.shift(); // remove a mais antiga
+                    }
                     localStorage.setItem('gravacoes', JSON.stringify(gravacoes));
                     btnRec.innerText = "SAVED";
                     setTimeout(() => btnRec.innerText = "REC", 1500);
