@@ -2,6 +2,15 @@ let fontIBM;
 
 let somBass, somBateria, somSax, somSax2;
 
+// Analisadores de amplitude
+let ampBass, ampBateria, ampSax, ampSax2;
+
+// Variáveis globais para amplitudes em tempo real
+let ampLevelBass = 0;
+let ampLevelBateria = 0;
+let ampLevelSax = 0;
+let ampLevelSax2 = 0;
+
 let gravador, ficheiroGravacao;
 
 let cenaAtiva = 1;
@@ -48,13 +57,30 @@ function setup() {
     myCanvas.parent('canvas_container');
 
     somBass.setVolume(0.5);
-    gravador = new p5.SoundRecorder(); // ← confirma que está aqui
+    gravador = new p5.SoundRecorder();
+
+    // Criar analisadores de amplitude
+    ampBass = new p5.Amplitude();
+    ampBateria = new p5.Amplitude();
+    ampSax = new p5.Amplitude();
+    ampSax2 = new p5.Amplitude();
+
+    // Conectar cada áudio ao seu analisador
+    ampBass.setInput(somBass);
+    ampBateria.setInput(somBateria);
+    ampSax.setInput(somSax);
+    ampSax2.setInput(somSax2);
 }
 
 function draw() {
     background(0);
-    desenharCena1();
-
+    
+    // Calcular amplitudes uma vez por frame
+    ampLevelBass = ampBass.getLevel();
+    ampLevelBateria = ampBateria.getLevel();
+    ampLevelSax = ampSax.getLevel();
+    ampLevelSax2 = ampSax2.getLevel();
+    
     if (cenaAtiva === 1) desenharCena1();
     else if (cenaAtiva === 2) desenharCena2();
     else if (cenaAtiva === 3) desenharCena3();
@@ -66,14 +92,20 @@ function desenharCena1() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
+    // Mapear amplitudes para opacidade - range grande para pulsar forte
+    let op1 = map(ampLevelBass, 0, 1, 30, 255);
+    let op2 = map(ampLevelBateria, 0, 1, 30, 255);
+    let op3 = map(ampLevelSax, 0, 1, 20, 255);
+    let op4 = map(ampLevelSax2, 0, 1, 20, 255);
+
     image(cena1bg, x, y, w, h);
-    tint(255, 180);
+    tint(255, op1);
     image(cena1bg2, x, y, w, h);
-    tint(255, 220);
+    tint(255, op2);
     image(cena1layer1, x, y, w, h);
-    tint(255, 150);
+    tint(255, op4);
     image(cena1layer2, x, y, w, h);
-    tint(255, 120);
+    tint(255, op4);
     image(cena1layer3, x, y, w, h);
     noTint();
 }
@@ -84,12 +116,17 @@ function desenharCena2() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
+    // Mapear amplitudes para opacidade - range grande para pulsar forte
+    let op1 = map(ampLevelBass, 0, 1, 30, 255);
+    let op2 = map(ampLevelBateria, 0, 1, 30, 255);
+    let op3 = map(ampLevelSax, 0, 1, 20, 255);
+
     image(cena2bg, x, y, w, h);
-    tint(255, 180);
+    tint(255, op1);
     image(cena2bg2, x, y, w, h);
-    tint(255, 220);
+    tint(255, op2);
     image(cena2layer1, x, y, w, h);
-    tint(255, 150);
+    tint(255, op3);
     image(cena2layer2, x, y, w, h);
     noTint();
 }
@@ -100,14 +137,20 @@ function desenharCena3() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
+    // Mapear amplitudes para opacidade - range grande para pulsar forte
+    let op1 = map(ampLevelBass, 0, 1, 30, 255);
+    let op2 = map(ampLevelBateria, 0, 1, 30, 255);
+    let op3 = map(ampLevelSax, 0, 1, 20, 255);
+    let op4 = map(ampLevelSax2, 0, 1, 20, 255);
+
     image(cena3bg, x, y, w, h);
-    tint(255, 160);
+    tint(255, op1);
     image(cena3bg2, x, y, w, h);
-    tint(255, 230);
+    tint(255, op2);
     image(cena3layer1, x, y, w, h);
-    tint(255, 150);
+    tint(255, op3);
     image(cena3layer2, x, y, w, h);
-    tint(255, 120);
+    tint(255, op4);
     image(cena3layer3, x, y, w, h);
     noTint();
 }

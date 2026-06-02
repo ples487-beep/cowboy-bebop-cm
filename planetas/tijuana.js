@@ -2,6 +2,15 @@ let fontIBM;
 
 let somNoise, somOboe, somSax, somSynth;
 
+// Analisadores de amplitude para cada track
+let ampNoise, ampOboe, ampSax, ampSynth;
+
+// Variáveis globais para amplitudes em tempo real
+let ampLevelNoise = 0;
+let ampLevelOboe = 0;
+let ampLevelSax = 0;
+let ampLevelSynth = 0;
+
 let gravador, ficheiroGravacao;
 
 let cenaAtiva = 1;
@@ -46,16 +55,32 @@ function setup() {
 
     somNoise.setVolume(0.5);
     gravador = new p5.SoundRecorder();
+
+    // Criar analisadores de amplitude para cada track
+    ampNoise = new p5.Amplitude();
+    ampOboe = new p5.Amplitude();
+    ampSax = new p5.Amplitude();
+    ampSynth = new p5.Amplitude();
+
+    // Conectar cada áudio ao seu analisador
+    ampNoise.setInput(somNoise);
+    ampOboe.setInput(somOboe);
+    ampSax.setInput(somSax);
+    ampSynth.setInput(somSynth);
 }
 
 function draw() {
     background(0);
-    desenharCena1();
+    
+    // Calcular amplitudes uma vez por frame
+    ampLevelNoise = ampNoise.getLevel();
+    ampLevelOboe = ampOboe.getLevel();
+    ampLevelSax = ampSax.getLevel();
+    ampLevelSynth = ampSynth.getLevel();
+    
     if (cenaAtiva === 1) desenharCena1();
     else if (cenaAtiva === 2) desenharCena2();
     else if (cenaAtiva === 3) desenharCena3();
-
-    
 }
 
 function desenharCena1() {
@@ -64,14 +89,20 @@ function desenharCena1() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
+    // Mapear amplitudes globais para opacidade
+    let opacity1 = map(ampLevelNoise, 0, 1, 150, 255);
+    let opacity2 = map(ampLevelOboe, 0, 1, 150, 255);
+    let opacity3 = map(ampLevelSax, 0, 1, 100, 255);
+    let opacityBg2 = map(ampLevelSynth, 0, 1, 100, 255);
+
     image(cena1bg, x, y, w, h);
-    tint(255, 180);
+    tint(255, opacityBg2);
     image(cena1bg2, x, y, w, h);
-    tint(255, 220);
+    tint(255, opacity1);
     image(cena1layer1, x, y, w, h);
-    tint(255, 150);
+    tint(255, opacity2);
     image(cena1layer2, x, y, w, h);
-    tint(255, 120);
+    tint(255, opacity3);
     image(cena1layer3, x, y, w, h);
     noTint();
 }
@@ -82,12 +113,17 @@ function desenharCena2() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
+    // Mapear amplitudes globais para opacidade
+    let opacityBg2 = map(ampLevelSynth, 0, 1, 100, 255);
+    let opacity1 = map(ampLevelNoise, 0, 1, 150, 255);
+    let opacity2 = map(ampLevelOboe, 0, 1, 150, 255);
+
     image(cena2bg, x, y, w, h);
-    tint(255, 180);
+    tint(255, opacityBg2);
     image(cena2bg2, x, y, w, h);
-    tint(255, 220);
+    tint(255, opacity1);
     image(cena2layer1, x, y, w, h);
-    tint(255, 150);
+    tint(255, opacity2);
     image(cena2layer2, x, y, w, h);
     noTint();
 }
@@ -98,14 +134,20 @@ function desenharCena3() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
+    // Mapear amplitudes globais para opacidade
+    let opacityBg2 = map(ampLevelSynth, 0, 1, 100, 255);
+    let opacity1 = map(ampLevelNoise, 0, 1, 150, 255);
+    let opacity2 = map(ampLevelOboe, 0, 1, 150, 255);
+    let opacity3 = map(ampLevelSax, 0, 1, 100, 255);
+
     image(cena3bg, x, y, w, h);
-    tint(255, 160);
+    tint(255, opacityBg2);
     image(cena3bg2, x, y, w, h);
-    tint(255, 230);
+    tint(255, opacity1);
     image(cena3layer1, x, y, w, h);
-    tint(255, 150);
+    tint(255, opacity2);
     image(cena3layer2, x, y, w, h);
-    tint(255, 120);
+    tint(255, opacity3);
     image(cena3layer3, x, y, w, h);
     noTint();
 }
