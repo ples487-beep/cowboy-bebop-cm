@@ -269,8 +269,10 @@ function desenharPopup() {
   textAlign(LEFT, TOP);
   let descricao = "THE UNIVERSE OF COWBOY BEBOP é uma experiência interativa baseada na série de animação 'Cowboy Bebop'. Explora quatro localizações da série e cria as tuas próprias composições. Grava as tuas músicas e volta a ouvi-las no sistema solar.  ";
   let creditos = "Este projeto foi realizado no âmbito da unidade curricular de Comunicação Multimédia,LDM,FCTUC 25/26";
+  let nomes = "Diogo Silva , Miguel Ples";
   text(descricao, popupX + 20, popupY + 40, popupW - 40, popupH - 80);
   text(creditos, popupX + 20, popupY + 180, popupW - 40, popupH - 80);
+  text(nomes, popupX + 20, popupY + 220, popupW - 40, popupH - 80);
 }
 function mousePressed() {
   if (popupAberto) {
