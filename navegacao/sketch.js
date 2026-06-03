@@ -22,7 +22,7 @@ let aDragging = false;
 let dragStartX, dragStartY;
 
 let gravacoes = [];
-let audioElements = [];
+let videoElements = [];
 const MAX_GRAVACOES = 5; // limite máximo de gravações guardadas
 
 let popupAberto = false;
@@ -51,14 +51,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //GRAVAÇOES
-  gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
-
-  audioElements = gravacoes.map(g => {
-  let a = document.createElement('audio');
-  a.src = g.audio;
-  document.body.appendChild(a);
-  return a;
-});
+  carregarGravacoes();
   
 }
 
@@ -191,7 +184,7 @@ function desenharCartoes() {
     fill('#4117ff');
     textSize(9);
     textAlign(LEFT, TOP);
-    text('TOCAR', x + 12, startY + 39);
+    text('VER', x + 12, startY + 39);
     textAlign(RIGHT, TOP);
     text('DOWNLOAD', x + cardW - 12, startY + 39);
   }
@@ -232,14 +225,16 @@ function desenharCutscene() {
     //window.location.href = './planetas/' + planetaAtual.nome.toLowerCase() + '.html';
   }
 }
+
+//Nova funcao de gravacao
 function downloadGravacao(index) {
-  let g = gravacoes[index];
-  let link = document.createElement('a');
-  link.href = g.audio;
-  link.download = `${g.planeta}_${g.data}.wav`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    let g    = gravacoes[index];
+    let link = document.createElement('a');
+    link.href     = videoElements[index].src;
+    link.download = `${g.planeta}_${g.data}.webm`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 function desenharPopup() {
@@ -336,7 +331,7 @@ function mousePressed() {
     if (mouseX > x && mouseX < x + cardW && mouseY > startY && mouseY < startY + cardH) {
       // tocar
       if (mouseX < x + (cardW / 2)) {
-        audioElements[i].play();
+        abrirModalVideo(i);
       }
       // download
       else {
@@ -348,4 +343,45 @@ function mousePressed() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+
+//para o vídeo
+function abrirDB() {
+    return new Promise((resolve, reject) => {
+        let req = indexedDB.open('GravacoesPlanetas', 1);
+        req.onupgradeneeded = e => {
+            e.target.result.createObjectStore('gravacoes', { keyPath: 'id', autoIncrement: true });
+        };
+        req.onsuccess = e => resolve(e.target.result);
+        req.onerror   = e => reject(e.target.error);
+    });
+}
+
+async function carregarGravacoes() {
+    let db  = await abrirDB();
+    let tx  = db.transaction('gravacoes', 'readonly');
+    let req = tx.objectStore('gravacoes').getAll();
+    req.onsuccess = () => {
+        gravacoes = req.result;
+        videoElements = gravacoes.map(g => {
+            let v = document.createElement('video');
+            v.src = URL.createObjectURL(g.video);
+            v.style.display = 'none';
+            document.body.appendChild(v);
+            return v;
+        });
+    };
+}
+
+function abrirModalVideo(index) {
+    let g      = gravacoes[index];
+    let modal  = document.getElementById('modal_video');
+    let player = document.getElementById('modal_video_player');
+    let label  = document.getElementById('modal_label');
+
+    label.innerText  = g.planeta + ' — ' + g.data;
+    player.src       = videoElements[index].src;
+    modal.style.display = 'flex';
+    player.play();
 }
