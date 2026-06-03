@@ -196,7 +196,7 @@ function desenharCutscene() {
   let scroll = width * 0.03 * progresso;
   let offset = width * 0.08 * progresso;
   
-  //image(imgBg, -width * 0.05 - scroll, -height * 0.05, width * 1.1, height * 1.1);
+  
   
   
   //desenha o respetivo planeta 
@@ -222,7 +222,7 @@ function desenharCutscene() {
 
   if (tempoCutscene > 100) {
     window.location.href = 'planetas/' + planetaAtual.nome.toLowerCase() + '.html';
-    //window.location.href = './planetas/' + planetaAtual.nome.toLowerCase() + '.html';
+    
   }
 }
 
