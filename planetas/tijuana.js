@@ -2,10 +2,8 @@ let fontIBM;
 
 let somNoise, somOboe, somSax, somSynth;
 
-// Analisadores de amplitude para cada track
 let ampNoise, ampOboe, ampSax, ampSynth;
 
-// Variáveis globais para amplitudes em tempo real
 let ampLevelNoise = 0;
 let ampLevelOboe = 0;
 let ampLevelSax = 0;
@@ -22,7 +20,7 @@ let cena2bg, cena2bg2, cena2layer1, cena2layer2;
 // Cena 3
 let cena3bg, cena3bg2, cena3layer1, cena3layer2, cena3layer3;
 
-// Para o vídeo
+// video
 let canvasStream;
 let gravadorVideo = null;
 let chunkesVideo = [];
@@ -30,26 +28,26 @@ let chunkesVideo = [];
 function preload() {
     fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
-    cena1bg     = loadImage('../elementos/tijuana/cena1/bg.png');
-    cena1bg2    = loadImage('../elementos/tijuana/cena1/bg2.png');
+    cena1bg = loadImage('../elementos/tijuana/cena1/bg.png');
+    cena1bg2 = loadImage('../elementos/tijuana/cena1/bg2.png');
     cena1layer1 = loadImage('../elementos/tijuana/cena1/layer1.png');
     cena1layer2 = loadImage('../elementos/tijuana/cena1/layer2.png');
     cena1layer3 = loadImage('../elementos/tijuana/cena1/layer3.png');
 
-    cena2bg     = loadImage('../elementos/tijuana/cena2/bg.png');
-    cena2bg2    = loadImage('../elementos/tijuana/cena2/bg2.png');
+    cena2bg = loadImage('../elementos/tijuana/cena2/bg.png');
+    cena2bg2 = loadImage('../elementos/tijuana/cena2/bg2.png');
     cena2layer1 = loadImage('../elementos/tijuana/cena2/layer1.gif');
     cena2layer2 = loadImage('../elementos/tijuana/cena2/layer2.gif');
 
-    cena3bg     = loadImage('../elementos/tijuana/cena3/bg1.png');
-    cena3bg2    = loadImage('../elementos/tijuana/cena3/bg2.png');
+    cena3bg = loadImage('../elementos/tijuana/cena3/bg1.png');
+    cena3bg2 = loadImage('../elementos/tijuana/cena3/bg2.png');
     cena3layer1 = loadImage('../elementos/tijuana/cena3/layer1.png');
     cena3layer2 = loadImage('../elementos/tijuana/cena3/layer2.png');
     cena3layer3 = loadImage('../elementos/tijuana/cena3/layer3.png');
 
     somNoise = loadSound('../elementos/sounds/tijuana_noise.mp3');
-    somOboe  = loadSound('../elementos/sounds/tijuana_oboe.mp3');
-    somSax   = loadSound('../elementos/sounds/tijuana_sax.mp3');
+    somOboe = loadSound('../elementos/sounds/tijuana_oboe.mp3');
+    somSax = loadSound('../elementos/sounds/tijuana_sax.mp3');
     somSynth = loadSound('../elementos/sounds/tijuana_synth.mp3');
 }
 
@@ -58,7 +56,7 @@ function setup() {
     let myCanvas = createCanvas(container.clientWidth, container.clientHeight);
     myCanvas.parent('canvas_container');
     myCanvas.mousePressed(() => {
-    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
+        cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
     });
 
     somNoise.setVolume(0);
@@ -76,13 +74,12 @@ function setup() {
         let rawCanvas = document.querySelector('#canvas_container canvas');
         canvasStream = rawCanvas.captureStream(30);
     }, 500);
-    // Criar analisadores de amplitude para cada track
+
     ampNoise = new p5.Amplitude();
     ampOboe = new p5.Amplitude();
     ampSax = new p5.Amplitude();
     ampSynth = new p5.Amplitude();
 
-    // Conectar cada áudio ao seu analisador
     ampNoise.setInput(somNoise);
     ampOboe.setInput(somOboe);
     ampSax.setInput(somSax);
@@ -91,13 +88,12 @@ function setup() {
 
 function draw() {
     background(0);
-    
-    // Calcular amplitudes uma vez por frame
+
     ampLevelNoise = ampNoise.getLevel();
     ampLevelOboe = ampOboe.getLevel();
     ampLevelSax = ampSax.getLevel();
     ampLevelSynth = ampSynth.getLevel();
-    
+
     if (cenaAtiva === 1) desenharCena1();
     else if (cenaAtiva === 2) desenharCena2();
     else if (cenaAtiva === 3) desenharCena3();
@@ -109,7 +105,7 @@ function desenharCena1() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
-    // Mapear amplitudes globais para opacidade
+    // mapear amplitudes
     let opacity1 = map(ampLevelNoise, 0, 0.3, 150, 255);
     let opacity2 = map(ampLevelOboe, 0, 0.3, 150, 255);
     let opacity3 = map(ampLevelSax, 0, 0.15, 100, 255);
@@ -134,7 +130,7 @@ function desenharCena2() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
-    // Mapear amplitudes globais para opacidade
+    // mapear amplitudes
     let opacityBg2 = map(ampLevelSynth, 0, 0.3, 100, 255);
     let opacity1 = map(ampLevelNoise, 0, 0.3, 150, 255);
     let opacity2 = map(ampLevelOboe, 0, 0.3, 150, 255);
@@ -156,7 +152,7 @@ function desenharCena3() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
-    // Mapear amplitudes globais para opacidade
+    // mapear amplitudes
     let opacityBg2 = map(ampLevelSynth, 0, 0.2, 100, 255);
     let opacity1 = map(ampLevelNoise, 0, 0.2, 30, 255);
     let opacity2 = map(ampLevelOboe, 0, 0.2, 150, 255);
@@ -181,9 +177,9 @@ function windowResized() {
 
 
 
-// ==========================================
-// BOTÕES DE SOM
-// ==========================================
+
+// botoes som
+
 let botoesAcao = document.querySelectorAll('.btn_action');
 
 botoesAcao.forEach(botao => {
@@ -228,11 +224,7 @@ botoesAcao.forEach(botao => {
         }
     });
 });
-
-
-// ==========================================
-// BOTÃO VOLTAR
-// ==========================================
+// voltar
 let btnVoltar = document.getElementById('btn_vl');
 
 if (btnVoltar) {
@@ -249,12 +241,10 @@ if (btnVoltar) {
 }
 
 
-// ==========================================
-// BOTÃO REC
-// ==========================================
+// gravação
 let aGravar = false;
 const corNormal = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))";
-const corHover  = "linear-gradient(rgba(255, 50, 50, 0.4), rgba(255, 50, 50, 0.4))";
+const corHover = "linear-gradient(rgba(255, 50, 50, 0.4), rgba(255, 50, 50, 0.4))";
 const corGravar = "linear-gradient(rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.8))";
 
 let btnRec = document.getElementById('btn_rec');
@@ -317,10 +307,7 @@ if (btnRec) {
     });
 }
 
-
-// ==========================================
-// SLIDERS DE VOLUME
-// ==========================================
+// sliders
 let sliderBx = document.getElementById('vol_bx');
 if (sliderBx) sliderBx.addEventListener('input', () => {
     if (somNoise && somNoise.isLoaded()) somNoise.setVolume(parseFloat(sliderBx.value));
@@ -341,10 +328,7 @@ if (sliderBa) sliderBa.addEventListener('input', () => {
     if (somSynth && somSynth.isLoaded()) somSynth.setVolume(parseFloat(sliderBa.value));
 });
 
-
-// ==========================================
-// INDEXEDDB — GUARDAR GRAVAÇÃO
-// ==========================================
+//gravações video
 function abrirDB() {
     return new Promise((resolve, reject) => {
         let req = indexedDB.open('GravacoesPlanetas', 1);
@@ -352,29 +336,29 @@ function abrirDB() {
             e.target.result.createObjectStore('gravacoes', { keyPath: 'id', autoIncrement: true });
         };
         req.onsuccess = e => resolve(e.target.result);
-        req.onerror   = e => reject(e.target.error);
+        req.onerror = e => reject(e.target.error);
     });
 }
 
 async function guardarNaDB(blob) {
-    let db    = await abrirDB();
-    let tx    = db.transaction('gravacoes', 'readwrite');
+    let db = await abrirDB();
+    let tx = db.transaction('gravacoes', 'readwrite');
     let store = tx.objectStore('gravacoes');
-    
+
     let allRecordings = await new Promise((resolve, reject) => {
         let req = store.getAll();
         req.onsuccess = () => resolve(req.result);
         req.onerror = () => reject(req.error);
     });
-    
+
     if (allRecordings.length >= 5) {
         store.delete(allRecordings[0].id);
     }
-    
+
     store.add({
-        planeta : 'TIJUANA',
-        data    : new Date().toLocaleDateString(),
-        video   : blob
+        planeta: 'TIJUANA',
+        data: new Date().toLocaleDateString(),
+        video: blob
     });
     tx.oncomplete = () => {
         btnRec.innerText = "SAVED";

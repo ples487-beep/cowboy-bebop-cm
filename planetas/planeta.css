@@ -1,12 +1,14 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 @font-face {
-    font-family: 'Fonte'; /* Dá o nome que quiseres aqui */
-    src: url('../navegacao/fontes/IBMPlexMono-Regular.ttf') format('truetype'); /* O caminho para o ficheiro */
+    font-family: 'Fonte';
+    /* Dá o nome que quiseres aqui */
+    src: url('../navegacao/fontes/IBMPlexMono-Regular.ttf') format('truetype');
+    /* O caminho para o ficheiro */
     font-weight: normal;
     font-style: normal;
 }
@@ -14,11 +16,14 @@
 body {
     overflow: hidden;
     background-color: black;
-    
+
     /* --- AS MÁGICAS DO ANTI-ALIASING --- */
-    -webkit-font-smoothing: antialiased; /* Suaviza as letras no Chrome/Safari */
-    -moz-osx-font-smoothing: grayscale;  /* Suaviza as letras no Firefox no Mac */
-    text-rendering: optimizeLegibility;  /* Pede ao navegador para focar na qualidade do texto */
+    -webkit-font-smoothing: antialiased;
+    /* Suaviza as letras no Chrome/Safari */
+    -moz-osx-font-smoothing: grayscale;
+    /* Suaviza as letras no Firefox no Mac */
+    text-rendering: optimizeLegibility;
+    /* Pede ao navegador para focar na qualidade do texto */
 }
 
 /* Organiza as coisas de cima para baixo */
@@ -27,14 +32,17 @@ body {
     flex-direction: row;
     height: 100vh;
     width: 100vw;
-    background-color: black; /* Se for uma frincha, agora fica preta e invisível! */
-    gap: 0;              /* Força a zero de espaço entre o canvas e o mixer */
+    background-color: black;
+    /* Se for uma frincha, agora fica preta e invisível! */
+    gap: 0;
+    /* Força a zero de espaço entre o canvas e o mixer */
 }
 
 
 /* O espaço do p5.js */
 .canvas_container {
-    flex: 1;           /* ← ADICIONA ISTO */
+    flex: 1;
+    /* ← ADICIONA ISTO */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,66 +51,75 @@ body {
 }
 
 canvas {
-    display: block; /* Remove espaços brancos extra */
+    display: block;
+    /* Remove espaços brancos extra */
 }
 
-.mixer_container { 
-    
+.mixer_container {
+
     /* Define o tamanho da barra lateral */
-    width: 15vw;   
-    height: 100vh; 
-    
-    order: -1; /* Força o mixer a ser o primeiro elemento (à esquerda) */
-    
+    width: 15vw;
+    height: 100vh;
+
+    order: -1;
+    /* Força o mixer a ser o primeiro elemento (à esquerda) */
+
     /* Garante que o mixer fica por cima do canvas */
-    position: relative; 
-    z-index: 10; 
-    
+    position: relative;
+    z-index: 10;
+
     /* Organiza o conteúdo interno do mixer */
     display: flex;
     flex-direction: column;
 }
 
 .mixer_header {
-  height: 10vh; 
-  /*border:2px solid white;*/
+    height: 10vh;
+    /*border:2px solid white;*/
 
-  /* Transformamos o header num contentor Flexbox para controlar o botão */
+    /* Transformamos o header num contentor Flexbox para controlar o botão */
     display: flex;
-    align-items: center; /* Centra o botão na vertical perfeitamente */
-    justify-content: flex-start; /* Garante que o botão fica à esquerda */
+    align-items: center;
+    /* Centra o botão na vertical perfeitamente */
+    justify-content: flex-start;
+    /* Garante que o botão fica à esquerda */
 }
 
-.mixer_body{
+.mixer_body {
     /*border:2px solid white;*/
 
     background-image: url('../elementos/painel/painel_2.png');
-    background-size: 100% 100%; 
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: left center; /* Garante que a imagem encosta à esquerda */
-    align-self:flex-start;
-    
-    width:15vw;
+    background-position: left center;
+    /* Garante que a imagem encosta à esquerda */
+    align-self: flex-start;
+
+    width: 15vw;
     height: 75vh;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 
-    margin-top:auto;
-    margin-bottom:auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 /* Organiza cada botão e o seu slider lado a lado */
 .control_row {
     display: flex;
-    flex-direction: row; 
-    align-items: center; /* Centra na vertical para o slider não ficar torto */
-    gap: 40px; /* Cria o espaço automático entre o botão e o slider */
-    
+    flex-direction: row;
+    align-items: center;
+    /* Centra na vertical para o slider não ficar torto */
+    gap: 40px;
+    /* Cria o espaço automático entre o botão e o slider */
+
     width: 100%;
-    margin-bottom: 20px; /* Espaço para a linha de baixo */
-    padding-left: 20px; /* Empurra tudo um pouco para a direita (afasta da borda esquerda do painel) */
+    margin-bottom: 20px;
+    /* Espaço para a linha de baixo */
+    padding-left: 20px;
+    /* Empurra tudo um pouco para a direita (afasta da borda esquerda do painel) */
 }
 
 /* Para o REC e o VOL ficarem bem posicionados */
@@ -114,13 +131,15 @@ canvas {
 
 /* O elemento invisível que empurra o "VOL" */
 .btn_fantasma {
-    width: 50px; /* Tem de ser EXATAMENTE igual ao width do teu .btn_action */
+    width: 50px;
+    /* Tem de ser EXATAMENTE igual ao width do teu .btn_action */
     /* Não precisa de mais nada, é literalmente só para ocupar espaço */
 }
 
 /* O teu texto já centrado */
 .label_vol {
-    width: 100px; /* EXATAMENTE igual ao width do teu .volume_slider */
+    width: 100px;
+    /* EXATAMENTE igual ao width do teu .volume_slider */
     text-align: center;
     color: white;
     font-family: "Montserrat", sans-serif;
@@ -134,14 +153,15 @@ canvas {
     font-weight: 500;
     font-size: 16px;
     font-style: bold;
-    width: 50px; /* Reduzi um pouquinho para caber melhor na linha */
+    width: 50px;
+    /* Reduzi um pouquinho para caber melhor na linha */
     height: 50px;
-    
+
     /* REMOVEMOS O ALIGN-SELF E AS MARGINS ANTIGAS. Fica só: */
-    margin: 0; 
-    
-    background-image: url('../elementos/painel/botao1.png'); 
-    background-size: 100% 100%; 
+    margin: 0;
+
+    background-image: url('../elementos/painel/botao1.png');
+    background-size: 100% 100%;
     background-color: transparent;
     filter: sepia(100%) saturate(250%) hue-rotate(320deg) brightness(130%);
     color: white;
@@ -155,29 +175,36 @@ canvas {
     -webkit-appearance: none;
     appearance: none;
 
-    /* A MUDANÇA É AQUI */
+
     background-image: url('../elementos/painel/slider.png');
-    background-size: 100% 100%; /* Estica a imagem para preencher toda a barra */
+    background-size: 100% 100%;
+    /* Estica a imagem para preencher toda a barra */
     background-repeat: no-repeat;
     background-color: transparent;
 
-    width: 100px; /* Largura da barra de volume */
-    height: 6px;  /* Grossura da linha preta */
-   
+    width: 100px;
+    /* Largura da barra de volume */
+    height: 6px;
+    /* Grossura da linha preta */
+
 }
 
 /* O "puxador" do slider (a barrinha branca vertical do Figma) */
 .volume_slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px; /* Mais fino */
-    height: 25px; /* Mais alto (forma retangular) */
-    
-    background-image: url('../elementos/painel/slider_handle.png'); 
-    background-size: 100% 100%; /* Garante que a imagem cabe inteira */
+    width: 20px;
+    /* Mais fino */
+    height: 25px;
+    /* Mais alto (forma retangular) */
+
+    background-image: url('../elementos/painel/slider_handle.png');
+    background-size: 100% 100%;
+    /* Garante que a imagem cabe inteira */
     background-repeat: no-repeat;
     background-position: center;
-    background-color: transparent; /* Remove o fundo branco antigo! */
+    background-color: transparent;
+    /* Remove o fundo branco antigo! */
 
     filter: brightness(5);
 
@@ -193,10 +220,12 @@ canvas {
     font-size: 16px;
 
     margin: 20px;
-    align-self: flex-start;/*flex start substitui o left*/
+    align-self: flex-start;
+    /*flex start substitui o left*/
     background-color: transparent;
     color: white;
-    border: 0px;/*retira a linha do botão*/
+    border: 0px;
+    /*retira a linha do botão*/
     padding: 10px;
 
     transition: font-size 0.2s ease-in-out;
@@ -225,60 +254,71 @@ canvas {
 }
 
 @keyframes piscar {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 
 /* --- O FUNDO DO POP-UP (Overlay) --- */
 #mobile-warning {
-    display: none; /* Escondido por defeito */
-    position: fixed; /* Fica fixo por cima de toda a página */
+    display: none;
+    /* Escondido por defeito */
+    position: fixed;
+    /* Fica fixo por cima de toda a página */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.85);
-    z-index: 9999; 
-    
-    
+    z-index: 9999;
+
+
     justify-content: center;
     align-items: center;
 }
+
 .popup-box {
     font-family: 'Fonte', Helvetica, sans-serif;
 
     background-color: #ffffff;
     color: #333;
     padding: 40px;
-    border-radius: 12px; 
+    border-radius: 12px;
     text-align: center;
     width: 80%;
-    max-width: 450px; 
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .popup-box h2 {
 
     margin-top: 0;
     margin-bottom: 30px;
-    color: #d32f2f; 
+    color: #d32f2f;
 }
 
 /* --- A REGRA DE BLOQUEIO (Media Query) --- */
 @media (max-width: 1450px) {
-    
+
     #mobile-warning {
-        display: flex; 
+        display: flex;
     }
 }
 
 #btn_rec {
     --pelicula: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
-    
+
     background-image: var(--pelicula), url('../elementos/painel/rec.png');
-    
+
     background-size: 100% 100%;
     background-color: transparent;
 
@@ -286,5 +326,5 @@ canvas {
     font-size: 12px;
 
     transition: 1s ease-in-out;
-   
+
 }

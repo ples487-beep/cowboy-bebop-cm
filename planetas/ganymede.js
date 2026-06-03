@@ -2,10 +2,8 @@ let fontIBM;
 
 let somBass, somDrone, somBateria, somSax;
 
-// Analisadores de amplitude
 let ampBass, ampDrone, ampBateria, ampSax;
 
-// Variáveis globais para amplitudes em tempo real
 let ampLevelBass = 0;
 let ampLevelDrone = 0;
 let ampLevelBateria = 0;
@@ -22,7 +20,7 @@ let cena2bg, cena2bg2, cena2layer1, cena2layer2;
 // Cena 3
 let cena3bg, cena3bg2, cena3layer1;
 
-// Para o vídeo
+
 let canvasStream;
 let gravadorVideo = null;
 let chunkesVideo = [];
@@ -30,24 +28,24 @@ let chunkesVideo = [];
 function preload() {
     fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
-    cena1bg     = loadImage('../elementos/ganymede/cena1/bg.png');
-    cena1bg2    = loadImage('../elementos/ganymede/cena1/bg2.png');
+    cena1bg = loadImage('../elementos/ganymede/cena1/bg.png');
+    cena1bg2 = loadImage('../elementos/ganymede/cena1/bg2.png');
     cena1layer1 = loadImage('../elementos/ganymede/cena1/layer1.png');
     cena1layer2 = loadImage('../elementos/ganymede/cena1/layer2.png');
 
-    cena2bg     = loadImage('../elementos/ganymede/cena2/bg.png');
-    cena2bg2    = loadImage('../elementos/ganymede/cena2/bg2.png');
+    cena2bg = loadImage('../elementos/ganymede/cena2/bg.png');
+    cena2bg2 = loadImage('../elementos/ganymede/cena2/bg2.png');
     cena2layer1 = loadImage('../elementos/ganymede/cena2/layer1.png');
     cena2layer2 = loadImage('../elementos/ganymede/cena2/layer2.png');
 
-    cena3bg     = loadImage('../elementos/ganymede/cena3/bg1.png');
-    cena3bg2    = loadImage('../elementos/ganymede/cena3/bg2.png');
+    cena3bg = loadImage('../elementos/ganymede/cena3/bg1.png');
+    cena3bg2 = loadImage('../elementos/ganymede/cena3/bg2.png');
     cena3layer1 = loadImage('../elementos/ganymede/cena3/layer1.png');
 
-    somBass    = loadSound('../elementos/sounds/ganymede_bass.mp3');
-    somDrone   = loadSound('../elementos/sounds/ganymede_drone.mp3');
+    somBass = loadSound('../elementos/sounds/ganymede_bass.mp3');
+    somDrone = loadSound('../elementos/sounds/ganymede_drone.mp3');
     somBateria = loadSound('../elementos/sounds/ganymede_drum.mp3');
-    somSax     = loadSound('../elementos/sounds/ganymede_sax.mp3');
+    somSax = loadSound('../elementos/sounds/ganymede_sax.mp3');
 }
 
 function setup() {
@@ -56,7 +54,7 @@ function setup() {
     myCanvas.parent('canvas_container');
 
     myCanvas.mousePressed(() => {
-    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
+        cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
     });
 
     somBass.setVolume(0);
@@ -74,13 +72,13 @@ function setup() {
         let rawCanvas = document.querySelector('#canvas_container canvas');
         canvasStream = rawCanvas.captureStream(30);
     }, 500);
-    // Criar analisadores de amplitude
+
     ampBass = new p5.Amplitude();
     ampDrone = new p5.Amplitude();
     ampBateria = new p5.Amplitude();
     ampSax = new p5.Amplitude();
 
-    // Conectar cada áudio ao seu analisador
+
     ampBass.setInput(somBass);
     ampDrone.setInput(somDrone);
     ampBateria.setInput(somBateria);
@@ -89,13 +87,12 @@ function setup() {
 
 function draw() {
     background(0);
-    
-    // Calcular amplitudes uma vez por frame
+
     ampLevelBass = ampBass.getLevel();
     ampLevelDrone = ampDrone.getLevel();
     ampLevelBateria = ampBateria.getLevel();
     ampLevelSax = ampSax.getLevel();
-    
+
     if (cenaAtiva === 1) desenharCena1();
     else if (cenaAtiva === 2) desenharCena2();
     else if (cenaAtiva === 3) desenharCena3();
@@ -107,7 +104,7 @@ function desenharCena1() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
-    // Mapear amplitudes para opacidade
+    //mapear amplitudes
     let op1 = map(ampLevelBass, 0, 0.15, 100, 255);
     let op2 = map(ampLevelDrone, 0, 0.15, 100, 255);
     let op3 = map(ampLevelBateria, 0, 0.15, 80, 255);
@@ -129,7 +126,7 @@ function desenharCena2() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
-    // Mapear amplitudes para opacidade
+    //mapear amplitudes
     let op1 = map(ampLevelBass, 0, 0.15, 100, 255);
     let op2 = map(ampLevelDrone, 0, 0.15, 100, 255);
     let op3 = map(ampLevelBateria, 0, 0.15, 80, 255);
@@ -151,7 +148,7 @@ function desenharCena3() {
     let x = (width - w) / 2;
     let y = (height - h) / 2;
 
-    // Mapear amplitudes para opacidade
+    //mapear amplitudes
     let op1 = map(ampLevelBass, 0, 0.15, 40, 255);
     let op2 = map(ampLevelDrone, 0, 0.15, 80, 255);
     let op3 = map(ampLevelBateria, 0, 0.15, 80, 255);
@@ -168,11 +165,7 @@ function windowResized() {
     let container = document.getElementById('canvas_container');
     resizeCanvas(container.clientWidth, container.clientHeight);
 }
-
-
-// ==========================================
-// BOTÕES DE SOM
-// ==========================================
+// botoes de som
 let botoesAcao = document.querySelectorAll('.btn_action');
 
 botoesAcao.forEach(botao => {
@@ -218,10 +211,8 @@ botoesAcao.forEach(botao => {
     });
 });
 
+// voltar
 
-// ==========================================
-// BOTÃO VOLTAR
-// ==========================================
 let btnVoltar = document.getElementById('btn_vl');
 
 if (btnVoltar) {
@@ -237,13 +228,11 @@ if (btnVoltar) {
     });
 }
 
+// gravação
 
-// ==========================================
-// BOTÃO REC
-// ==========================================
 let aGravar = false;
 const corNormal = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))";
-const corHover  = "linear-gradient(rgba(255, 50, 50, 0.4), rgba(255, 50, 50, 0.4))";
+const corHover = "linear-gradient(rgba(255, 50, 50, 0.4), rgba(255, 50, 50, 0.4))";
 const corGravar = "linear-gradient(rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.8))";
 
 let btnRec = document.getElementById('btn_rec');
@@ -306,10 +295,8 @@ if (btnRec) {
     });
 }
 
+// volume
 
-// ==========================================
-// SLIDERS DE VOLUME
-// ==========================================
 let sliderBx = document.getElementById('vol_bx');
 if (sliderBx) sliderBx.addEventListener('input', () => {
     if (somBass && somBass.isLoaded()) somBass.setVolume(parseFloat(sliderBx.value));
@@ -330,10 +317,8 @@ if (sliderBa) sliderBa.addEventListener('input', () => {
     if (somSax && somSax.isLoaded()) somSax.setVolume(parseFloat(sliderBa.value));
 });
 
+//gravações video
 
-// ==========================================
-// INDEXEDDB — GUARDAR GRAVAÇÃO
-// ==========================================
 function abrirDB() {
     return new Promise((resolve, reject) => {
         let req = indexedDB.open('GravacoesPlanetas', 1);
@@ -341,29 +326,29 @@ function abrirDB() {
             e.target.result.createObjectStore('gravacoes', { keyPath: 'id', autoIncrement: true });
         };
         req.onsuccess = e => resolve(e.target.result);
-        req.onerror   = e => reject(e.target.error);
+        req.onerror = e => reject(e.target.error);
     });
 }
 
 async function guardarNaDB(blob) {
-    let db    = await abrirDB();
-    let tx    = db.transaction('gravacoes', 'readwrite');
+    let db = await abrirDB();
+    let tx = db.transaction('gravacoes', 'readwrite');
     let store = tx.objectStore('gravacoes');
-    
+
     let allRecordings = await new Promise((resolve, reject) => {
         let req = store.getAll();
         req.onsuccess = () => resolve(req.result);
         req.onerror = () => reject(req.error);
     });
-    
+
     if (allRecordings.length >= 5) {
         store.delete(allRecordings[0].id);
     }
-    
+
     store.add({
-        planeta : 'GANYMEDE',
-        data    : new Date().toLocaleDateString(),
-        video   : blob
+        planeta: 'GANYMEDE',
+        data: new Date().toLocaleDateString(),
+        video: blob
     });
     tx.oncomplete = () => {
         btnRec.innerText = "SAVED";

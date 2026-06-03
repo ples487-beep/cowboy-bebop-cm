@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('../navegacao/fontes/IBMPlexMono-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'IBM Plex Mono';
+    src: url('../navegacao/fontes/IBMPlexMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 #mobile-warning {
@@ -35,7 +35,7 @@
     font-weight: normal;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-align: center; 
+    text-align: center;
 }
 
 .popup-box p {

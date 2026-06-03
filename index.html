@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Bebop</title>
-  <link rel="stylesheet" href="navegacao/style.css">
-  <link rel="stylesheet" href="planetas/pop_up.css">
+    <meta charset="UTF-8">
+    <title>Bebop</title>
+    <link rel="stylesheet" href="navegacao/style.css">
+    <link rel="stylesheet" href="planetas/pop_up.css">
 </head>
+
 <body>
 
-  <!-- O Pop-up de Aviso -->
-  <div id="mobile-warning">
-    <div class="popup-box">
-        <h2>Ecrã Incompatível</h2>
-        <p> OLÁ COWBOY!!! Esta experiência não está optimizada para o seu ecrã...</p> 
-        <p>Por favor tente aceder através de um dispositivo com um ecrã maior para poder experienciar o nosso website.</p>
-    
-      </div>
-  </div>
+    <div id="mobile-warning">
+        <div class="popup-box">
+            <h2>Ecrã Incompatível</h2>
+            <p> OLÁ COWBOY!!! Esta experiência não está optimizada para o seu ecrã...</p>
+            <p>Por favor tente aceder através de um dispositivo com um ecrã maior para poder experienciar o nosso
+                website.</p>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
-  <script src="navegacao/planetaorb.js"></script>
-  <script src="navegacao/sketch.js"></script>
-  <script src="https://prontopablo.github.io/p5.FIP/assets/javascripts/p5.FIP.js"></script>
+        </div>
+    </div>
 
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <script src="navegacao/planetaorb.js"></script>
+    <script src="navegacao/sketch.js"></script>
+    <script src="https://prontopablo.github.io/p5.FIP/assets/javascripts/p5.FIP.js"></script>
 
-  <div id="modal_video" style="display:none; position:fixed; inset:0;
+
+
+    <div id="modal_video" style="display:none; position:fixed; inset:0;
      background:rgba(0,0,0,0.88); z-index:999;
      align-items:center; justify-content:center; flex-direction:column;">
 
-    <p id="modal_label" style="color:rgb(237,224,196); font-family:monospace;
+        <p id="modal_label" style="color:rgb(237,224,196); font-family:monospace;
        font-size:12px; margin-bottom:12px; letter-spacing:2px;"></p>
 
-    <video id="modal_video_player" controls style="max-width:80vw; max-height:70vh;
+        <video id="modal_video_player" controls style="max-width:80vw; max-height:70vh;
            border:1px solid #4117ff; background:#06011e;"></video>
 
-    <button id="modal_fechar" style="margin-top:16px; background:none;
+        <button id="modal_fechar" style="margin-top:16px; background:none;
             border:1px solid #4117ff; color:#4117ff; font-family:monospace;
             font-size:11px; padding:6px 18px; cursor:pointer; letter-spacing:2px;">
-        ✕ FECHAR
-    </button>
-</div>
+            ✕ FECHAR
+        </button>
+    </div>
 
-<script>
-    document.getElementById('modal_fechar').addEventListener('click', () => {
-        let player = document.getElementById('modal_video_player');
-        player.pause();
-        player.src = '';
-        document.getElementById('modal_video').style.display = 'none';
-    });
+    <script>
+        document.getElementById('modal_fechar').addEventListener('click', () => {
+            let player = document.getElementById('modal_video_player');
+            player.pause();
+            player.src = '';
+            document.getElementById('modal_video').style.display = 'none';
+        });
 
-    document.getElementById('modal_video').addEventListener('click', e => {
-        if (e.target === document.getElementById('modal_video')) {
-            document.getElementById('modal_fechar').click();
-        }
-    });
-</script>
+        document.getElementById('modal_video').addEventListener('click', e => {
+            if (e.target === document.getElementById('modal_video')) {
+                document.getElementById('modal_fechar').click();
+            }
+        });
+    </script>
 </body>
+
 </html>
