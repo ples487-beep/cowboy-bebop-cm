@@ -22,6 +22,11 @@ let cena2bg, cena2bg2, cena2layer1, cena2layer2;
 // Cena 3
 let cena3bg, cena3bg2, cena3layer1;
 
+// Para o vídeo
+let canvasStream;
+let gravadorVideo = null;
+let chunkesVideo = [];
+
 function preload() {
     fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
@@ -50,9 +55,21 @@ function setup() {
     let myCanvas = createCanvas(container.clientWidth, container.clientHeight);
     myCanvas.parent('canvas_container');
 
-    somBass.setVolume(0.5);
+    somBass.setVolume(0);
+    somBass.loop();
+    somDrone.setVolume(0);
+    somDrone.loop();
+    somBateria.setVolume(0);
+    somBateria.loop();
+    somSax.setVolume(0);
+    somSax.loop();
+
     gravador = new p5.SoundRecorder();
 
+    setTimeout(() => {
+        let rawCanvas = document.querySelector('#canvas_container canvas');
+        canvasStream = rawCanvas.captureStream(30);
+    }, 500);
     // Criar analisadores de amplitude
     ampBass = new p5.Amplitude();
     ampDrone = new p5.Amplitude();
@@ -179,16 +196,24 @@ botoesAcao.forEach(botao => {
         botaoClicado = !botaoClicado;
 
         if (botao.id === 'btn_bx') {
-            if (somBass && somBass.isLoaded()) { botaoClicado ? somBass.loop() : somBass.pause(); }
+            if (somBass && somBass.isLoaded()) {
+                somBass.setVolume(botaoClicado ? parseFloat(document.getElementById('vol_bx').value) : 0);
+            }
         }
         if (botao.id === 'btn_bs') {
-            if (somBateria && somBateria.isLoaded()) { botaoClicado ? somBateria.loop() : somBateria.pause(); }
+            if (somBateria && somBateria.isLoaded()) {
+                somBateria.setVolume(botaoClicado ? parseFloat(document.getElementById('vol_bs').value) : 0);
+            }
         }
         if (botao.id === 'btn_bt') {
-            if (somDrone && somDrone.isLoaded()) { botaoClicado ? somDrone.loop() : somDrone.pause(); }
+            if (somDrone && somDrone.isLoaded()) {
+                somDrone.setVolume(botaoClicado ? parseFloat(document.getElementById('vol_bt').value) : 0);
+            }
         }
         if (botao.id === 'btn_ba') {
-            if (somSax && somSax.isLoaded()) { botaoClicado ? somSax.loop() : somSax.pause(); }
+            if (somSax && somSax.isLoaded()) {
+                somSax.setVolume(botaoClicado ? parseFloat(document.getElementById('vol_ba').value) : 0);
+            }
         }
     });
 });
@@ -240,37 +265,43 @@ if (btnRec) {
         if (!aGravar) {
             ficheiroGravacao = new p5.SoundFile();
             gravador.record(ficheiroGravacao);
+
+            chunkesVideo = [];
+            let audioCtx = getAudioContext();
+            let destination = audioCtx.createMediaStreamDestination();
+
+            [somBass, somDrone, somBateria, somSax].forEach(som => {
+                if (som && som.isLoaded()) {
+                    som.connect(destination);
+                }
+            });
+
+            let tracksVideo = canvasStream.getVideoTracks();
+            let tracksAudio = destination.stream.getAudioTracks();
+            let streamCombinado = new MediaStream([...tracksVideo, ...tracksAudio]);
+
+            gravadorVideo = new MediaRecorder(streamCombinado, { mimeType: 'video/webm;codecs=vp8,opus' });
+            gravadorVideo.ondataavailable = e => { if (e.data.size > 0) chunkesVideo.push(e.data); };
+            gravadorVideo.start(100);
+
             aGravar = true;
             btnRec.innerText = "STOP";
             btnRec.style.setProperty('--pelicula', corGravar);
             btnRec.classList.add('gravando');
+
         } else {
             gravador.stop();
+            gravadorVideo.stop();
+
+            gravadorVideo.onstop = () => {
+                let blobFinal = new Blob(chunkesVideo, { type: 'video/webm' });
+                guardarNaDB(blobFinal);
+            };
+
             aGravar = false;
             btnRec.innerText = "REC";
             btnRec.style.setProperty('--pelicula', corNormal);
             btnRec.classList.remove('gravando');
-
-            setTimeout(() => {
-                let blobAudio = ficheiroGravacao.getBlob();
-                let reader = new FileReader();
-                reader.readAsDataURL(blobAudio);
-                reader.onloadend = () => {
-                    let gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
-                    gravacoes.push({
-                        planeta: 'GANYMEDE',
-                        data: new Date().toLocaleDateString(),
-                        audio: reader.result
-                    });
-                    // limitar a 5 gravações máximas
-                    if (gravacoes.length > 5) {
-                        gravacoes.shift(); // remove a mais antiga
-                    }
-                    localStorage.setItem('gravacoes', JSON.stringify(gravacoes));
-                    btnRec.innerText = "SAVED";
-                    setTimeout(() => btnRec.innerText = "REC", 1500);
-                };
-            }, 100);
         }
     });
 }
@@ -298,3 +329,33 @@ let sliderBa = document.getElementById('vol_ba');
 if (sliderBa) sliderBa.addEventListener('input', () => {
     if (somSax && somSax.isLoaded()) somSax.setVolume(parseFloat(sliderBa.value));
 });
+
+
+// ==========================================
+// INDEXEDDB — GUARDAR GRAVAÇÃO
+// ==========================================
+function abrirDB() {
+    return new Promise((resolve, reject) => {
+        let req = indexedDB.open('GravacoesPlanetas', 1);
+        req.onupgradeneeded = e => {
+            e.target.result.createObjectStore('gravacoes', { keyPath: 'id', autoIncrement: true });
+        };
+        req.onsuccess = e => resolve(e.target.result);
+        req.onerror   = e => reject(e.target.error);
+    });
+}
+
+async function guardarNaDB(blob) {
+    let db    = await abrirDB();
+    let tx    = db.transaction('gravacoes', 'readwrite');
+    let store = tx.objectStore('gravacoes');
+    store.add({
+        planeta : 'GANYMEDE',
+        data    : new Date().toLocaleDateString(),
+        video   : blob
+    });
+    tx.oncomplete = () => {
+        btnRec.innerText = "SAVED";
+        setTimeout(() => btnRec.innerText = "REC", 1500);
+    };
+}

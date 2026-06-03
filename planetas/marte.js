@@ -16,6 +16,11 @@ let cenaAtiva = 1;
 
 let gravador, ficheiroGravacao;
 
+//para o vídeo
+let canvasStream;
+let gravadorVideo = null;
+let chunkesVideo = [];
+
 function preload() {
     fontIBM = loadFont('../navegacao/fontes/IBMPlexMono-Regular.ttf');
 
@@ -62,6 +67,20 @@ function setup() {
     let gap = 20;
 
     somBass.setVolume(0);
+    somBass.loop();
+    somBateria.setVolume(0);
+    somBateria.loop();
+    somSax.setVolume(0);
+    somSax.loop();
+    somSax2.setVolume(0);
+    somSax2.loop(); 
+
+    gravador = new p5.SoundRecorder();
+
+    setTimeout(() => {
+        let rawCanvas = document.querySelector('#canvas_container canvas');
+        canvasStream = rawCanvas.captureStream(30);
+    }, 500);
 
     gravador = new p5.SoundRecorder();
 
@@ -221,9 +240,9 @@ botoesAcao.forEach(botao => {
         if (botao.id === 'btn_bx'){
             if (somBass && somBass.isLoaded()) {
                 if (botaoClicado === true){
-                    somBass.loop();
+                    somBass.setVolume(parseFloat(sliderBx.value));
                 } else {
-                    somBass.pause();
+                    somBass.setVolume(0);
                 }
             } 
         } 
@@ -231,9 +250,9 @@ botoesAcao.forEach(botao => {
         if (botao.id === 'btn_bs'){
             if (somBateria && somBateria.isLoaded()) {
                 if (botaoClicado === true){
-                    somBateria.loop();
+                    somBateria.setVolume(parseFloat(sliderBt.value));
                 } else {
-                    somBateria.pause();
+                    somBateria.setVolume(0);
                 }
             } 
         } 
@@ -241,9 +260,9 @@ botoesAcao.forEach(botao => {
         if (botao.id === 'btn_bt'){
             if (somSax && somSax.isLoaded()) {
                 if (botaoClicado === true){
-                    somSax.loop();
+                    somSax.setVolume(parseFloat(sliderSx.value));
                 } else {
-                    somSax.pause();
+                    somSax.setVolume(0);
                 }
             } 
         }
@@ -251,9 +270,9 @@ botoesAcao.forEach(botao => {
         if (botao.id === 'btn_ba'){
             if (somSax2 && somSax2.isLoaded()) {
                 if (botaoClicado === true){
-                    somSax2.loop();
+                    somSax2.setVolume(parseFloat(sliderSx2.value));
                 } else {
-                    somSax2.pause();
+                    somSax2.setVolume(0);
                 }
             } 
         }
@@ -268,7 +287,6 @@ botoesAcao.forEach(botao => {
         
     });
 });
-
 
 
 let btnVoltar = document.getElementById('btn_vl');
@@ -329,8 +347,30 @@ if (btnRec) {
     if (!gravador) return;
 
     if (!aGravar) {
+        // — Áudio —
         ficheiroGravacao = new p5.SoundFile();
         gravador.record(ficheiroGravacao);
+
+        // — Stream combinado: canvas + áudio —
+        chunkesVideo = [];
+        let audioCtx = getAudioContext();
+        let destination = audioCtx.createMediaStreamDestination();
+
+        [somBass, somBateria, somSax, somSax2].forEach(som => {
+            if (som && som.isLoaded()) {
+                //som.disconnect();
+                som.connect(destination);
+            }
+        });
+
+        let tracksVideo = canvasStream.getVideoTracks();
+        let tracksAudio = destination.stream.getAudioTracks();
+        let streamCombinado = new MediaStream([...tracksVideo, ...tracksAudio]);
+
+        gravadorVideo = new MediaRecorder(streamCombinado, { mimeType: 'video/webm;codecs=vp8,opus' });
+        gravadorVideo.ondataavailable = e => { if (e.data.size > 0) chunkesVideo.push(e.data); };
+        gravadorVideo.start(100);
+
         aGravar = true;
         btnRec.innerText = "STOP";
         btnRec.style.setProperty('--pelicula', corGravar);
@@ -338,37 +378,19 @@ if (btnRec) {
 
     } else {
         gravador.stop();
+        gravadorVideo.stop();
+
+        gravadorVideo.onstop = () => {
+            let blobFinal = new Blob(chunkesVideo, { type: 'video/webm' });
+            guardarNaDB(blobFinal);
+        };
+
         aGravar = false;
         btnRec.innerText = "REC";
         btnRec.style.setProperty('--pelicula', corNormal);
         btnRec.classList.remove('gravando');
-
-        setTimeout(() => {
-            let blobAudio = ficheiroGravacao.getBlob();
-            let urlAudio = URL.createObjectURL(blobAudio);
-
-            let reader = new FileReader();
-            reader.readAsDataURL(blobAudio);
-            reader.onloadend = () => {
-                let gravacoes = JSON.parse(localStorage.getItem('gravacoes') || '[]');
-                gravacoes.push({
-                    planeta: 'MARTE',
-                    data: new Date().toLocaleDateString(),
-                    audio: reader.result
-                });
-                // limitar a 5 gravações máximas
-                if (gravacoes.length > 5) {
-                    gravacoes.shift(); // remove a mais antiga
-                }
-                localStorage.setItem('gravacoes', JSON.stringify(gravacoes));
-
-                // feedback visual
-                btnRec.innerText = "SAVED";
-                setTimeout(() => btnRec.innerText = "REC", 1500);
-            };
-        }, 100);
     }
-  } );
+});
 }
 
 // ==========================================
@@ -414,4 +436,31 @@ if (sliderBa) {
             somSax2.setVolume(parseFloat(sliderBa.value));
         }
     });
+}
+
+//para o vídeo
+function abrirDB() {
+    return new Promise((resolve, reject) => {
+        let req = indexedDB.open('GravacoesPlanetas', 1);
+        req.onupgradeneeded = e => {
+            e.target.result.createObjectStore('gravacoes', { keyPath: 'id', autoIncrement: true });
+        };
+        req.onsuccess = e => resolve(e.target.result);
+        req.onerror   = e => reject(e.target.error);
+    });
+}
+
+async function guardarNaDB(blob) {
+    let db    = await abrirDB();
+    let tx    = db.transaction('gravacoes', 'readwrite');
+    let store = tx.objectStore('gravacoes');
+    store.add({
+        planeta : 'MARTE',
+        data    : new Date().toLocaleDateString(),
+        video   : blob
+    });
+    tx.oncomplete = () => {
+        btnRec.innerText = "SAVED";
+        setTimeout(() => btnRec.innerText = "REC", 1500);
+    };
 }
