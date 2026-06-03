@@ -50,16 +50,12 @@ function preload() {
 }
 
 function setup() {
-    // Procura a div que criámos no HTML para saber o tamanho exato disponível
     let container = document.querySelector('.canvas_container');
-    
-    // Cria o canvas com a largura e altura exatas dessa div
     let myCanvas = createCanvas(container.clientWidth, container.clientHeight);
-
-    // Prende o canvas dentro da div correta (respeitando o layout Flexbox!)
     myCanvas.parent('canvas_container');
-  
-    // Apagámos o position(0, 0) e o z-index, pois o Flexbox já organiza tudo!
+    myCanvas.mousePressed(() => {
+    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
+    });
 
     let px = width * 0.05;
     let bw = 50;
@@ -184,21 +180,6 @@ function windowResized() {
     let container = document.getElementById('canvas_container');
     resizeCanvas(container.clientWidth, container.clientHeight);
 }
-
-function mousePressed() {
-    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
-}
-
-
-
-
-
-
-
-
-
-
-
 
 let botoesAcao = document.querySelectorAll('.btn_action');
 
@@ -454,6 +435,18 @@ async function guardarNaDB(blob) {
     let db    = await abrirDB();
     let tx    = db.transaction('gravacoes', 'readwrite');
     let store = tx.objectStore('gravacoes');
+    
+    // Limitar a 5 gravações máximas
+    let allRecordings = await new Promise((resolve, reject) => {
+        let req = store.getAll();
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+    
+    if (allRecordings.length >= 5) {
+        store.delete(allRecordings[0].id);
+    }
+    
     store.add({
         planeta : 'MARTE',
         data    : new Date().toLocaleDateString(),

@@ -1,44 +1,51 @@
-/* --- O FUNDO DO POP-UP (Overlay) --- */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('../navegacao/fontes/IBMPlexMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 #mobile-warning {
-    display: none; /* Escondido por defeito */
-    position: fixed; /* Fica fixo por cima de toda a página */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85); /* Fundo preto com 85% de opacidade */
-    z-index: 9999; /* Garante que fica à frente de qualquer outro elemento */
-    
-    /* Prepara para centrar a caixa lá dentro */
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
 }
 
-/* --- A CAIXA DO POP-UP --- */
 .popup-box {
-    font-family: 'Fonte', Helvetica, sans-serif;
-
-    background-color: #ffffff;
-    color: #333;
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: #1a1a1a;
+    color: #cccccc;
     padding: 40px;
-    border-radius: 12px; /* Cantos arredondados */
-    text-align: center;
+    border: 1px solid #555;
+    border-radius: 0;
+    text-align: left;
     width: 80%;
-    max-width: 450px; /* Não deixa a caixa ficar gigante em tablets */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    max-width: 500px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
 }
 
 .popup-box h2 {
-
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: #d32f2f; /* Um tom vermelho para chamar à atenção (opcional) */
+    margin-bottom: 24px;
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center; 
 }
 
-/* --- A REGRA DE BLOQUEIO (Media Query) --- */
+.popup-box p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #999;
+}
+
 @media (max-width: 1450px) {
-    
     #mobile-warning {
-        display: flex; /* Muda de "none" para "flex", ativando e centrando o pop-up */
+        display: flex;
     }
 }

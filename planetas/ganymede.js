@@ -55,6 +55,10 @@ function setup() {
     let myCanvas = createCanvas(container.clientWidth, container.clientHeight);
     myCanvas.parent('canvas_container');
 
+    myCanvas.mousePressed(() => {
+    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
+    });
+
     somBass.setVolume(0);
     somBass.loop();
     somDrone.setVolume(0);
@@ -163,10 +167,6 @@ function desenharCena3() {
 function windowResized() {
     let container = document.getElementById('canvas_container');
     resizeCanvas(container.clientWidth, container.clientHeight);
-}
-
-function mousePressed() {
-    cenaAtiva = cenaAtiva === 3 ? 1 : cenaAtiva + 1;
 }
 
 
@@ -349,6 +349,17 @@ async function guardarNaDB(blob) {
     let db    = await abrirDB();
     let tx    = db.transaction('gravacoes', 'readwrite');
     let store = tx.objectStore('gravacoes');
+    
+    let allRecordings = await new Promise((resolve, reject) => {
+        let req = store.getAll();
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+    
+    if (allRecordings.length >= 5) {
+        store.delete(allRecordings[0].id);
+    }
+    
     store.add({
         planeta : 'GANYMEDE',
         data    : new Date().toLocaleDateString(),

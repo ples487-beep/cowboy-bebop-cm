@@ -244,18 +244,17 @@ function desenharPopup() {
   let popupY = (height - popupH) / 2;
   let closeBoxSize = 25;
   
-  // fundo semi-transparente
   fill(0, 0, 0, 200);
   noStroke();
   rect(0, 0, width, height);
   
-  // popup
+ 
   fill('#06011e');
   stroke('#4117ff');
   strokeWeight(2);
   rect(popupX, popupY, popupW, popupH);
   
-  // X para fechar (canto superior direito)
+
   fill('#ffffff');
   noStroke();
   textFont(font2);
@@ -274,7 +273,6 @@ function desenharPopup() {
   text(creditos, popupX + 20, popupY + 180, popupW - 40, popupH - 80);
 }
 function mousePressed() {
-  // fechar popup ao clicar fora ou no X
   if (popupAberto) {
     let popupW = 400;
     let popupH = 250;
@@ -283,21 +281,16 @@ function mousePressed() {
     let closeBoxSize = 25;
     let closeX = popupX + popupW - closeBoxSize/2 - 5;
     let closeY = popupY + closeBoxSize/2 - 5;
-    
-    // clicar no X
     if (dist(mouseX, mouseY, closeX, closeY) < closeBoxSize) {
       popupAberto = false;
       return;
     }
-    
-    // clicar fora do popup
     if (mouseX < popupX || mouseX > popupX + popupW || mouseY < popupY || mouseY > popupY + popupH) {
       popupAberto = false;
       return;
     }
   }
   
-  // clicar em "THE UNIVERSE OF COWBOY BEBOP" para abrir popup
   if (mouseX > 30 && mouseX < 280 && mouseY > 30 && mouseY < 50) {
     popupAberto = true;
     return;
