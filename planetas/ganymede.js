@@ -81,7 +81,7 @@ function draw() {
 }
 
 function desenharCena1() {
-    let h = height * 0.9;
+    let h = height;
     let w = h * (4 / 3);
     let x = (width - w) / 2;
     let y = (height - h) / 2;
@@ -103,7 +103,7 @@ function desenharCena1() {
 }
 
 function desenharCena2() {
-    let h = height * 0.9;
+    let h = height;
     let w = h * (4 / 3);
     let x = (width - w) / 2;
     let y = (height - h) / 2;
@@ -125,7 +125,7 @@ function desenharCena2() {
 }
 
 function desenharCena3() {
-    let h = height * 0.9;
+    let h = height;
     let w = h * (4 / 3);
     let x = (width - w) / 2;
     let y = (height - h) / 2;

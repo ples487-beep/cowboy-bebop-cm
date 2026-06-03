@@ -93,8 +93,8 @@ function draw() {
 }
 
 function desenharCena1() { //elevador
-    // Mantemos a proporção 4:3
-    let h = height * 0.9;
+    // Ocupa a altura toda da tela mantendo proporção 4:3
+    let h = height;
     let w = h * (4 / 3);
     let x = (width - w) / 2;   // ← ERA: width - w
     let y = (height - h) / 2;
@@ -116,7 +116,7 @@ function desenharCena1() { //elevador
 }
 
 function desenharCena2() {
-    let h = height * 0.9;
+    let h = height;
     let w = h * (4 / 3);
     let x = (width - w) / 2;   // ← ERA: width - w
     let y = (height - h) / 2;
@@ -140,7 +140,7 @@ function desenharCena2() {
 }
 
 function desenharCena3() {
-    let h = height * 0.9;
+    let h = height;
     let w = h * (4 / 3);
     let x = (width - w) / 2;   // ← ERA: width - w
     let y = (height - h) / 2;
