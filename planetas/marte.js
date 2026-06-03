@@ -122,10 +122,10 @@ function desenharCena2() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade
-    let op1 = map(ampLevelBass, 0, 0.4, 100, 255);
-    let op2 = map(ampLevelBateria,0,0.4, 100, 255);
-    let op3 = map(ampLevelSax, 0, 0.4, 80, 255);
-    let op4 = map(ampLevelSax2, 0, 0.4, 80, 255);
+    let op1 = map(ampLevelBass, 0, 0.2, 100, 255);
+    let op2 = map(ampLevelBateria,0,0.2, 100, 255);
+    let op3 = map(ampLevelSax, 0, 0.2, 150, 255);
+    let op4 = map(ampLevelSax2, 0, 0.2, 150, 255);
 
     image(cena2bg, x, y, w, h);
     tint(255, op1);
@@ -146,14 +146,14 @@ function desenharCena3() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade
-    let op1 = map(ampLevelBass,  0, 0.4, 100, 255);
-    let op2 = map(ampLevelBateria, 0,0.4, 100, 255);
-    let op3 = map(ampLevelSax, 0, 0.4, 80, 255);
+    let op1 = map(ampLevelBass,  0, 0.3, 80, 255);
+    let op2 = map(ampLevelBateria, 0,0.3, 80, 255);
+    let op3 = map(ampLevelSax, 0, 0.3, 80, 255);
 
     image(cena3bg, x, y, w, h);
-    tint(255, op1);
-    image(cena3bg2, x, y, w, h);
     tint(255, op2);
+    image(cena3bg2, x, y, w, h);
+    tint(255, op1);
     image(cena3layer1, x, y, w, h);
     tint(255, op3);
     image(cena3layer2, x, y, w, h);

@@ -90,15 +90,16 @@ function desenharCena1() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes globais para opacidade
-    let opacity1 = map(ampLevelNoise, 0, 1, 150, 255);
-    let opacity2 = map(ampLevelOboe, 0, 1, 150, 255);
-    let opacity3 = map(ampLevelSax, 0, 1, 100, 255);
-    let opacityBg2 = map(ampLevelSynth, 0, 1, 100, 255);
+    let opacity1 = map(ampLevelNoise, 0, 0.3, 150, 255);
+    let opacity2 = map(ampLevelOboe, 0, 0.3, 150, 255);
+    let opacity3 = map(ampLevelSax, 0, 0.15, 100, 255);
+    let opacityBg2 = map(ampLevelSynth, 0, 0.15, 100, 255);
 
     image(cena1bg, x, y, w, h);
-    tint(255, opacityBg2);
-    image(cena1bg2, x, y, w, h);
     tint(255, opacity1);
+    image(cena1bg2, x, y, w, h);
+    noTint();
+    tint(255, opacity2);
     image(cena1layer1, x, y, w, h);
     tint(255, opacity2);
     image(cena1layer2, x, y, w, h);
@@ -114,16 +115,17 @@ function desenharCena2() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes globais para opacidade
-    let opacityBg2 = map(ampLevelSynth, 0, 1, 100, 255);
-    let opacity1 = map(ampLevelNoise, 0, 1, 150, 255);
-    let opacity2 = map(ampLevelOboe, 0, 1, 150, 255);
+    let opacityBg2 = map(ampLevelSynth, 0, 0.3, 100, 255);
+    let opacity1 = map(ampLevelNoise, 0, 0.3, 150, 255);
+    let opacity2 = map(ampLevelOboe, 0, 0.3, 150, 255);
+    let opacity3 = map(ampLevelSax, 0, 0.2, 75, 255);
 
     image(cena2bg, x, y, w, h);
-    tint(255, opacityBg2);
-    image(cena2bg2, x, y, w, h);
     tint(255, opacity1);
+    image(cena2bg2, x, y, w, h);
+    tint(255, opacity3);
     image(cena2layer1, x, y, w, h);
-    tint(255, opacity2);
+    tint(255, opacity3);
     image(cena2layer2, x, y, w, h);
     noTint();
 }
@@ -135,17 +137,17 @@ function desenharCena3() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes globais para opacidade
-    let opacityBg2 = map(ampLevelSynth, 0, 1, 100, 255);
-    let opacity1 = map(ampLevelNoise, 0, 1, 150, 255);
-    let opacity2 = map(ampLevelOboe, 0, 1, 150, 255);
-    let opacity3 = map(ampLevelSax, 0, 1, 100, 255);
+    let opacityBg2 = map(ampLevelSynth, 0, 0.2, 100, 255);
+    let opacity1 = map(ampLevelNoise, 0, 0.2, 30, 255);
+    let opacity2 = map(ampLevelOboe, 0, 0.2, 150, 255);
+    let opacity3 = map(ampLevelSax, 0, 0.2, 75, 255);
 
     image(cena3bg, x, y, w, h);
-    tint(255, opacityBg2);
-    image(cena3bg2, x, y, w, h);
     tint(255, opacity1);
+    image(cena3bg2, x, y, w, h);
+    tint(255, opacityBg2);
     image(cena3layer1, x, y, w, h);
-    tint(255, opacity2);
+    tint(255, opacity3);
     image(cena3layer2, x, y, w, h);
     tint(255, opacity3);
     image(cena3layer3, x, y, w, h);

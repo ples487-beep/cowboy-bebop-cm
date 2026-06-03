@@ -87,18 +87,18 @@ function desenharCena1() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade
-    let op1 = map(ampLevelBass, 0, 1, 100, 255);
-    let op2 = map(ampLevelDrone, 0, 1, 100, 255);
-    let op3 = map(ampLevelBateria, 0, 1, 80, 255);
-    let op4 = map(ampLevelSax, 0, 1, 80, 255);
+    let op1 = map(ampLevelBass, 0, 0.15, 100, 255);
+    let op2 = map(ampLevelDrone, 0, 0.15, 100, 255);
+    let op3 = map(ampLevelBateria, 0, 0.15, 80, 255);
+    let op4 = map(ampLevelSax, 0, 0.15, 80, 255);
 
     image(cena1bg, x, y, w, h);
     tint(255, op1);
     image(cena1bg2, x, y, w, h);
-    tint(255, op2);
-    image(cena1layer1, x, y, w, h);
     tint(255, op3);
     image(cena1layer2, x, y, w, h);
+    tint(255, op2);
+    image(cena1layer1, x, y, w, h);
     noTint();
 }
 
@@ -109,19 +109,19 @@ function desenharCena2() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade
-    let op1 = map(ampLevelBass, 0, 1, 100, 255);
-    let op2 = map(ampLevelDrone, 0, 1, 100, 255);
-    let op3 = map(ampLevelBateria, 0, 1, 80, 255);
-    let op4 = map(ampLevelSax, 0, 1, 80, 255);
+    let op1 = map(ampLevelBass, 0, 0.15, 100, 255);
+    let op2 = map(ampLevelDrone, 0, 0.15, 100, 255);
+    let op3 = map(ampLevelBateria, 0, 0.15, 80, 255);
+    let op4 = map(ampLevelSax, 0, 0.15, 80, 255);
 
     image(cena2bg, x, y, w, h);
     tint(255, op1);
     image(cena2bg2, x, y, w, h);
     tint(255, op2);
     image(cena2layer1, x, y, w, h);
-    tint(255, op3);
-    image(cena2layer2, x, y, w, h);
     noTint();
+    image(cena2layer2, x, y, w, h);
+
 }
 
 function desenharCena3() {
@@ -131,9 +131,9 @@ function desenharCena3() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade
-    let op1 = map(ampLevelBass, 0, 1, 100, 255);
-    let op2 = map(ampLevelDrone, 0, 1, 100, 255);
-    let op3 = map(ampLevelBateria, 0, 1, 80, 255);
+    let op1 = map(ampLevelBass, 0, 0.15, 40, 255);
+    let op2 = map(ampLevelDrone, 0, 0.15, 80, 255);
+    let op3 = map(ampLevelBateria, 0, 0.15, 80, 255);
 
     image(cena3bg, x, y, w, h);
     tint(255, op1);

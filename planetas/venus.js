@@ -93,19 +93,18 @@ function desenharCena1() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade - range grande para pulsar forte
-    let op1 = map(ampLevelBass, 0, 1, 30, 255);
-    let op2 = map(ampLevelBateria, 0, 1, 30, 255);
-    let op3 = map(ampLevelSax, 0, 1, 20, 255);
-    let op4 = map(ampLevelSax2, 0, 1, 20, 255);
+    let op1 = map(ampLevelBass, 0, 0.3, 150, 255);
+    let op2 = map(ampLevelBateria, 0, 0.3, 150, 255);
+    let op3 = map(ampLevelSax, 0, 0.3, 150, 255);
+
 
     image(cena1bg, x, y, w, h);
-    tint(255, op1);
     image(cena1bg2, x, y, w, h);
-    tint(255, op2);
+    tint(255, op1);
     image(cena1layer1, x, y, w, h);
-    tint(255, op4);
+    tint(255, op2);
     image(cena1layer2, x, y, w, h);
-    tint(255, op4);
+    tint(255, op3);
     image(cena1layer3, x, y, w, h);
     noTint();
 }
@@ -117,14 +116,14 @@ function desenharCena2() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade - range grande para pulsar forte
-    let op1 = map(ampLevelBass, 0, 1, 30, 255);
-    let op2 = map(ampLevelBateria, 0, 1, 30, 255);
-    let op3 = map(ampLevelSax, 0, 1, 20, 255);
+    let op1 = map(ampLevelBass, 0, 0.15, 150, 255);
+    let op2 = map(ampLevelBateria, 0, 0.15, 0, 255);
+    let op3 = map(ampLevelSax, 0, 0.15, 90, 255);
 
     image(cena2bg, x, y, w, h);
-    tint(255, op1);
-    image(cena2bg2, x, y, w, h);
     tint(255, op2);
+    image(cena2bg2, x, y, w, h);
+    tint(255, op1);
     image(cena2layer1, x, y, w, h);
     tint(255, op3);
     image(cena2layer2, x, y, w, h);
@@ -138,19 +137,19 @@ function desenharCena3() {
     let y = (height - h) / 2;
 
     // Mapear amplitudes para opacidade - range grande para pulsar forte
-    let op1 = map(ampLevelBass, 0, 1, 30, 255);
-    let op2 = map(ampLevelBateria, 0, 1, 30, 255);
-    let op3 = map(ampLevelSax, 0, 1, 20, 255);
-    let op4 = map(ampLevelSax2, 0, 1, 20, 255);
+    let op1 = map(ampLevelBass, 0, 0.15, 100, 255);
+    let op2 = map(ampLevelBateria, 0, 0.15, 100, 255);
+    let op3 = map(ampLevelSax, 0, 0.15, 100, 255);
+
 
     image(cena3bg, x, y, w, h);
-    tint(255, op1);
-    image(cena3bg2, x, y, w, h);
     tint(255, op2);
+    image(cena3bg2, x, y, w, h);
+    tint(255, op1);
     image(cena3layer1, x, y, w, h);
     tint(255, op3);
     image(cena3layer2, x, y, w, h);
-    tint(255, op4);
+    noTint();
     image(cena3layer3, x, y, w, h);
     noTint();
 }
